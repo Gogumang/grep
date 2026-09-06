@@ -59,14 +59,14 @@ export function TodayPicks({ picks }: { picks: Post[] }) {
           </div>
 
           <div className={styles.imageStack}>
-            {leaving && leaving.id !== post.id && leaving.sourceThumbnail && (
+            {leaving && leaving.id !== post.id && leaving.wideImage && (
               <div key={leaving.id} className={`${styles.imageLayer} ${styles.leaving}`} aria-hidden="true">
-                <img className={styles.image} src={leaving.sourceThumbnail} alt="" width={1200} height={630} />
+                <img className={styles.image} src={leaving.wideImage} alt="" width={1200} height={630} />
               </div>
             )}
-            {post.sourceThumbnail && (
+            {post.wideImage && (
               <a key={post.id} href={`/posts/${post.id}`} className={`${styles.imageLayer} ${styles.entering}`}>
-                <img className={styles.image} src={post.sourceThumbnail} alt="" width={1200} height={630} />
+                <img className={styles.image} src={post.wideImage} alt="" width={1200} height={630} />
               </a>
             )}
           </div>

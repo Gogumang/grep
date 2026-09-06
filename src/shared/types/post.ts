@@ -10,7 +10,16 @@ export interface Post {
   /** ISO-8601 */
   publishedAt: string
   summary: string
+  /** 원문이 밝힌 대표 이미지. 없는 글이 넷에 하나쯤 된다. */
   sourceThumbnail: string | null
+  /**
+   * 목록 카드용 400×220. 아래 wideImage와 함께 '화면에 실제로 거는 이미지'다 —
+   * 원문 이미지가 없으면 collector가 그린 카드로 채운다. collector는 원문 이미지가
+   * 없는 글에만 카드를 그리므로 두 경로가 겹치지 않는다.
+   */
+  cardImage: string
+  /** 히어로·공유 미리보기용 1200×630. 400×220을 늘려 쓰면 글자가 뭉개져 따로 둔다. */
+  wideImage: string
   tags: string[]
   /** 원문 블로그가 매긴 분류. RSS에 없어 원문 페이지에서 긁어와야 채워진다. */
   category: string | null

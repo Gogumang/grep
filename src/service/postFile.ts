@@ -1,10 +1,16 @@
 import type { Post } from '../shared/types'
 
 /**
+ * 파일이 담고 있는 것만 만든다. cardImage·wideImage는 파일 이름의 id가 있어야
+ * 정할 수 있어서 읽는 쪽(content.ts)에서 채운다.
+ */
+export type ParsedPostFile = Omit<Post, 'cardImage' | 'wideImage'>
+
+/**
  * frontmatter는 collector가 항상 같은 규칙으로 쓴다(값은 큰따옴표, tags만 배열).
  * 그래서 YAML 파서를 들이지 않는다. 형식이 깨진 파일은 null로 걸러낸다.
  */
-export function parsePostFile(fileContents: string): Post | null {
+export function parsePostFile(fileContents: string): ParsedPostFile | null {
   const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(fileContents)
   if (!match) return null
 

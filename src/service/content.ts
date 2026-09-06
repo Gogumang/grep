@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { Post } from '../shared/types'
 import { parsePicksTable } from './picks'
-import { parsePostFile } from './postFile'
+import { type ParsedPostFile, parsePostFile } from './postFile'
 
 /**
  * 글 메타와 본문을 갈라 둔 것은 성능 결정이다 — 목록은 md만 읽고 본문은 상세에서만 읽는다.
@@ -31,6 +31,22 @@ async function listPostFileNames(): Promise<string[]> {
   }
 }
 
+/**
+ * 화면에 걸 이미지를 정한다.
+ *
+ * 원문이 준 이미지를 먼저 쓰고, 없으면 collector가 그려 public/thumbnails 에 넣어 둔
+ * 카드로 채운다. 원문 이미지가 있는 글에는 카드를 그리지 않으므로 두 경로가 겹치지 않는다.
+ * 크기가 다른 두 장을 쓰는 이유 — 400×220을 1200×630 자리에 늘리면 글자가 뭉개진다.
+ */
+function withImages(post: ParsedPostFile, id: string): Post {
+  return {
+    ...post,
+    id,
+    cardImage: post.sourceThumbnail ?? `/thumbnails/${id}.png`,
+    wideImage: post.sourceThumbnail ?? `/thumbnails/${id}-og.png`,
+  }
+}
+
 /** 숨긴 글까지 포함한 전부. 최신순. */
 async function loadAllPosts(): Promise<Post[]> {
   const fileNames = await listPostFileNames()
@@ -42,7 +58,7 @@ async function loadAllPosts(): Promise<Post[]> {
 
       // id는 frontmatter가 아니라 파일 이름에 있다 — 썸네일을 찾으려면 이게 필요하다.
       const id = POST_ID_IN_FILE_NAME.exec(fileName)?.[1]
-      return id ? { ...post, id } : null
+      return id ? withImages(post, id) : null
     }),
   )
 

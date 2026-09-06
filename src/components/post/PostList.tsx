@@ -34,16 +34,9 @@ export function PostList({ posts }: { posts: Post[] }) {
                 )}
               </div>
 
-              {/* 원문이 준 이미지만 쓴다. 없는 글은 이미지 칸을 비운다. */}
-              {post.sourceThumbnail && (
-                <img
-                  className={styles.thumbnail}
-                  src={post.sourceThumbnail}
-                  alt=""
-                  loading="lazy"
-                  width={400}
-                  height={220}
-                />
+              {/* 원문 이미지가 없는 글은 collector가 그린 카드가 들어온다 — 칸이 비지 않는다. */}
+              {post.cardImage && (
+                <img className={styles.thumbnail} src={post.cardImage} alt="" loading="lazy" width={400} height={220} />
               )}
             </a>
           </li>

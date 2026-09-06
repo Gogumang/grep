@@ -32,7 +32,7 @@ const structuredData = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': post.url },
   ...(post.author && { author: { '@type': 'Person', name: post.author } }),
   ...(post.category && { articleSection: post.category }),
-  ...(post.sourceThumbnail && { image: post.sourceThumbnail }),
+  image: post.wideImage,
   publisher: { '@type': 'Organization', name: post.blogName, url: post.blogHomepage },
 }
 ---
@@ -41,7 +41,7 @@ const structuredData = {
   title={`${post.title} — grep`}
   description={post.summary}
   canonical={post.url}
-  ogImage={post.sourceThumbnail ?? undefined}
+  ogImage={post.wideImage}
   structuredData={structuredData}
 >
   <main class={styles.container} data-pagefind-body>
