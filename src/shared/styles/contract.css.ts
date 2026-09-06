@@ -16,6 +16,7 @@ export const vars = createThemeContract({
     ink: null,
     inkStrong: null,
     inkSoft: null,
+    inkSubtle: null,
     inkMuted: null,
     inkFaint: null,
     brand: null,

@@ -59,6 +59,11 @@
         "$value": "{palette.brand.500}",
         "$description": "로고 심볼 전용. UI 강조(accent)와 역할이 다르다 — 브랜드를 가리킬 때만 쓴다."
       },
+      "inkSubtle": {
+        "$type": "color",
+        "$value": "{palette.grey.700}",
+        "$description": "본문에 딸린 글. 부가 설명(inkMuted)보다 또렷하고 본문(ink)보다는 여리다 — 글쓴이 줄이 여기 해당한다. toss.tech 실측 #4e5968."
+      },
       "inkSoft": {
         "$type": "color",
         "$value": "{palette.grey.800}",

@@ -38,7 +38,8 @@
       },
       "700": {
         "$type": "color",
-        "$value": "#4e5968"
+        "$value": "#4e5968",
+        "$description": "본문에 딸린 글 — 글쓴이 줄·댓글·관련글 제목. toss.tech 글 페이지 7회"
       },
       "800": {
         "$type": "color",

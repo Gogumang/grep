@@ -28,9 +28,8 @@ export const title = style({
 })
 
 /**
- * 글쓴이 줄. toss.tech 실측: 17px / 600 / line-height 25.5px, 제목에서 24px 아래.
- * 색은 실측 #4e5968(grey.700)인데 의미 토큰에 그 단계가 없어 한 칸 여린
- * inkMuted(#6b7684)를 쓴다 — 새 색을 만들지 않는다는 토큰 원칙을 지킨 결과다.
+ * 글쓴이 줄. toss.tech 실측: 17px / 600 / line-height 25.5px / #4e5968,
+ * 제목에서 24px 아래. 색은 inkSubtle이 그 실측값을 그대로 가리킨다.
  */
 export const byline = style({
   display: 'flex',
@@ -44,7 +43,7 @@ export const byline = style({
   fontSize: vars.fontSize.lg,
   fontWeight: vars.fontWeight.semibold,
   lineHeight: 1.5,
-  color: vars.color.inkMuted,
+  color: vars.color.inkSubtle,
 })
 
 /** 이름과 출처를 가르는 표식일 뿐이라 화면 낭독기에는 읽히지 않는다. */
