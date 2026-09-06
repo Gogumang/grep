@@ -1,0 +1,128 @@
+{
+  "semantic": {
+    "space": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "4px"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "8px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "32px"
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": "48px"
+      },
+      "xxxl": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$description": "목록 항목 사이. toss.tech 실측 64px"
+      },
+      "$description": "테마를 타지 않는 값들 — 라이트와 다크가 같은 간격·크기를 쓴다."
+    },
+    "radius": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "뱃지. toss.tech 실측"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "10px",
+        "$description": "버튼. toss.tech 실측"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "썸네일·이미지. toss.tech 실측"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "full": {
+        "$type": "dimension",
+        "$value": "999px"
+      }
+    },
+    "fontSize": {
+      "xs": {
+        "$type": "dimension",
+        "$value": "12px"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "13px"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "15px"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "17px"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "xxl": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "섹션 제목('전체 아티클'). toss.tech 실측"
+      },
+      "display": {
+        "$type": "dimension",
+        "$value": "40px",
+        "$description": "히어로 제목. toss.tech 실측"
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "$type": "fontWeight",
+        "$value": 400
+      },
+      "medium": {
+        "$type": "fontWeight",
+        "$value": 500
+      },
+      "semibold": {
+        "$type": "fontWeight",
+        "$value": 600
+      },
+      "bold": {
+        "$type": "fontWeight",
+        "$value": 700
+      }
+    },
+    "font": {
+      "sans": {
+        "$type": "fontFamily",
+        "$value": [
+          "Pretendard Variable",
+          "Pretendard",
+          "Tossface",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$description": "토스는 자체 폰트(Toss Product Sans)라 쓸 수 없다. 한글 자소 폭과 획 두께가 가장 가까운 Pretendard로 대신한다. Tossface는 토스가 공개한 이모지 폰트(OFL 계열, Reserved Font Name)로, 토스 스택과 같은 자리에 둔다 — 시스템 이모지보다 앞에 와야 1️⃣ 같은 글자가 원문처럼 납작하게 그려진다."
+      }
+    }
+  }
+}

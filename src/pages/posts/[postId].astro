@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { PostBody } from '@/components/post/PostBody'
+import { loadBody, loadPosts } from '@/service/content'
+import * as badge from '@/shared/styles/badge.css'
+import * as styles from '@/styles/post.css'
+
+/**
+ * 글은 배포와 배포 사이에 바뀌지 않는다 — 전부 빌드 때 구워둔다.
+ * 목록에 없는 id는 여기서 만들어지지 않으므로 404가 자동으로 난다.
+ */
+export async function getStaticPaths() {
+  const posts = await loadPosts()
+  return posts.map((post) => ({ params: { postId: post.id }, props: { post } }))
+}
+
+const { post } = Astro.props
+const body = await loadBody(post.id)
+
+/**
+ * mainEntityOfPage와 url을 원문으로 둔다 — canonical과 같은 판단이다.
+ * 우리는 옮겨 실은 쪽이라 검색·AI가 인용해야 할 정본은 원문이다.
+ */
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.summary,
+  datePublished: post.publishedAt,
+  url: post.url,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': post.url },
+  ...(post.author && { author: { '@type': 'Person', name: post.author } }),
+  ...(post.category && { articleSection: post.category }),
+  ...(post.sourceThumbnail && { image: post.sourceThumbnail }),
+  publisher: { '@type': 'Organization', name: post.blogName, url: post.blogHomepage },
+}
+---
+
+<BaseLayout
+  title={`${post.title} — grep`}
+  description={post.summary}
+  canonical={post.url}
+  ogImage={post.sourceThumbnail ?? undefined}
+  structuredData={structuredData}
+>
+  <main class={styles.container} data-pagefind-body>
+    {/* 검색 결과에 함께 띄울 값들. 본문에는 안 보이고 색인에만 실린다. */}
+    <span hidden data-pagefind-meta={`blogName:${post.blogName}`}></span>
+    <span hidden data-pagefind-meta={`publishedAt:${post.publishedAt}`}></span>
+
+    {/* 목록 카드와 같은 라벨을 쓴다 — 같은 글이 화면마다 다르게 보이지 않게. */}
+    <p class={styles.meta}>
+      {post.category && <span class={badge.category}>{post.category}</span>}
+      {post.author && <span class={badge.secondary}>{post.author}</span>}
+      <a href={post.blogHomepage} target="_blank" rel="noopener noreferrer" class={badge.secondary}>
+        {post.blogName}
+      </a>
+    </p>
+
+    <h1 class={styles.title}>{post.title}</h1>
+
+    <a href={post.url} target="_blank" rel="noopener noreferrer" class={styles.sourceLink}>
+      원문에서 보기 ↗
+    </a>
+
+    {body ? (
+      <div class={styles.body}>
+        <PostBody body={body} />
+      </div>
+    ) : (
+      <p class={styles.missingBody}>
+        이 글은 본문을 가져오지 못했습니다. 원문에서 읽어주세요.
+      </p>
+    )}
+  </main>
+</BaseLayout>

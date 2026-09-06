@@ -1,0 +1,122 @@
+{
+  "palette": {
+    "grey": {
+      "0": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "50": {
+        "$type": "color",
+        "$value": "#f9fafb"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#f2f4f6",
+        "$description": "패널 배경. toss.tech 14회"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#e5e8eb"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#d1d6db"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#b0b8c1"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#8b95a1",
+        "$description": "흐린 글자. toss.tech 21회"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6b7684",
+        "$description": "부가 설명. toss.tech 145회"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#4e5968"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#333d4b"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#212529",
+        "$description": "본문 글자. toss.tech 171회"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#191f28",
+        "$description": "목록 제목. 토스는 본문(#212529)보다 한 단계 진한 색을 제목에 쓴다"
+      }
+    },
+    "blue": {
+      "50": {
+        "$type": "color",
+        "$value": "#e8f3ff",
+        "$description": "뱃지 배경. toss.tech 5회"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#4593fc"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#3182f6",
+        "$description": "버튼 파랑. toss.tech"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#1b64da"
+      }
+    },
+    "night": {
+      "$description": "다크 모드용. 토스에는 다크 모드가 없어 측정할 대상이 없었다. 같은 회색 계열을 어두운 쪽으로 이어 만들었다.",
+      "0": {
+        "$type": "color",
+        "$value": "#0f1319"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#191f28"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#232a35"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#2b3441"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#3d4759"
+      },
+      "accentSoft": {
+        "$type": "color",
+        "$value": "#17253a"
+      },
+      "accentHover": {
+        "$type": "color",
+        "$value": "#6aa9ff"
+      }
+    },
+    "$description": "원시 팔레트. 여기 값들은 toss.tech에서 computed style을 세어 뽑은 실측값이다.",
+    "brand": {
+      "$description": "브랜드 색. 토스 파랑(#3182F6)의 채도(91.6%)는 그대로 두고 색상만 초록(145°)으로 돌렸다. 명도는 파랑과 맞추지 않고 낮췄다 — L을 57.8%로 두면 형광 초록이 되어 흰 배경 대비가 1.4:1까지 떨어진다. 지금 값은 흰 배경에서 3.81:1로, 직전 브랜드 색과 같은 대비다.",
+      "500": {
+        "$type": "color",
+        "$value": "#079743"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#09d25d"
+      }
+    }
+  }
+}

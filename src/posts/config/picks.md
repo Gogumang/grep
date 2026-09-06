@@ -1,0 +1,8 @@
+# 오늘의 픽
+
+여기에 원문 주소를 적으면 히어로 캐러셀에 그 순서대로 올라간다.
+비어 있으면 자동 선정(최근 7일 · 블로그별 최신 1개 · 5개)이 대신한다.
+
+| 원문 주소 | 한 줄 추천사 |
+| --- | --- |
+| https://techblog.lycorp.co.jp/ko/applying-e2ee-to-apache-kafka-in-line-app |  |

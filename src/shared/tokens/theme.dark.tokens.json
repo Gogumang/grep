@@ -1,0 +1,68 @@
+{
+  "semantic": {
+    "color": {
+      "canvas": {
+        "$type": "color",
+        "$value": "{palette.night.0}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{palette.night.100}"
+      },
+      "surfaceSunken": {
+        "$type": "color",
+        "$value": "{palette.night.200}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{palette.night.300}"
+      },
+      "borderStrong": {
+        "$type": "color",
+        "$value": "{palette.night.400}"
+      },
+      "ink": {
+        "$type": "color",
+        "$value": "{palette.grey.100}"
+      },
+      "inkMuted": {
+        "$type": "color",
+        "$value": "{palette.grey.400}"
+      },
+      "inkFaint": {
+        "$type": "color",
+        "$value": "{palette.grey.500}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{palette.blue.400}"
+      },
+      "accentHover": {
+        "$type": "color",
+        "$value": "{palette.night.accentHover}"
+      },
+      "onAccent": {
+        "$type": "color",
+        "$value": "{palette.night.0}"
+      },
+      "accentSoft": {
+        "$type": "color",
+        "$value": "{palette.night.accentSoft}"
+      },
+      "$description": "다크 테마의 의미 토큰. 이름은 라이트와 하나도 다르지 않고 가리키는 원시 토큰만 다르다.",
+      "inkStrong": {
+        "$type": "color",
+        "$value": "{palette.grey.0}"
+      },
+      "brand": {
+        "$type": "color",
+        "$value": "{palette.brand.400}",
+        "$description": "로고 심볼 전용. UI 강조(accent)와 역할이 다르다 — 브랜드를 가리킬 때만 쓴다."
+      },
+      "inkSoft": {
+        "$type": "color",
+        "$value": "{palette.grey.300}"
+      }
+    }
+  }
+}

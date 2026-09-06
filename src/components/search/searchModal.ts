@@ -1,0 +1,142 @@
+import { type SearchHit, searchPosts } from './pagefind'
+import * as styles from './SearchModal.css'
+
+/** 타자를 칠 때마다 색인을 훑지 않도록 잠깐 기다린다. */
+const TYPING_PAUSE_MILLISECONDS = 200
+const MAX_RESULTS = 8
+
+/**
+ * 검색 모달. React 없이 DOM을 직접 만든다.
+ *
+ * 헤더에 React를 쓰던 시절에는 글 상세 페이지에서 테마 토글과 검색 버튼 때문에
+ * React 런타임 194KB가 통째로 내려갔다. 읽기만 하는 페이지에 그건 과했다.
+ */
+export function createSearchModal() {
+  let overlay: HTMLDivElement | null = null
+  let hits: SearchHit[] = []
+  let selected = 0
+  let timer: ReturnType<typeof setTimeout> | undefined
+  let requestId = 0
+
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, className?: string) => {
+    const node = document.createElement(tag)
+    if (className) node.className = className
+    return node
+  }
+
+  function renderResults(container: HTMLElement, message?: string) {
+    container.replaceChildren()
+    if (message) {
+      const status = el('p', styles.status)
+      status.textContent = message
+      container.append(status)
+      return
+    }
+
+    hits.forEach((hit, index) => {
+      const link = el('a', `${styles.item} ${index === selected ? styles.itemSelected : ''}`)
+      link.href = hit.url
+      link.addEventListener('mouseenter', () => {
+        selected = index
+        renderResults(container)
+      })
+
+      const title = el('h3', styles.itemTitle)
+      title.textContent = hit.title
+      link.append(title)
+
+      const meta = [hit.blogName, hit.publishedAt.slice(0, 10)].filter(Boolean).join(' · ')
+      if (meta) {
+        const metaNode = el('p', styles.itemMeta)
+        metaNode.textContent = meta
+        link.append(metaNode)
+      }
+
+      // 발췌의 <mark>는 Pagefind가 이스케이프한 본문에 붙인 강조뿐이다.
+      const excerpt = el('p', styles.excerpt)
+      excerpt.innerHTML = hit.excerpt
+      link.append(excerpt)
+
+      container.append(link)
+    })
+  }
+
+  function close() {
+    overlay?.remove()
+    overlay = null
+    document.body.style.overflow = ''
+    clearTimeout(timer)
+  }
+
+  function open() {
+    if (overlay) return close()
+
+    overlay = el('div', styles.overlay)
+    overlay.setAttribute('role', 'dialog')
+    overlay.setAttribute('aria-modal', 'true')
+    overlay.setAttribute('aria-label', '글 검색')
+    overlay.addEventListener('mousedown', (event) => {
+      if (event.target === overlay) close()
+    })
+
+    const panel = el('div', styles.panel)
+    const inputRow = el('div', styles.inputRow)
+    const input = el('input', styles.input)
+    input.type = 'search'
+    input.placeholder = '제목과 본문에서 찾기'
+    input.setAttribute('aria-label', '검색어')
+
+    const hint = el('span', styles.hint)
+    hint.textContent = 'ESC'
+
+    const results = el('div', styles.results)
+    renderResults(results, '두 글자 이상 입력하면 찾기 시작합니다.')
+
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') return close()
+      if (hits.length === 0) return
+
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault()
+        const step = event.key === 'ArrowDown' ? 1 : -1
+        selected = (selected + step + hits.length) % hits.length
+        renderResults(results)
+      } else if (event.key === 'Enter') {
+        event.preventDefault()
+        const hit = hits[selected]
+        if (hit) window.location.href = hit.url
+      }
+    })
+
+    input.addEventListener('input', () => {
+      const query = input.value.trim()
+      clearTimeout(timer)
+      if (query.length < 2) {
+        hits = []
+        return renderResults(results, '두 글자 이상 입력하면 찾기 시작합니다.')
+      }
+
+      renderResults(results, '찾는 중…')
+      const current = ++requestId
+      timer = setTimeout(async () => {
+        const found = await searchPosts(query, MAX_RESULTS)
+        // 타자를 계속 치면 앞선 요청 결과는 버린다.
+        if (current !== requestId || !overlay) return
+
+        if (found === null) return renderResults(results, '검색 색인이 없습니다. 빌드를 한 번 돌리면 만들어집니다.')
+        hits = found
+        selected = 0
+        renderResults(results, found.length === 0 ? `“${query}”에 맞는 글이 없습니다.` : undefined)
+      }, TYPING_PAUSE_MILLISECONDS)
+    })
+
+    inputRow.append(input, hint)
+    panel.append(inputRow, results)
+    overlay.append(panel)
+    document.body.append(overlay)
+    document.body.style.overflow = 'hidden'
+    input.focus()
+  }
+
+  return { open, close }
+}
