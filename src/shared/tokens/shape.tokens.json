@@ -113,15 +113,15 @@
         "$value": [
           "Pretendard Variable",
           "Pretendard",
+          "Tossface",
           "-apple-system",
           "BlinkMacSystemFont",
           "Apple SD Gothic Neo",
           "Noto Sans KR",
           "system-ui",
-          "sans-serif",
-          "Tossface"
+          "sans-serif"
         ],
-        "$description": "토스는 자체 폰트(Toss Product Sans)라 쓸 수 없다. 한글 자소 폭과 획 두께가 가장 가까운 Pretendard로 대신한다(BaseLayout에서 웹폰트로 싣는다 — 스택 1순위인데 안 실으면 방문자 대부분에게 적용되지 않는다). Tossface는 이모지 폰트지만 unicode-range가 U+0-10FFFF인 face를 포함해 숫자·라틴 글리프까지 들고 있다. 그래서 반드시 sans-serif 뒤, 이모지 폴백 자리에 둔다 — 앞에 두면 Pretendard가 없는 기기에서 숫자만 이모지 글리프로 그려져 전각처럼 벌어진다."
+        "$description": "토스는 자체 폰트(Toss Product Sans)라 쓸 수 없다. 한글 자소 폭과 획 두께가 가장 가까운 Pretendard로 대신한다. Tossface는 토스가 공개한 이모지 폰트로, 소제목의 1️⃣2️⃣3️⃣를 원문과 같은 모양으로 그린다 — 시스템 폰트보다 앞이어야 한다. 뒤로 미루면 OS·브라우저에 따라 시스템 이모지가 먼저 가로채 원문과 다른 입체 광택 모양이 된다. Tossface에는 unicode-range가 U+0-10FFFF인 face가 있어 숫자까지 들고 있지만, 앞의 Pretendard를 BaseLayout에서 웹폰트로 반드시 싣기 때문에 숫자는 Pretendard가 가져간다. Pretendard를 싣지 않으면 숫자가 Tossface로 새어 \"2 0 2 6년\"처럼 벌어진다 — 이 둘은 한 몸이다."
       }
     }
   }
