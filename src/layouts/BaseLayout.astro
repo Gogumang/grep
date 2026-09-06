@@ -40,11 +40,25 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    {/*
+      본문 폰트. 폰트 스택 1순위인데 싣지 않으면 Pretendard가 깔린 기기에서만 적용된다
+      — 방문자 대부분은 시스템 폰트로 떨어져서 토스와 자소 폭이 달라진다.
+      dynamic-subset은 쓰인 글자의 조각만 받아 온다(한글 전체는 몇 MB다).
+    */}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+
     {/*
       토스가 공개한 이모지 폰트. 본문에 섞여 오는 1️⃣ 같은 글자를 원문과 같은 모양으로 그린다.
       시스템 이모지로 두면 OS마다 다르게 보이고, macOS에서는 입체 광택 모양이라 글과 겉돈다.
+      스택 맨 뒤에 둔다 — tossface.css에는 unicode-range가 U+0-10FFFF인 face가 있어서
+      앞에 두면 숫자까지 이 폰트가 가져간다(발행일이 "2 0 2 6년"처럼 벌어졌던 원인).
     */}
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/toss/tossface@main/dist/tossface.css" />
     <title>{title}</title>
     <meta name="description" content={description} />
