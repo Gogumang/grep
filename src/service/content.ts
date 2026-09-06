@@ -6,7 +6,10 @@ import { parsePostFile } from './postFile'
 
 /**
  * 글 메타와 본문을 갈라 둔 것은 성능 결정이다 — 목록은 md만 읽고 본문은 상세에서만 읽는다.
- * collector(Kotlin)가 GitHub의 content/ 경로에 쓰므로 경로를 옮기면 그쪽도 함께 고쳐야 한다.
+ *
+ * 이 아래 구조는 collector(Kotlin)와의 계약이다. collector가 같은 자리에 커밋한다:
+ *   GitHubProperties.postsPath / bodiesPath / feedsPath / picksPath
+ * 경로나 파일 이름 규칙을 옮기면 그쪽도 함께 고쳐야 한다.
  */
 const POSTS_ROOT = path.join(process.cwd(), 'src', 'posts')
 /** 글 메타. 목록 화면이 이것만 읽는다 — 본문은 상세에서 한 건씩 읽는다. */
