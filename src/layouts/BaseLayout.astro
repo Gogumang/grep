@@ -23,6 +23,14 @@ const {
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href
 const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
+
+/**
+ * GA4 측정 ID. 브라우저에 그대로 실려 나가는 공개값이라 환경변수로 숨길 이유가 없다.
+ * PROD에서만 싣는다 — 로컬 개발과 프리뷰 배포의 방문이 실제 통계에 섞이면
+ * 방문자 수를 우리가 직접 부풀리게 된다.
+ */
+const GA_MEASUREMENT_ID = 'G-CWJ9Q7MFJN'
+const isAnalyticsEnabled = import.meta.env.PROD
 ---
 
 <!doctype html>
@@ -73,6 +81,26 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
 
     {structuredData && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
+
+    {/*
+      Google Analytics.
+      is:inline이라야 Astro가 번들로 끌어가지 않고 gtag가 전역에 남는다.
+      define:vars는 쓰지 않는다 — 스크립트를 IIFE로 감싸버려서 gtag가 그 안에 갇힌다
+      (페이지뷰는 dataLayer로 잡히지만 나중에 gtag('event', ...)를 못 부른다).
+      그래서 ID는 set:html 쪽에서 직접 넣는다.
+    */}
+    {isAnalyticsEnabled && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script
+          is:inline
+          set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`}
+        />
+      </>
     )}
   </head>
   <body>
