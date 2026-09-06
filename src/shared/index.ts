@@ -1,5 +1,5 @@
 export type { Post } from './types'
-export { formatPostDate } from './utils/formatDate'
+export { formatArticleDate, formatPostDate } from './utils/formatDate'
 export {
   type BlogFacet,
   buildBlogFacets,

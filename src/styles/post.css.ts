@@ -27,7 +27,53 @@ export const title = style({
   color: vars.color.ink,
 })
 
-/** 제목 아래 한 번만. 출처는 상단 배지와 canonical로도 밝힌다. */
+/**
+ * 글쓴이 줄. toss.tech 실측: 17px / 600 / line-height 25.5px, 제목에서 24px 아래.
+ * 색은 실측 #4e5968(grey.700)인데 의미 토큰에 그 단계가 없어 한 칸 여린
+ * inkMuted(#6b7684)를 쓴다 — 새 색을 만들지 않는다는 토큰 원칙을 지킨 결과다.
+ */
+export const byline = style({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  // 실측은 앞뒤 공백을 낀 ' · '. 17px에서 공백 하나가 약 5px이라 gap으로 옮겼다.
+  gap: 5,
+  // 실측 24px. space 토큰이 lg(20px)와 xl(32px)뿐이라 여기서만 숫자를 직접 쓴다.
+  marginTop: 24,
+  marginBottom: 0,
+  fontSize: vars.fontSize.lg,
+  fontWeight: vars.fontWeight.semibold,
+  lineHeight: 1.5,
+  color: vars.color.inkMuted,
+})
+
+/** 이름과 출처를 가르는 표식일 뿐이라 화면 낭독기에는 읽히지 않는다. */
+export const bylineDot = style({
+  color: vars.color.inkFaint,
+})
+
+/** 출처 블로그. 토스는 평문이지만 여기는 여러 블로그를 모으는 곳이라 홈으로 건다. */
+export const bylineSource = style({
+  color: 'inherit',
+  selectors: {
+    '&:hover': { textDecoration: 'underline', textUnderlineOffset: '3px' },
+  },
+})
+
+/**
+ * 발행일. toss.tech 실측: 14px / 400 / line-height 21px / #8b95a1,
+ * 글쓴이 줄 바로 아래 2px. fontSize 토큰은 13px과 15px뿐이라 여기서만 숫자를 쓴다.
+ */
+export const publishedAt = style({
+  marginTop: 2,
+  marginBottom: 0,
+  fontSize: 14,
+  fontWeight: vars.fontWeight.regular,
+  lineHeight: 1.5,
+  color: vars.color.inkFaint,
+})
+
+/** 제목 아래 한 번만. 출처는 글쓴이 줄과 canonical로도 밝힌다. */
 export const sourceLink = style({
   display: 'inline-flex',
   alignItems: 'center',
