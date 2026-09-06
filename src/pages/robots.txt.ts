@@ -27,7 +27,7 @@ export const GET: APIRoute = ({ site }) => {
     '# 옮겨 실은 글은 canonical이 원문을 가리킨다.',
     '# AI 검색이 인용해야 할 정본은 원문 블로그다.',
     ...AI_CRAWLERS.flatMap((agent) => [`User-agent: ${agent}`, 'Allow: /', '']),
-    `Sitemap: ${new URL('sitemap-index.xml', site).href}`,
+    `Sitemap: ${new URL('sitemap.xml', site).href}`,
   ]
   return new Response(`${lines.join('\n')}\n`, {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
