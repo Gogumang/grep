@@ -13,7 +13,7 @@ import pagefind from 'astro-pagefind'
  * sitemap-index.xml이 올바른 주소를 갖는다.
  */
 export default defineConfig({
-  site: 'https://grep.vercel.app',
+  site: 'https://grep-alpha.vercel.app',
   integrations: [react(), sitemap(), pagefind()],
   vite: {
     plugins: [vanillaExtractPlugin()],
