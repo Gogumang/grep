@@ -64,6 +64,11 @@ export const leaving = style({
 /** 텍스트와 같은 방식으로 두 장을 한 칸에 겹친다. 칸은 가장 높은 자식만큼 늘어난다. */
 export const imageStack = style({
   display: 'grid',
+  '@media': {
+    // 한 칸으로 접히면 마크업 순서상 텍스트가 먼저 온다.
+    // 모바일에서는 사진이 먼저 보여야 하므로 순서를 뒤집는다.
+    '(max-width: 860px)': { order: -1 },
+  },
 })
 
 export const imageLayer = style({
@@ -96,6 +101,11 @@ export const title = style({
   WebkitLineClamp: 2,
   WebkitBoxOrient: 'vertical',
   overflow: 'hidden',
+  '@media': {
+    // 좁은 화면에서는 빈 둘째 줄이 제목과 요약 사이 빈 칸으로 그대로 드러난다.
+    // 세로로 쌓인 히어로에서는 그 여백이 화살표가 조금 움직이는 것보다 눈에 거슬린다.
+    '(max-width: 860px)': { minHeight: 0 },
+  },
   selectors: {
     '&:hover': { color: vars.color.accent },
   },
