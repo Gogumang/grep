@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "cherrypick",
+      "name": "grep",
       "dependencies": {
         "@astrojs/react": "^6.0.5",
         "@vanilla-extract/css": "^1.21.2",
