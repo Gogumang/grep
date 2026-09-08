@@ -21,26 +21,26 @@ export const inner = style({
 export const spacer = style({ flex: 1 })
 
 /**
- * 검색 자리. 토스증권 헤더 실측(2026-09-09):
- *   버튼 200×32 · 배경 rgba(2,32,71,0.05)(흰 바탕에서 #f2f4f6) · radius 8px
- *   돋보기 14px · 키 칩 20×20 radius 5px · 안내문 14px/500 #6b7684
+ * 검색 자리. 알약 배경 없이 돋보기·단축키·안내문만 세운다.
  *
- * 동그란 아이콘 하나만 두면 "찾을 수 있는 곳"이라는 걸 아이콘 뜻으로만 알려주게 된다.
- * 눌러야 할 자리를 글로 적어 두면 처음 온 사람도 읽고, 단축키까지 같이 배운다.
+ * 토스증권은 회색 알약(200×32)을 쓰는데, 우리 헤더는 워드마크와 테마 토글까지
+ * 셋뿐이라 배경까지 깔면 그 자리만 무거워진다. 눌러야 할 자리를 글로 적어 두는 것이
+ * 원래 목적이었고 그건 배경 없이도 그대로다.
+ *
+ * 누르는 영역은 글자를 감싼 만큼 그대로 살아 있다 — 배경만 지웠지 버튼이 아니게 된 건 아니다.
  */
 export const searchField = style({
   display: 'flex',
   alignItems: 'center',
   gap: vars.space.sm,
-  width: 200,
-  height: 32,
-  padding: `0 ${vars.space.md}`,
-  borderRadius: vars.radius.sm,
+  height: 36,
+  padding: 0,
   border: 'none',
-  background: vars.color.surfaceSunken,
+  background: 'none',
   color: vars.color.inkMuted,
+  /* 색 이모지는 currentColor를 따르지 않는다 — 글자 쪽이 짙어지는 것으로 반응을 준다. */
   selectors: {
-    '&:hover': { background: vars.color.border },
+    '&:hover': { color: vars.color.ink },
   },
   '@media': {
     /*
@@ -49,9 +49,6 @@ export const searchField = style({
     */
     'screen and (max-width: 640px)': {
       width: 36,
-      height: 36,
-      padding: 0,
-      borderRadius: vars.radius.full,
       justifyContent: 'center',
     },
   },
@@ -61,16 +58,16 @@ export const searchField = style({
  * 돋보기. 토스가 공개한 이모지 폰트가 그린다 — 본문 이모지와 같은 손이라
  * 헤더만 다른 그림체로 겉돌지 않는다(폰트 스택에서 시스템 폰트보다 앞이다).
  *
- * 16px. 쓰던 선 아이콘(14px)과 시각적 무게가 맞는 크기다 — 이모지는 글자 상자 안에
- * 여백을 물고 있어서 같은 숫자를 주면 더 작아 보인다. 다크에서는 렌즈가 밝아
- * 더 작게 두면 손잡이가 묻히고 그냥 동그라미로 읽힌다.
+ * 22px. 배경을 걷어내면서 기준이 바뀌었다 — 알약 안에서는 16px로 충분했지만,
+ * 맨바닥에서는 옆의 테마 토글(28px)과 안내문(13px) 사이에서 자리를 잡아야 한다.
+ * 다크에서는 렌즈가 밝게 그려져 더 작으면 손잡이가 묻히고 그냥 동그라미로 읽힌다.
  */
 export const searchIcon = style({
   flexShrink: 0,
-  fontSize: 16,
+  fontSize: 22,
   lineHeight: 1,
   '@media': {
-    'screen and (max-width: 640px)': { fontSize: 19 },
+    'screen and (max-width: 640px)': { fontSize: 24 },
   },
 })
 
