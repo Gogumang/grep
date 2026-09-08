@@ -1,4 +1,4 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, unlink, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 
@@ -11,15 +11,28 @@ import sharp from 'sharp'
  * 토스 CDN은 Accept 협상을 하지 않아 PNG만 주며(홈에서 PNG 13장 약 1.5MB),
  * 읽는 사람의 브라우저가 원문 서버로 직접 요청을 보낸다(핫링크).
  *
- * collector가 파일을 덮어쓰면 원격 주소로 되돌아가므로 그때 다시 돌려야 한다.
- * 이미 로컬 경로인 이미지는 건너뛰므로 몇 번을 돌려도 같은 결과가 된다.
+ * collector(grep-airflow의 AvifTranscoder)도 공개 시점에 같은 일을 한다. 여기는
+ * 그쪽이 놓친 것을 메우는 자리다 — avifenc가 없거나 실패하면 원본 PNG·JPEG가
+ * 그대로 들어오는데, 그걸 여기서 다시 구워 AVIF로 바꾸고 원본을 지운다.
+ * 이미 AVIF인 이미지는 건드리지 않으므로 몇 번을 돌려도 같은 결과가 된다.
+ *
+ * 최대 폭(1200·1400)과 품질(50)은 collector와 맞춰 둔 값이다. 한쪽만 고치면
+ * 같은 그림이 두 크기로 갈린다.
  *
  * 실행: bun run images
  */
 const LIST_DIRECTORY = path.join(process.cwd(), 'src', 'posts', 'list')
 const POST_DIRECTORY = path.join(process.cwd(), 'src', 'posts', 'post')
 const IMAGE_DIRECTORY = path.join(process.cwd(), 'public', 'images')
+const PUBLIC_DIRECTORY = path.join(process.cwd(), 'public')
 const IMAGE_URL_PREFIX = '/images'
+
+/**
+ * 이미 우리 저장소에 있지만 다시 구워야 하는 형식. collector가 원문에서 받은 바이트를
+ * 그대로 넣기 때문에(grep-airflow e75532d) 새 글은 PNG·JPEG로 들어온다.
+ * AVIF·WebP는 이미 줄어든 것이거나 움직이는 이미지라 손대지 않는다.
+ */
+const REBAKE_PATTERN = /\.(png|jpe?g)$/i
 
 const REQUEST_TIMEOUT_MS = 20_000
 const CONCURRENCY = 4
@@ -55,6 +68,9 @@ const MARKDOWN_IMAGE_PATTERN = /!\[([^\]]*)\]\(((?:\\.|[^()\s])+)\)/g
 const tidyBlankLines = (contents) => contents.replace(/\n{3,}/g, '\n\n')
 
 const isRemote = (value) => value.startsWith('http://') || value.startsWith('https://')
+const isLocalImage = (value) => value.startsWith(`${IMAGE_URL_PREFIX}/`)
+/** 원격이면 받아야 하고, 로컬 PNG·JPEG면 다시 구워야 한다. 그 밖에는 할 일이 없다. */
+const needsWork = (value) => isRemote(value) || (isLocalImage(value) && REBAKE_PATTERN.test(value))
 const unescapeUrl = (value) => value.replace(/\\([()])/g, '$1')
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const toKb = (bytes) => Math.round(bytes / 1024)
@@ -91,11 +107,25 @@ function isAnimatedPng(buffer) {
 }
 
 /**
- * 받아서 줄인 뒤 `<targetBase>.<확장자>`로 저장하고, 붙은 확장자를 알려준다.
+ * 받거나 읽어서 줄인 뒤 저장하고, 새로 가리켜야 할 `/images/...` 주소를 돌려준다.
  * 움직이는 이미지를 정지 변환하면 첫 프레임만 남으므로 프레임 수를 먼저 본다.
+ *
+ * 주소를 부르는 쪽에서 조립하지 않고 여기서 돌려주는 이유 — 로컬 파일은 제 경로를
+ * 지키고 원격만 fallbackBase를 쓴다. 두 규칙을 호출부마다 되풀이하면 어긋난다.
  */
-async function saveConverted(url, targetBase, maxWidth) {
-  const original = await download(url)
+/**
+ * 원격이면 받아 오고, 우리 저장소 안의 경로면 파일에서 읽는다.
+ * 로컬은 확장자를 뺀 경로를 그대로 목적지로 쓴다 — 번호를 다시 매기면
+ * collector가 붙인 번호와 어긋나서 다른 그림을 가리키게 된다.
+ */
+/** public 아래의 실제 파일 경로를 브라우저가 부르는 주소로 되돌린다. */
+const toPublicUrl = (filePath) => `/${path.relative(PUBLIC_DIRECTORY, filePath).split(path.sep).join('/')}`
+
+const loadSource = (source) => (isRemote(source) ? download(source) : readFile(path.join(PUBLIC_DIRECTORY, source)))
+
+async function saveConverted(source, fallbackBase, maxWidth) {
+  const original = await loadSource(source)
+  const targetBase = isRemote(source) ? fallbackBase : path.join(PUBLIC_DIRECTORY, source).replace(/\.[^./]+$/, '')
 
   /**
    * APNG는 다시 굽지 않고 원본 그대로 둔다 — 프레임마다 픽셀이 거의 다 바뀌어
@@ -104,7 +134,7 @@ async function saveConverted(url, targetBase, maxWidth) {
    */
   if (isAnimatedPng(original)) {
     await writeFile(`${targetBase}.png`, original)
-    return { before: original.length, after: original.length, extension: 'png' }
+    return { before: original.length, after: original.length, url: toPublicUrl(`${targetBase}.png`) }
   }
 
   const isAnimated = ((await sharp(original, { animated: true }).metadata()).pages ?? 1) > 1
@@ -119,8 +149,16 @@ async function saveConverted(url, targetBase, maxWidth) {
     : resized.avif({ quality: AVIF_QUALITY })
   ).toBuffer()
 
-  await writeFile(`${targetBase}.${extension}`, converted)
-  return { before: original.length, after: converted.length, extension }
+  const targetPath = `${targetBase}.${extension}`
+  await writeFile(targetPath, converted)
+
+  // 다시 구운 로컬 파일의 원본은 지운다 — 남겨두면 아무도 안 보는 채로 저장소만 무거워진다.
+  if (!isRemote(source)) {
+    const originalPath = path.join(PUBLIC_DIRECTORY, source)
+    if (originalPath !== targetPath) await unlink(originalPath)
+  }
+
+  return { before: original.length, after: converted.length, url: toPublicUrl(targetPath) }
 }
 
 const markdownFileNames = async (directory) => (await readdir(directory)).filter((name) => name.endsWith('.md')).sort()
@@ -145,13 +183,13 @@ async function fetchThumbnail(fileName) {
   const filePath = path.join(LIST_DIRECTORY, fileName)
   const contents = await readFile(filePath, 'utf8')
   const url = /^sourceThumbnail: "(.*)"$/m.exec(contents)?.[1]
-  if (!url || !isRemote(url)) return
+  if (!url || !needsWork(url)) return
 
   const id = fileName.replace(/\.md$/, '')
   try {
     const saved = await saveConverted(url, path.join(IMAGE_DIRECTORY, id), THUMBNAIL_MAX_WIDTH)
     recordSaved(saved)
-    await writeFile(filePath, contents.replace(url, `${IMAGE_URL_PREFIX}/${id}.${saved.extension}`), 'utf8')
+    await writeFile(filePath, contents.replace(url, saved.url), 'utf8')
   } catch (error) {
     // 이미지는 보조 데이터다 — 한 장이 실패해도 나머지를 멈추지 않는다.
     // 주소는 원격 그대로 두어 다음 실행이 다시 시도할 수 있게 한다.
@@ -169,8 +207,9 @@ async function fetchBodyImages(fileName) {
   )
 
   /**
-   * 번호는 남은 이미지 전체에서의 순서로 매긴다 — 원격만 세면 한 장이 실패했다가
+   * 번호는 남은 이미지 전체에서의 순서로 매긴다 — 처리 대상만 세면 한 장이 실패했다가
    * 다음 실행에서 성공할 때 이미 저장된 파일과 번호가 어긋난다.
+   * 이미 로컬에 있는 파일은 이 번호를 쓰지 않고 제 경로를 그대로 지킨다(saveConverted).
    */
   const images = [...withoutPixels.matchAll(MARKDOWN_IMAGE_PATTERN)].map((match, index) => ({
     markdown: match[0],
@@ -178,8 +217,8 @@ async function fetchBodyImages(fileName) {
     url: unescapeUrl(match[2]),
     number: String(index + 1).padStart(2, '0'),
   }))
-  const remotes = images.filter((image) => isRemote(image.url))
-  if (remotes.length === 0) {
+  const pending = images.filter((image) => needsWork(image.url))
+  if (pending.length === 0) {
     if (withoutPixels !== original) await writeFile(filePath, tidyBlankLines(withoutPixels), 'utf8')
     return
   }
@@ -188,13 +227,12 @@ async function fetchBodyImages(fileName) {
   await mkdir(postImageDirectory, { recursive: true })
 
   let contents = withoutPixels
-  for (const image of remotes) {
+  for (const image of pending) {
     try {
       const saved = await saveConverted(image.url, path.join(postImageDirectory, image.number), BODY_MAX_WIDTH)
       recordSaved(saved)
       // 치환문을 함수로 준다 — alt에 `$&` 같은 글자가 있어도 그대로 남는다.
-      const localPath = `${IMAGE_URL_PREFIX}/${id}/${image.number}.${saved.extension}`
-      contents = contents.replace(image.markdown, () => `![${image.alt}](${localPath})`)
+      contents = contents.replace(image.markdown, () => `![${image.alt}](${saved.url})`)
     } catch (error) {
       failures.push(`${fileName} ${image.number}번: ${error.message}`)
     }
