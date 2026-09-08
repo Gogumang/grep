@@ -5,4 +5,3 @@
 
 | 원문 주소 | 한 줄 추천사 |
 | --- | --- |
-| https://techblog.lycorp.co.jp/ko/applying-e2ee-to-apache-kafka-in-line-app |  |
