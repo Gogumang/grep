@@ -57,13 +57,20 @@ export const searchField = style({
   },
 })
 
-/** 돋보기. 안내문(14px)과 나란히 서므로 그보다 한 단계 작게 둔다. */
+/**
+ * 돋보기. 토스가 공개한 이모지 폰트가 그린다 — 본문 이모지와 같은 손이라
+ * 헤더만 다른 그림체로 겉돌지 않는다(폰트 스택에서 시스템 폰트보다 앞이다).
+ *
+ * 16px. 쓰던 선 아이콘(14px)과 시각적 무게가 맞는 크기다 — 이모지는 글자 상자 안에
+ * 여백을 물고 있어서 같은 숫자를 주면 더 작아 보인다. 다크에서는 렌즈가 밝아
+ * 더 작게 두면 손잡이가 묻히고 그냥 동그라미로 읽힌다.
+ */
 export const searchIcon = style({
   flexShrink: 0,
-  width: 14,
-  height: 14,
+  fontSize: 16,
+  lineHeight: 1,
   '@media': {
-    'screen and (max-width: 640px)': { width: 16, height: 16 },
+    'screen and (max-width: 640px)': { fontSize: 19 },
   },
 })
 
