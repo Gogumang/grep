@@ -113,13 +113,20 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
           </span>
         </a>
         <span class={header.spacer} />
-        <button type="button" class={header.themeToggle} data-search-open aria-label="글 검색 열기">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <button type="button" class={header.searchField} data-search-open aria-label="글 검색 열기">
+          <svg class={header.searchIcon} viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <circle cx="8.6" cy="8.6" r="5.2" stroke="currentColor" stroke-width="2"></circle>
             <path d="M12.6 12.6L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
           </svg>
+          <kbd class={header.searchKey} aria-hidden="true">/</kbd>
+          <span class={header.searchHint} aria-hidden="true">를 눌러 검색하세요</span>
         </button>
-        <button type="button" class={header.themeToggle} data-theme-toggle aria-label="테마 바꾸기">☾</button>
+        <button
+          type="button"
+          class={`${header.themeToggle} ${header.themeGlyph}`}
+          data-theme-toggle
+          aria-label="테마 바꾸기"
+        ></button>
       </div>
     </header>
     <slot />
@@ -128,18 +135,12 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
       import { createSearchModal } from '@/components/search/searchModal'
 
       const root = document.documentElement
-      const themeButton = document.querySelector('[data-theme-toggle]')
 
-      function paintThemeButton() {
-        if (themeButton) themeButton.textContent = root.dataset.theme === 'dark' ? '☀' : '☾'
-      }
-      paintThemeButton()
-
-      themeButton?.addEventListener('click', () => {
+      // 버튼에 그려지는 달·해는 SiteHeader.css.ts가 data-theme을 보고 정한다.
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
         const next = root.dataset.theme === 'dark' ? 'light' : 'dark'
         root.dataset.theme = next
         localStorage.setItem('grep-theme', next)
-        paintThemeButton()
       })
 
       // 검색 모듈은 처음 열 때만 받는다 — 읽기만 하는 방문자는 내려받지 않는다.
@@ -150,11 +151,22 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
       }
 
       document.querySelector('[data-search-open]')?.addEventListener('click', openSearch)
+
+      /*
+        헤더에 적어 둔 '/'와 기존 ⌘K 둘 다 받는다. '/'는 토스증권이 쓰는 방식인데
+        운영체제를 가리지 않아 버튼에 그대로 적어 둘 수 있다(⌘는 윈도우에서 거짓말이 된다).
+        글자를 넣는 중이면 가로채지 않는다 — 검색창에 '/'를 못 치게 되면 안 된다.
+      */
+      const isTyping = (target: EventTarget | null) =>
+        target instanceof HTMLElement &&
+        (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
+
       addEventListener('keydown', (event) => {
-        if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-          event.preventDefault()
-          openSearch()
-        }
+        const isCommandK = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k'
+        const isSlash = event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey
+        if (!isCommandK && !(isSlash && !isTyping(event.target))) return
+        event.preventDefault()
+        openSearch()
       })
     </script>
   </body>
