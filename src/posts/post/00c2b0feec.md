@@ -10,7 +10,7 @@
 
 먼저 광고주가 이 화면에서 실제로 무엇을 하는지 짚어볼게요.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/e871f6e3-cb03-4780-9915-9df2e04cd334/alpha-ads-platform.toss.im_advertiser_display-ads_columnIdpurchasecontractSortbillable_clickdescstartDate2025-08-15endDate2026-08-14dateRangeKey1year_\(3\).png)
+![](/images/00c2b0feec/01.avif)
 
 광고 대시보드에는 캠페인 → 광고세트 → 소재라는 3단계 계층이 있어요. 캠페인은 ‘이 예산으로 이런 목표를 달성하겠다’를 정하는 단위, 광고세트는 그 안에서 누구에게 언제 보여줄지를 정하는 단위, 소재는 실제로 사용자 눈에 보이는 이미지와 문구예요. 캠페인 하나에 광고세트 여러 개가, 광고세트 하나에 소재 여러 개가 붙습니다.
 
@@ -25,7 +25,7 @@
 
 한 번 보고 끝나는 화면이 아니에요. 가설을 세우고, 걸러보고, 아니다 싶으면 되돌아가는 탐색 도구에 가깝습니다.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/0f831580-7a75-47e2-a730-d418a2944515/Screenshot_2026-08-14_at_13.03.01.png)
+![](/images/00c2b0feec/02.avif)
 
 문제는 저 모든 동작이 서버 호출이었다는 것입니다.
 
@@ -115,7 +115,7 @@
 
 첫째, 점진적 렌더링이 가능해졌어요. Metadata가 도착하는 순간 표를 그리고, 나머지 컬럼은 스켈레톤 UI로 둡니다. 사용자는 가장 느린 API를 기다리는 대신 가장 빠른 API의 속도로 화면을 보게 돼요.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/b240e842-5623-4b0d-8823-e003d0ed0670/alpha-ads-platform.toss.im_advertiser_display-ads_startDate2024-08-20endDate2025-08-19dateRangeKey1yearcontractSortspenddesc_\(1\).png)
+![](/images/00c2b0feec/03.avif)
 
 둘째, 성과가 0인 항목이 사라지지 않게 됐어요. 표에 어떤 행이 있는지는 Metadata가 정하고, 성과는 그 행에 ID로 붙는 값일 뿐이에요. 그래서 성과가 없는 캠페인도 행은 그대로 남습니다.
 

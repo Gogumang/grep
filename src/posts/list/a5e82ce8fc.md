@@ -5,7 +5,7 @@ blogName: "여기어때"
 blogKey: "techblog-gccompany-co-kr"
 blogHomepage: "https://techblog.gccompany.co.kr"
 publishedAt: "2026-09-02T00:48:36Z"
-sourceThumbnail: "https://cdn-images-1.medium.com/max/1024/1*4J9QIcsz8a5h88-kN27zTA.png"
+sourceThumbnail: "/images/a5e82ce8fc.avif"
 tags: ["product-design", "ux", "ui", "ux-design", "design"]
 ---
 

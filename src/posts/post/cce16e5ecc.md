@@ -10,7 +10,7 @@ As frontend developers, we often need functions like `throttle`, `debounce`, or 
 
 Of course, we could have used a well-known library like lodash. But lodash fundamentally has a dated code structure, and it implements all of its logic from scratch rather than using functions that browsers now provide natively, like `Array#map`. It also carried defensive logic designed for legacy browsers like Internet Explorer, which is code that modern web applications no longer need.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/ad3de02e-e645-4a40-91a1-30c8864d5a75/image.png)
+![](/images/cce16e5ecc/01.avif)
 
 _An example of lodash code containing unnecessary logic for supporting old browsers_
 
@@ -28,13 +28,13 @@ So we decided we should build a modern JavaScript utility library based on `@tos
 
 When we actually went ahead and implemented the core functions that `lodash` provided, the results were astonishing. It varied from function to function, but simply removing unnecessary logic improved speed by at least 2x and up to more than 10x.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/856f3f09-f59f-4dd2-92bc-182c2b0c14c4/image.png)
+![](/images/cce16e5ecc/02.avif)
 
 _Performance comparison between early es-toolkit functions and lodash functions_
 
 The change in bundle size was even more dramatic. By removing unnecessary code for supporting old browsers and directly using functions already common in modern browsers, like `Array#map`, the bundle size shrank by more than 30x in some cases.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/fb592478-505e-4ef2-8662-273e6e3b0607/image.png)
+![](/images/cce16e5ecc/03.avif)
 
 _Bundle size comparison between es-toolkit and lodash_
 
@@ -44,27 +44,27 @@ Seeing this, we figured there would be quite a few people who could benefit from
 
 After building the first version of es-toolkit, we shared the initial results on Toss Frontend's social media. When we did, we received far more attention than we'd expected.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/d69c9ade-5011-4e40-9b47-9202444de788/image.png)
+![](/images/cce16e5ecc/04.avif)
 
 More frontend developers than we anticipated started using it, and contributions trickled in here and there. People implemented missing functions, fixed bugs, and optimized parts that hadn't been fully optimized.
 
 The strong response we received in Korea made us think this wasn’t a problem unique to Korean developers. So we shared the project on [Reddit](https://www.reddit.com/r/javascript/comments/1dvmd1v/estoolkit_a_23x_faster_and_97_smaller_alternative/) where many international developers gather.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/0c74bc3c-1fe6-4eda-a0c2-e3129ef6060a/image.png)
+![](/images/cce16e5ecc/05.avif)
 
 The response was overwhelming. It received over 100 upvotes, driving tens of thousands of developers to the repository. Discussions continued for days in the comments, with people asking questions like, “How did you pull this off?” and suggesting ideas such as, “What if you tried doing it this way instead?”
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/8b43b3d5-95a0-4852-8783-dc53c200bc7d/image.png)
+![](/images/cce16e5ecc/06.avif)
 
 As the discussion heated up in the overseas developer community, well-known blogs and newsletters started spreading the word too. And when that happened, even more people began participating.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/00c277c9-4d09-49cb-815c-10666ccb8159/image.png)
+![](/images/cce16e5ecc/07.avif)
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/32da4e5c-1bbc-40b6-a4fc-ae42cfd99d47/image.png)
+![](/images/cce16e5ecc/08.avif)
 
 People in the community voluntarily built bundler plugins that replace lodash with es-toolkit, and even swapped the dependencies of well-known libraries over to es-toolkit.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/6c1d0351-a87d-4356-a4e6-5d2a92c8bc5d/image.png)
+![](/images/cce16e5ecc/09.avif)
 
 ## \[Dayong\] From Open-Source Contributor to Toss Developer
 
@@ -72,11 +72,11 @@ Even before I knew about the es-toolkit library, I'd always had this question in
 
 Then one day, I happened to come across news about the es-toolkit library on Toss Frontend's Twitter. The news was that es-toolkit, which was faster than the famous lodash library, was getting explosive responses overseas as well.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/dc1a36f2-3d99-4838-aeee-2f8bf2bb183e/image.png)
+![](/images/cce16e5ecc/10.avif)
 
 I wanted to see a major open-source project from Korea make a meaningful contribution to the frontend ecosystem. On top of that, the project was maintained by a company I had long admired, which made me even more eager to get involved. Because it was open source, I could open a Pull Request even though I wasn't a Toss employee. So I immediately cloned the repository and started contributing little by little, beginning with small issues.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/7f901ed0-ca21-456f-ab55-ffe9846b4ab4/image.png)
+![](/images/cce16e5ecc/11.avif)
 
 They were small Pull Requests, but it was fulfilling to watch myself contribute as the library gradually improved. So I kept at it, contributing one piece at a time.
 
@@ -84,7 +84,7 @@ Then I happened to meet Sojin in person at an external tech conference. I still 
 
 From then on, I contributed even harder, and that's how I became the #2 contributor.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/7e33503d-6858-49f3-bd04-5dffc9459eba/image.png)
+![](/images/cce16e5ecc/12.avif)
 
 Through the process of opening Pull Requests to the es-toolkit library and getting them reviewed, I learned a great deal about interface design principles and the JavaScript language. The experience I built up along the way ultimately led to me joining Toss Bank.
 
@@ -102,7 +102,7 @@ So we added an intermediate layer that matches lodash's actual interface and beh
 
 Once we did this, the tide turned. It wasn't just companies building services. Big open-source projects like Storybook, Mermaid, and Yarn Berry started adopting es-toolkit too. More and more people felt the value of es-toolkit and spread the word. NPM downloads instantly grew exponentially.
 
-![](https://static.toss.im/ipd-tcs/toss_core/live/612b172d-9853-4021-a3e2-b3a986ff9869/image.png)
+![](/images/cce16e5ecc/13.avif)
 
 Feeling the value of es-toolkit myself, and wanting more people to use it, I spent a while actively contributing to external libraries. I did migrations myself and explained in detail the performance es-toolkit offers, going around here and there almost like a salesperson. In that process, even more contributors joined us, and the folks on Toss's Open Source Committee (now the [Slash Team](https://www.slash.page/)) helped out a great deal as well.
 
