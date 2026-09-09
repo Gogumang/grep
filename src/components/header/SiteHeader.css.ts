@@ -21,18 +21,18 @@ export const inner = style({
 export const spacer = style({ flex: 1 })
 
 /**
- * 검색 자리. 알약 배경 없이 돋보기·단축키·안내문만 세운다.
+ * 검색 자리. 돋보기 하나만 세운다.
  *
- * 토스증권은 회색 알약(200×32)을 쓰는데, 우리 헤더는 워드마크와 테마 토글까지
- * 셋뿐이라 배경까지 깔면 그 자리만 무거워진다. 눌러야 할 자리를 글로 적어 두는 것이
- * 원래 목적이었고 그건 배경 없이도 그대로다.
+ * 알약 배경도, "/를 눌러 검색하세요"라는 안내문도 걷어냈다. 배경은 헤더에 셋뿐인 자리
+ * 하나만 무겁게 만들었고, 안내문은 옆의 테마 토글까지 세 덩어리를 한 줄에 늘어놓아
+ * 오른쪽이 왼쪽 워드마크보다 시끄러웠다. 돋보기는 설명 없이도 읽히는 그림이다.
  *
- * 누르는 영역은 글자를 감싼 만큼 그대로 살아 있다 — 배경만 지웠지 버튼이 아니게 된 건 아니다.
+ * '/'와 ⌘K 단축키는 그대로 산다 — BaseLayout이 계속 받는다. 적어 두지 않을 뿐이다.
  */
 export const searchField = style({
-  display: 'flex',
-  alignItems: 'center',
-  gap: vars.space.sm,
+  display: 'grid',
+  placeItems: 'center',
+  width: 36,
   height: 36,
   padding: 0,
   border: 'none',
@@ -42,61 +42,19 @@ export const searchField = style({
   selectors: {
     '&:hover': { color: vars.color.ink },
   },
-  '@media': {
-    /*
-      좁은 화면에서는 안내문과 키 칩을 접고 돋보기만 남긴다 —
-      워드마크·검색·테마가 한 줄에 들어가야 하고, 폰에는 누를 단축키도 없다.
-    */
-    'screen and (max-width: 640px)': {
-      width: 36,
-      justifyContent: 'center',
-    },
-  },
 })
 
 /**
  * 돋보기. 토스가 공개한 이모지 폰트가 그린다 — 본문 이모지와 같은 손이라
  * 헤더만 다른 그림체로 겉돌지 않는다(폰트 스택에서 시스템 폰트보다 앞이다).
  *
- * 22px. 배경을 걷어내면서 기준이 바뀌었다 — 알약 안에서는 16px로 충분했지만,
- * 맨바닥에서는 옆의 테마 토글(28px)과 안내문(13px) 사이에서 자리를 잡아야 한다.
+ * 24px. 안내문이 사라져 이제 옆의 테마 토글(28px)하고만 크기를 겨룬다 —
+ * 안내문과 나란할 때 쓰던 22px로는 혼자 남으니 작아 보인다.
  * 다크에서는 렌즈가 밝게 그려져 더 작으면 손잡이가 묻히고 그냥 동그라미로 읽힌다.
  */
 export const searchIcon = style({
-  flexShrink: 0,
-  fontSize: 22,
+  fontSize: 24,
   lineHeight: 1,
-  '@media': {
-    'screen and (max-width: 640px)': { fontSize: 24 },
-  },
-})
-
-const foldOnNarrowScreen = {
-  '@media': {
-    'screen and (max-width: 640px)': { display: 'none' },
-  },
-} as const
-
-/** 단축키 칩. 배경을 한 단계 더 얹어 눌리는 키처럼 보이게 한다. */
-export const searchKey = style({
-  ...foldOnNarrowScreen,
-  flexShrink: 0,
-  display: 'grid',
-  placeItems: 'center',
-  width: 20,
-  height: 20,
-  borderRadius: 5,
-  background: vars.color.border,
-  color: vars.color.inkSubtle,
-  fontSize: vars.fontSize.sm,
-  fontWeight: vars.fontWeight.medium,
-})
-
-export const searchHint = style({
-  ...foldOnNarrowScreen,
-  whiteSpace: 'nowrap',
-  fontSize: vars.fontSize.sm,
-  fontWeight: vars.fontWeight.medium,
 })
 
 /**
