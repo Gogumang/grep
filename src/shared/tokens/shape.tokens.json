@@ -108,6 +108,14 @@
       }
     },
     "font": {
+      "display": {
+        "$type": "fontFamily",
+        "$value": [
+          "Jalnan2",
+          "{semantic.font.sans}"
+        ],
+        "$description": "제목용. 여기어때 잘난체 2(gccompany.co.kr/font) — 네모틀에 꽉 찬 제목 전용 서체다. 워드마크가 본문과 같은 글꼴이면 그냥 굵은 글자로 읽힌다. 라틴만 남긴 서브셋이라 한글은 뒤의 sans가 그대로 받는다."
+      },
       "sans": {
         "$type": "fontFamily",
         "$value": [

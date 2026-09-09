@@ -7,6 +7,10 @@
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
+# 폰트는 서브셋을 바꾸면 파일 이름도 함께 바꾼다 — 그래야 영구 캐시가 낡은 글자를 붙들지 않는다.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /pagefind/*
   Cache-Control: public, max-age=86400
 

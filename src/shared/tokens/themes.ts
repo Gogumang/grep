@@ -24,10 +24,22 @@ function valueAtPath(path: string): unknown {
   return (node as TokenNode | undefined)?.$value
 }
 
+/** 폰트 스택 배열의 원소도 다른 스택을 가리킬 수 있다 — display가 sans 전체를 뒤에 붙이는 식. */
+function expand(entry: unknown): string[] {
+  const reference = typeof entry === 'string' ? REFERENCE.exec(entry) : null
+  if (!reference) return [String(entry)]
+
+  const referenced = valueAtPath(reference[1] ?? '')
+  return Array.isArray(referenced) ? referenced.flatMap(expand) : [String(referenced)]
+}
+
 /** DTCG는 fontWeight를 숫자로 규정한다. JSON을 규격대로 두고 변환만 여기서 한다. */
 function toCssValue(raw: unknown, type: string | undefined): string {
   if (Array.isArray(raw)) {
-    return raw.map((name) => (String(name).includes(' ') ? `'${name}'` : String(name))).join(', ')
+    return raw
+      .flatMap(expand)
+      .map((name) => (name.includes(' ') ? `'${name}'` : name))
+      .join(', ')
   }
   if (type === 'fontWeight') return String(raw)
   return String(raw)

@@ -29,5 +29,5 @@ export const vars = createThemeContract({
   radius: { sm: null, md: null, lg: null, xl: null, full: null },
   fontSize: { xs: null, sm: null, md: null, lg: null, xl: null, xxl: null, display: null },
   fontWeight: { regular: null, medium: null, semibold: null, bold: null },
-  font: { sans: null },
+  font: { sans: null, display: null },
 })

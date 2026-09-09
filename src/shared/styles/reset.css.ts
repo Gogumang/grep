@@ -1,5 +1,6 @@
 import { globalStyle } from '@vanilla-extract/css'
 import { vars } from './contract.css'
+import './fonts.css'
 import './theme.css'
 
 globalStyle('*, *::before, *::after', { boxSizing: 'border-box' })
