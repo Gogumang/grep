@@ -34,7 +34,8 @@ export const panel = style({
   display: 'flex',
   flexDirection: 'column',
   background: vars.color.surface,
-  borderRadius: vars.radius.lg,
+  /* 썸네일용 12px을 그대로 쓰니 640px짜리 상자에서는 모서리가 도드라졌다 — 한 단계 줄인다. */
+  borderRadius: vars.radius.sm,
   boxShadow: '0 24px 64px rgba(0, 0, 0, 0.24)',
   overflow: 'hidden',
   animation: `${riseIn} 140ms ease-out`,
@@ -77,37 +78,31 @@ export const input = style({
 })
 
 /**
- * 닫는 자리. 넓은 화면에서는 누를 키(ESC)를 알려주고, 좁은 화면에서는 ✕를 보여준다.
+ * 닫는 ✕. 좁은 화면에서만 나온다.
  *
- * 전체 화면이 되면 바깥을 눌러 닫을 배경이 사라지는데 폰에는 ESC 키도 없다 —
- * 글로만 'ESC'라고 적어 두면 닫을 방법이 없어진다. 그래서 눌러도 닫히는 버튼이다.
+ * 넓은 화면에서는 바깥을 누르거나 ESC를 치면 닫히니 버튼이 자리만 차지했다.
+ * 하지만 좁은 화면에서는 패널이 화면을 다 덮어 누를 바깥이 없고 폰에는 ESC 키도 없다 —
+ * 여기서까지 지우면 닫을 방법이 사라진다.
  */
 export const closeButton = style({
   flexShrink: 0,
-  display: 'grid',
+  display: 'none',
   placeItems: 'center',
-  minWidth: 32,
+  width: 32,
   height: 32,
-  padding: `0 ${vars.space.sm}`,
+  padding: 0,
   borderRadius: vars.radius.sm,
   border: `1px solid ${vars.color.border}`,
   background: 'none',
   color: vars.color.inkMuted,
-  fontSize: vars.fontSize.xs,
+  fontSize: vars.fontSize.md,
+  lineHeight: 1,
   selectors: {
     '&:hover': { borderColor: vars.color.borderStrong, color: vars.color.ink },
   },
-})
-
-/** 키 이름은 키보드가 있는 화면에서만 뜻이 있다. */
-export const closeKeyLabel = style({
-  '@media': { 'screen and (max-width: 640px)': { display: 'none' } },
-})
-
-export const closeIcon = style({
-  fontSize: vars.fontSize.md,
-  lineHeight: 1,
-  '@media': { 'screen and (min-width: 641px)': { display: 'none' } },
+  '@media': {
+    'screen and (max-width: 640px)': { display: 'grid' },
+  },
 })
 
 export const results = style({

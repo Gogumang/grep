@@ -87,19 +87,14 @@ export function createSearchModal() {
     input.setAttribute('aria-label', '검색어')
 
     /*
-      닫기. 좁은 화면에서는 패널이 화면을 다 덮어 바깥을 누를 배경이 없고,
-      폰에는 ESC 키도 없다 — 누를 수 있는 자리를 반드시 남긴다.
-      넓은 화면에서는 그대로 'ESC'라고 알려준다(CSS가 둘 중 하나만 보여준다).
+      닫기 ✕. 좁은 화면에서만 보인다(CSS가 정한다) — 패널이 화면을 다 덮어
+      바깥을 누를 배경이 없고 폰에는 ESC 키도 없다. 넓은 화면에서는 바깥 클릭과
+      ESC 키가 있어 버튼이 자리만 차지했다.
     */
     const closeButton = el('button', styles.closeButton)
     closeButton.type = 'button'
+    closeButton.textContent = '✕'
     closeButton.setAttribute('aria-label', '검색 닫기')
-    const closeKeyLabel = el('span', styles.closeKeyLabel)
-    closeKeyLabel.textContent = 'ESC'
-    const closeIcon = el('span', styles.closeIcon)
-    closeIcon.textContent = '✕'
-    closeIcon.setAttribute('aria-hidden', 'true')
-    closeButton.append(closeKeyLabel, closeIcon)
     closeButton.addEventListener('click', close)
 
     const results = el('div', styles.results)
