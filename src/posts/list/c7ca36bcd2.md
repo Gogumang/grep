@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-03-20T01:00:00Z"
-sourceThumbnail: "/images/c7ca36bcd2.avif"
+sourceThumbnail: "https://images.gogumang.com/c7ca36bcd2.avif"
 tags: []
 category: "Engineering"
 author: "표상영"

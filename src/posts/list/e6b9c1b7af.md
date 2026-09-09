@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2024-01-11T06:10:00Z"
-sourceThumbnail: "/images/e6b9c1b7af.avif"
+sourceThumbnail: "https://images.gogumang.com/e6b9c1b7af.avif"
 tags: []
 category: "Engineering"
 author: "한재엽"

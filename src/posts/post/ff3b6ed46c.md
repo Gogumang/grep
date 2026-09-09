@@ -8,7 +8,7 @@
 
 lodash 같은 유명한 라이브러리를 활용하는 방법도 있었지만, 기본적으로 lodash는 [이렇게](https://github.com/lodash/lodash/blob/4.18.1/dist/lodash.js) 낡은 코드 구조를 가지고 있고, `Array#map` 같이 이제 브라우저가 기본적으로 제공하는 함수가 아니라 모든 로직을 직접 구현하고 있었어요. 이외로 Internet Explorer를 위한 방어적인 로직같이 현대 웹 개발에는 필요하지 않은 로직이 불필요하게 들어가 있었어요.
 
-![](/images/ff3b6ed46c/01.avif)
+![](https://images.gogumang.com/ff3b6ed46c/01.avif)
 
 _오래된 브라우저 지원 등을 위해 불필요한 로직이 들어가 있는 lodash 코드 예시_
 
@@ -26,13 +26,13 @@ ECMAScript Modules도 지원하지 않아서, 현대 웹 개발에서 일반화�
 
 실제로 `lodash` 에서 제공하는 핵심적인 함수들 위주로 구현을 해보니까 효과가 놀라웠어요. 함수에 따라서 달랐지만, 불필요한 로직를 제거하는 것만으로 최소 2배, 최대 10배 이상 속도가 빨라졌어요.
 
-![](/images/ff3b6ed46c/02.avif)
+![](https://images.gogumang.com/ff3b6ed46c/02.avif)
 
 _초기 버전의 es-toolkit 함수 성능과 lodash 함수 성능 비교_
 
 번들 사이즈의 변화는 더 드라마틱했어요. 오래된 브라우저를 지원하는 불필요한 코드를 제거하고, 현대 브라우저에서 이미 보편화된 `Array#map` 같은 함수를 직접 사용하도록 하니까 번들 사이즈가 30배 이상 줄어들기도 했어요.
 
-![](/images/ff3b6ed46c/03.avif)
+![](https://images.gogumang.com/ff3b6ed46c/03.avif)
 
 _es-toolkit과 lodash 번들 사이즈 비교_
 
@@ -42,27 +42,27 @@ _es-toolkit과 lodash 번들 사이즈 비교_
 
 es-toolkit의 첫 버전을 만들고 난 후, 첫 결과를 토스 프론트엔드 SNS에 공개했어요. 생각보다 더 큰 관심을 받았죠.
 
-![](/images/ff3b6ed46c/04.avif)
+![](https://images.gogumang.com/ff3b6ed46c/04.avif)
 
 생각보다 많은 프론트엔드 개발자 분들께서 사용하기 시작했고, 기여도 간간히 올라왔어요. 빠진 함수를 구현해 주기도 하고, 버그를 수정해 주시기도 하고, 최적화가 덜 된 부분을 최적화 해주시기도 했죠.
 
 한국에서의 관심을 바탕으로, 이러한 문제가 한국에서만 있지는 않을 것 같다고 생각했어요. 그래서 많은 해외 개발자 분들이 모이는 [해외 개발자 사이트](https://www.reddit.com/r/javascript/comments/1dvmd1v/estoolkit_a_23x_faster_and_97_smaller_alternative/)에 프로젝트를 알렸어요.
 
-![](/images/ff3b6ed46c/05.avif)
+![](https://images.gogumang.com/ff3b6ed46c/05.avif)
 
 프로젝트를 알리니까 폭발적인 반응이 있었어요. 100개 이상의 추천을 받아서 수만 명의 분들이 오픈소스 레포지토리를 열람해 주셨고, 댓글에서도 "어떻게 한 거야?", "이렇게 하면 더 좋지 않을까?" 같은 논의가 한동안 지속되었어요.
 
-![](/images/ff3b6ed46c/06.avif)
+![](https://images.gogumang.com/ff3b6ed46c/06.avif)
 
 해외 개발자 커뮤니티에서 논의가 뜨거워지니까, 유명 블로그나 유명 뉴스레터에서도 소식을 알리기 시작했어요. 그랬더니 더 많은 분들이 참여해 주시기 시작했죠.
 
-![](/images/ff3b6ed46c/07.avif)
+![](https://images.gogumang.com/ff3b6ed46c/07.avif)
 
-![](/images/ff3b6ed46c/08.avif)
+![](https://images.gogumang.com/ff3b6ed46c/08.avif)
 
 커뮤니티에서 자발적으로 lodash를 es-toolkit으로 대체하는 번들러 플러그인을 만들거나, 유명 라이브러리의 의존성을 es-toolkit으로 바꿔 주시기도 하셨어요.
 
-![](/images/ff3b6ed46c/09.avif)
+![](https://images.gogumang.com/ff3b6ed46c/09.avif)
 
 ## \[다용\] 처음에는 외부 오픈소스 기여자로 es-toolkit에 참여하다
 
@@ -70,11 +70,11 @@ es-toolkit 라이브러리를 알기 전부터, 저는 평소에 이런 의문�
 
 그러던 어느 날, 토스 프론트엔드 트위터에서 우연히 es-toolkit 라이브러리의 소식을 봤어요. 유명한 라이브러리였던 lodash보다 성능이 빠른 es-toolkit이 해외에서도 폭발적인 반응을 얻고 있다는 소식이었어요.
 
-![](/images/ff3b6ed46c/10.avif)
+![](https://images.gogumang.com/ff3b6ed46c/10.avif)
 
 한국에서도 프론트엔드 생태계에 기여하는 큰 오픈소스 프로젝트가 나왔으면 한다는 마음이 들었어요. 게다가 평소 좋아하던 회사에서 운영한다고 하니, 더 기여하고 싶다는 생각이 들었어요. 오픈소스이다 보니까 토스 직원이 아니라고 하더라도 충분히 Pull Request를 올릴 수도 있었고요. 그래서 바로 레포지토리를 클론 받고 작은 이슈부터 조금씩 기여를 시작했어요.
 
-![](/images/ff3b6ed46c/11.avif)
+![](https://images.gogumang.com/ff3b6ed46c/11.avif)
 
 작은 Pull Request였지만 조금씩 라이브러리가 발전하는 과정에서 기여하는 모습을 보니 뿌듯함이 있었어요. 그래서 하나씩 하나씩 꾸준히 기여를 했었죠.
 
@@ -82,7 +82,7 @@ es-toolkit 라이브러리를 알기 전부터, 저는 평소에 이런 의문�
 
 그때부터 더 열심히 기여했고, 그렇게 2위 기여자까지 됐어요.
 
-![](/images/ff3b6ed46c/12.avif)
+![](https://images.gogumang.com/ff3b6ed46c/12.avif)
 
 es-toolkit 라이브러리에 Pull Request를 올리고 리뷰받는 과정에서 인터페이스 설계 원칙이나 JavaScript 언어에 대해서 많이 배울 수 있었어요. 그래서 그렇게 쌓인 경험이 토스뱅크 입사로 이어졌죠.
 
@@ -100,7 +100,7 @@ es-toolkit은 메이저한 유스케이스에 집중했다 보니, 모든 경우
 
 이렇게 하니까 흐름이 달라졌어요. 서비스를 개발하는 회사들뿐만 아니라 Storybook, Mermaid, Yarn Berry 같은 큰 오픈소스 프로젝트들까지 es-toolkit을 채택하기 시작했거든요. 더 많은 사람들이 es-toolkit의 가치를 느끼고 전파해 주시기 시작했어요. 곧바로 NPM 다운로드도 기하급수적으로 늘었어요.
 
-![](/images/ff3b6ed46c/13.avif)
+![](https://images.gogumang.com/ff3b6ed46c/13.avif)
 
 저도 es-toolkit의 가치를 느끼면서, es-toolkit을 더 많은 사람들이 사용하면 좋겠다는 생각에 한동안은 외부 라이브러리들에 적극적으로 기여하기 시작했어요. 직접 마이그레이션도 하고, es-toolkit이 제공하는 성능에 대해서 자세히 설명하기도 하면서 마치 영업하듯 여기저기 돌아다녔죠. 그 과정에서 더 많은 기여자 분들이 함께해 주셨고, 토스의 오픈소스 위원회 (지금의 [Slash Team](https://www.slash.page/)) 분들도 많은 도움을 주셨어요.
 

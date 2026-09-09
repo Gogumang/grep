@@ -106,7 +106,7 @@ Feign은 Apache HttpClient, OkHttp Client 등 다양한 HTTP 클라이언트를 
     feign.httpclient.hc5.enabled: true
 
 제가 겪은 문제는 사실 두 번째 Feign 설정을 누락하면서 발생했어요. Apache HttpClient 5 의존성만 주입해 주면 나머지는 언제나처럼 Spring Boot가 마법처럼 해결해 줄 거라 믿은 게 실수였죠. Spring Boot 2.x 버전을 사용하고 계신다면, 꼭 Feign의 위 설정을 true 로 바꿔주셔야 해요. 참고로 Spring Boot 3.x 버전부터는 의존성만 주입해도 자동 설정됩니다.
-![](/images/90f3dd2edb/01.avif)
+![](https://images.gogumang.com/90f3dd2edb/01.avif)
 
 Feign에 HTTP 클라이언트가 주입되는 방식이 궁금하다면, 아래 클래스에서 시작해서 코드를 따라가 보시는 것을 추천할게요. 다음과 같이 registerFeignClients 메서드를 따라가다 보면,
 

@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2023-03-16T09:49:46Z"
-sourceThumbnail: "/images/9bdca50ebf.avif"
+sourceThumbnail: "https://images.gogumang.com/9bdca50ebf.avif"
 tags: []
 category: "Design"
 author: "이혜인"

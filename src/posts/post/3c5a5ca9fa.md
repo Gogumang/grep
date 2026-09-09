@@ -85,7 +85,7 @@ exclusive_cpu_cores가 설정된 그룹은 이 3개 풀을 **공유 풀과 별�
 ### 1단계: cpu_weight 조정
 
 처음에는 commerce_batch 쪽의 무거운 쿼리가 길게 점유하면서 shopping_service까지 함께 밀렸어요. 두 계정이 비슷한 우선순위로 묶여 있어서 배치 쪽 쿼리가 커지면 서비스 쿼리도 함께 영향을 받았습니다.
-![](/images/3c5a5ca9fa/01.avif)
+![](https://images.gogumang.com/3c5a5ca9fa/01.avif)
 
 이때는 shopping_service에 더 높은 weight를 부여하고, commerce_batch는 낮은 우선순위로 내려서 경합 발생 시 서비스 쿼리가 먼저 CPU를 할당받을수 있도록 설정했어요.
 
@@ -246,7 +246,7 @@ cpuset 미설정 상태에서도 exclusive_cpu_cores 자체는 동작해요. 92�
 exclusive_cpu_cores를 설정하면 같은 그룹의 cpu_weight는 자동으로 무시됩니다. 나머지 그룹은 여전히 cpu_weight 기반으로 운영했죠.
 
 **결과**: 16:00 \~ 이후를 보면 CPU 부하는 약 60%로 제한됐지만, load_wg 소속 INSERT 쿼리들의 실행 시간이 약 380\~457초로 설정 전 대비 약 100초 증가했어요. 전용 코어를 줄인 만큼 느려지는 건 예상된 트레이드오프였습니다.
-![](/images/3c5a5ca9fa/02.avif)
+![](https://images.gogumang.com/3c5a5ca9fa/02.avif)
 
 다만 이 상태에서는 load_wg가 idle할 때도 50개 코어가 놀게 돼요. borrowing으로 해결할 수 있을까? 여기서 주의점 2를 만났습니다.
 
@@ -271,7 +271,7 @@ exclusive_cpu_cores로 전용 코어를 할당하면, 그 그룹이 idle할 때 
 ### 해결 후: cpuset + bind_cpus 설정으로 borrowing 동작 확인
 
 주의할 점 1, 2를 해결하고 cpuset_cpus와 bind_cpus=true를 설정한 뒤, 노드 한 대(olap-dn1006-dc3)에 먼저 적용했어요. default_wg 그룹에서 헤비 쿼리를 실행하니, **해당 노드에서만 CPU가 거의 100%까지 사용**되었습니다. 나머지 노드는 여전히 낮은 수준을 유지하고 있어, borrowing이 정상 동작함을 확인할 수 있었어요.
-![](/images/3c5a5ca9fa/03.avif)
+![](https://images.gogumang.com/3c5a5ca9fa/03.avif)
 
     ┌─────────────────────┐         ┌─────────────────────┐
     │  Exclusive RG       │  idle   │   Shared RG         │

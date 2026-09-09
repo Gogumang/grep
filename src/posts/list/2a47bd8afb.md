@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-08-11T01:00:00Z"
-sourceThumbnail: "/images/2a47bd8afb.avif"
+sourceThumbnail: "https://images.gogumang.com/2a47bd8afb.avif"
 tags: []
 ---
 

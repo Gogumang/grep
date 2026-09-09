@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2023-11-22T05:30:00Z"
-sourceThumbnail: "/images/90f3dd2edb.avif"
+sourceThumbnail: "https://images.gogumang.com/90f3dd2edb.avif"
 tags: []
 category: "Engineering"
 author: "김성두"

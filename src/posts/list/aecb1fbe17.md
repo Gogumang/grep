@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2024-06-19T06:14:00Z"
-sourceThumbnail: "/images/aecb1fbe17.avif"
+sourceThumbnail: "https://images.gogumang.com/aecb1fbe17.avif"
 tags: []
 category: "Engineering"
 author: "토스 프론트엔드 챕터"

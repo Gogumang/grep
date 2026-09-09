@@ -39,14 +39,14 @@ QA라면 모두가 알고 있는 탐색적 테스팅의 개념, Dog Fooding, Bug
 서비스에 대해 여러 피드백을 받기 위해 직군에 관계없이 참여가 가능한 분들은 모두 신청을 받았는데요. 그러다보니, 알파 환경 자체를 처음 접해보는 임직원분들도 있어 사용성에 어려움이 많아 사전 테스트 환경 준비가 중요했어요. 마치, 실제 서비스가 런칭되었을 때와 동일하게 사용하는 경험을 주기 위해 알파 테스트 환경이지만 운영과 동일한 환경에서 볼 수 있도록 테스트 환경을 마련하였는데, 모두의 시간을 할애하는 만큼 테스트 환경을 위해 InfraOps, Network Engineer, Devops 팀에서 테스트 환경 구축에 많은 도움을 주셨어요.
 
 신청자 대다수가 토스증권 해외 주식에 대한 기본적인 Spec을 전혀 모르기 때문에 테스트 시나리오를 제공해야했어요. 그래서, 탐색적 테스팅의 Test Charter 개념을 섞어서 Test Scenario를 Use Case 형식으로 작성했는데요. 서비스의 주요 퍼널을 통과할 수 있게 작성하고 QA Team의 Peer Review를 통해 시나리오를 준비하였어요.
-![](/images/baeafa69ce/01.avif)
+![](https://images.gogumang.com/baeafa69ce/01.avif)
 
 시나리오는 총 36건 작성을 하였고, 해외 증권 거래소 시간에 맞게 테스트를 진행해야 해서, Use Case를 테스트할 수 있는 Timeline을 설정했어요. 해외 증권 거래소의 테스트 거래소와 연동을 하여 실제 주식이 체결되는 것처럼 보이게 환경을 만들어 두었기 때문에, 먼저 증권 거래소 운영 시간에 맞추고 주식의 매수/매도 유형에 맞춰 시나리오를 만들었는데요. 그래서 해외 주식 서비스는 밤 11시가 넘은 심야에도 계속 진행되어야 했어요.
 
 해당 Timeline에 맞게 임직원 모두가 같은 시간대에 테스트를 하는 것을 유도하기 위해 캘린더 초대도 잊지 않았어요! (참석자 모두, 심야 시간인데도 불구하고 수락을 눌러주셨어요!)
 
 이렇게 준비된 테스트 형식을 모두가 이해하기 쉽게 " **통합테스트**" 라는 용어로 정리하였어요!
-![](/images/baeafa69ce/02.avif)
+![](https://images.gogumang.com/baeafa69ce/02.avif)
 
 이제 마지막으로 테스트 진행 관련된 사항을 어떻게 공유할지, 어떻게 Debrief 할지를 정해야 했는데요.
 
@@ -58,24 +58,24 @@ QA라면 모두가 알고 있는 탐색적 테스팅의 개념, Dog Fooding, Bug
 
 ### 그러면, 이제 저와 함께 통합테스트를 함께 진행해 볼까요?
 
-![](/images/baeafa69ce/03.avif)
+![](https://images.gogumang.com/baeafa69ce/03.avif)
 
 * 완료 후 미션에**DONE**Emoji를 남기면 Thread에 완료 표기
 
-![](/images/baeafa69ce/04.avif)
+![](https://images.gogumang.com/baeafa69ce/04.avif)
 
 * 미션 중 이슈로 인해 진행하지 못하는 경우**SOS**Emoji를 남기면 Thread에 표기
 
-![](/images/baeafa69ce/05.avif)
+![](https://images.gogumang.com/baeafa69ce/05.avif)
 
 * 이슈에 Emoji를 남기면 별도 채널로 이동되고, 해당 채널에 이슈 등록
 
-![](/images/baeafa69ce/06.avif) ![](/images/baeafa69ce/07.avif)
+![](https://images.gogumang.com/baeafa69ce/06.avif) ![](https://images.gogumang.com/baeafa69ce/07.avif)
 
 이런 미션의 형태로 진행하니, 임직원들도 게임에 참여하듯이 (미션 클리어! 효과음이 들리시나요?) 즐겁고 적극적으로 진행해 주셨어요. 또한 테스트를 진행하는 동안 이전에 사용하였던 해외증권 서비스의 경험을 비롯한 다양한 의견들을 제시해 주셨어요.
 
 그렇게 통합테스트 기간 동안 약 100개가 넘는 피드백이 등록되었는데요. 👀
-![](/images/baeafa69ce/08.avif)
+![](https://images.gogumang.com/baeafa69ce/08.avif)
 
 전달된 의견들은 실제로 Bug나 결함보다는 사용자로서의 의견에 더 가까운 내용들이 많았어요. 제시해 주신 여러 의견들을 통해 오픈 전 서비스의 사용성 및 품질을 더 높일 수 있었다고 생각해요.
 

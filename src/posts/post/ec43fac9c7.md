@@ -9,22 +9,22 @@
 
 # 세션 더 보기
 
-* ![](/images/ec43fac9c7/01.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/01.avif)
 
   **토스 데이터의 흐름과 활용** **유결** 토스코어 Data Platform Team Leader
-* ![](/images/ec43fac9c7/02.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/02.avif)
 
   **빠르게 성장하는 스타트업의 DW****유승민**토스코어 Data Service Team Leader
-* ![](/images/ec43fac9c7/03.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/03.avif)
 
   **MYSQL HA \& DR Topology****김피터**토스코어 Database Administrator
-* ![](/images/ec43fac9c7/04.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/04.avif)
 
   **토스뱅크 데이터 설계사상****조한기**토스뱅크 Core Banking Developer
-* ![](/images/ec43fac9c7/05.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/05.avif)
 
   **Micro-frontend React, 점진적으로 도입하기****조유성**토스코어 Full Stack Developer
-* ![](/images/ec43fac9c7/06.avif)
+* ![](https://images.gogumang.com/ec43fac9c7/06.avif)
 
   **토스팀을 위한 슬랙봇 설계****임한솔**토스코어 Full Stack Developer
 

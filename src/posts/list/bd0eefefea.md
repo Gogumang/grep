@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2025-07-21T05:00:00Z"
-sourceThumbnail: "/images/bd0eefefea.avif"
+sourceThumbnail: "https://images.gogumang.com/bd0eefefea.avif"
 tags: []
 category: "프로덕트"
 author: "박세진/김태성"

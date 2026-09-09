@@ -17,7 +17,7 @@ Kafka 이중화에 대한 고민과 설계는 데이터센터 장애 상황에�
 3. 서버는 MSA 구조로 설계되어 Kafka를 메시지 브로커로 활용합니다.
 
 서비스 서버는 Active-Active로 구성돼 이중화 됐습니다. 하지만 MSA에서 메시지 브로커 역할을 하는 Kafka가 이중화 돼있지 않으면 실제 데이터센터 장애 상황 발생 시 서비스는 정상 동작하지 않을 것이 분명합니다. Kafka 역시 데이터센터 이중화를 해야 하는 상황이 됐습니다.
-![](/images/fbd9e5f1fc/01.avif) 그림 1. 유저의 트래픽이 이중화된 클러스터로 분산돼서 들어오면 뒷단은 어떻게 구성해야 할까요?
+![](https://images.gogumang.com/fbd9e5f1fc/01.avif) 그림 1. 유저의 트래픽이 이중화된 클러스터로 분산돼서 들어오면 뒷단은 어떻게 구성해야 할까요?
 
 서비스 서버가 stateless하게 구현됐다면 상대적으로 이중화 구성이 간단합니다. 하지만 stateless한 서비스 서버와 다르게 stateful한 Kafka는 이중화 구성에 더 많은 고민이 필요합니다. 어떻게 구성해야 좋은 아키텍처가 될까요?
 
@@ -87,7 +87,7 @@ Active-Active로 결정하고 구성을 하게 되면서 해당 구성의 단점
 2번 목표인 장애 발생 시 메인 센터 전환을 달성하기 위해서는 DNS 정책을 적극적으로 활용했습니다. 메인 센터 전환은 Producer와 Consumer를 분리해서 정책을 설계했습니다.
 
 * 이중화 구성 후 트래픽의 흐름
-  ![](/images/fbd9e5f1fc/02.avif) 그림 4. Active-Active로 Kafka 이중화 구성을 하면 실시간으로 양방향 데이터 미러링으로 각각 100%를 맞춰줘야 하고, Consumer가 데이터센터를 옮겨갈 경우를 대비해서 Consumer Group Offset Sync를 맞춰야 합니다.
+  ![](https://images.gogumang.com/fbd9e5f1fc/02.avif) 그림 4. Active-Active로 Kafka 이중화 구성을 하면 실시간으로 양방향 데이터 미러링으로 각각 100%를 맞춰줘야 하고, Consumer가 데이터센터를 옮겨갈 경우를 대비해서 Consumer Group Offset Sync를 맞춰야 합니다.
 
 **Producer 정책**
 

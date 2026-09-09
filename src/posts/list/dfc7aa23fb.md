@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2021-06-08T01:00:00Z"
-sourceThumbnail: "/images/dfc7aa23fb.avif"
+sourceThumbnail: "https://images.gogumang.com/dfc7aa23fb.avif"
 tags: []
 category: "Engineering"
 author: "윤아서"

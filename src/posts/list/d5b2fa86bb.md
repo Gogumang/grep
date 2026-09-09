@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-08T01:00:00Z"
-sourceThumbnail: "/images/d5b2fa86bb.avif"
+sourceThumbnail: "https://images.gogumang.com/d5b2fa86bb.avif"
 tags: []
 category: "Engineering"
 author: "조민규"

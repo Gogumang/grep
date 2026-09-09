@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2023-08-10T09:15:00Z"
-sourceThumbnail: "/images/cf66c6cff7.avif"
+sourceThumbnail: "https://images.gogumang.com/cf66c6cff7.avif"
 tags: []
 category: "Design"
 author: "김지윤"

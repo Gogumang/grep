@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-04-07T09:44:00Z"
-sourceThumbnail: "/images/f25e53bdfb.avif"
+sourceThumbnail: "https://images.gogumang.com/f25e53bdfb.avif"
 tags: []
 category: "Design"
 author: "이정현"

@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2021-04-28T06:00:00Z"
-sourceThumbnail: "/images/ec43fac9c7.avif"
+sourceThumbnail: "https://images.gogumang.com/ec43fac9c7.avif"
 tags: []
 category: "Engineering"
 author: "김피터"

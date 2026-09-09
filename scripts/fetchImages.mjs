@@ -70,7 +70,21 @@ const MARKDOWN_IMAGE_PATTERN = /!\[([^\]]*)\]\(((?:\\.|[^()\s])+)\)/g
 /** 추적 픽셀을 지운 자리에 빈 줄이 세 개씩 남는다. */
 const tidyBlankLines = (contents) => contents.replace(/\n{3,}/g, '\n\n')
 
-const isRemote = (value) => value.startsWith('http://') || value.startsWith('https://')
+/**
+ * 우리 이미지를 서비스하는 R2 커스텀 도메인.
+ *
+ * collector가 공개 시점에 이미지를 R2로 올리고 마크다운에는 이 도메인의 절대 주소를
+ * 남긴다(grep-airflow의 ImageStoragePort). 그것까지 "원격"으로 세면 이 스크립트가 도로
+ * 내려받아 public/images에 넣는다 — 저장소를 가볍게 하려고 옮긴 것을 매번 되돌리는 셈이다.
+ *
+ * 환경변수가 아니라 기본값으로 둔 이유가 여기 있다. 환경변수만 보게 하면 값을 빠뜨린
+ * 실행이 조용히 성공하면서 이미지를 전부 저장소로 되돌린다 — 실패가 눈에 띄지 않는다.
+ * collector의 application.yaml(collector.r2.public-base-url)과 같은 값이어야 한다.
+ */
+const OUR_IMAGE_ORIGIN = (process.env.R2_PUBLIC_BASE_URL ?? 'https://images.gogumang.com').replace(/\/$/, '')
+
+const isOurStorage = (value) => value.startsWith(`${OUR_IMAGE_ORIGIN}/`)
+const isRemote = (value) => !isOurStorage(value) && (value.startsWith('http://') || value.startsWith('https://'))
 const isLocalImage = (value) => value.startsWith(`${IMAGE_URL_PREFIX}/`)
 /** 원격이면 받아야 하고, 로컬 PNG·JPEG면 다시 구워야 한다. 그 밖에는 할 일이 없다. */
 const needsWork = (value) => isRemote(value) || (isLocalImage(value) && REBAKE_PATTERN.test(value))

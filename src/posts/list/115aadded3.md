@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2022-12-14T12:45:20Z"
-sourceThumbnail: "/images/115aadded3.png"
+sourceThumbnail: "https://images.gogumang.com/115aadded3.png"
 tags: []
 category: "Design"
 author: "김재현"

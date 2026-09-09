@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2023-03-22T05:29:51Z"
-sourceThumbnail: "/images/fdcd52e1c3.png"
+sourceThumbnail: "https://images.gogumang.com/fdcd52e1c3.png"
 tags: []
 category: "Engineering"
 author: "이준희"

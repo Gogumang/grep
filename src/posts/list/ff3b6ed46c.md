@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-22T12:52:00Z"
-sourceThumbnail: "/images/ff3b6ed46c.avif"
+sourceThumbnail: "https://images.gogumang.com/ff3b6ed46c.avif"
 tags: []
 category: "Engineering"
 author: "박서진/이다용"

@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2024-01-30T05:45:00Z"
-sourceThumbnail: "/images/91cfcabf8c.avif"
+sourceThumbnail: "https://images.gogumang.com/91cfcabf8c.avif"
 tags: []
 category: "Design"
 author: "박지희"

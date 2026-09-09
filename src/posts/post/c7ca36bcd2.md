@@ -317,7 +317,7 @@ Multi-Agent 구조는 다음과 같고, Discovery, Analysis 에이전트만 Sour
 * **Supervisor**: Discovery와 Analysis 에이전트에게 상황에 맞는 적절한 지시를 내리는 감독관
 * **Discovery**: 수집된 모든 경로 중 취약점 발생 가능성이 높은 경로만 선별하는 필터 역할
 * **Analysis**: Discovery가 선별한 경로에 대해서만 실제 취약점 분석 수행
-![](/images/c7ca36bcd2/01.avif) [xbow.com](http://xbow.com/)
+![](https://images.gogumang.com/c7ca36bcd2/01.avif) [xbow.com](http://xbow.com/)
 
 이 아이디어는 예전부터 지켜봐 온 [XBOW](https://xbow.com/) 프로젝트에서 차용하게 되었는데요, 인간의 개입 없이 AI 에이전트로만 취약점을 찾는 것이 목표인 프로젝트예요. 굵직한 CVE를 찾거나, 글로벌 해커 플랫폼인 HackerOne에서 USA 1위를 달성하는 등 성능이 검증된 프로젝트입니다.
 
@@ -326,7 +326,7 @@ XBOW 아키텍처에서 Discovery Agents와 비슷한 역할을 해요. 수집�
 ### Discovery 에이전트 구성
 
 근데 생각보다 Discovery 에이전트 구성이 까다로웠어요.
-![](/images/c7ca36bcd2/02.avif)
+![](https://images.gogumang.com/c7ca36bcd2/02.avif)
 
 이전 글에서 이 내용을 짚어주신 분이 계셔서 조금 더 자세하게 준비했습니다.
 
@@ -353,7 +353,7 @@ Discovery 에이전트를 차용한 이유는 Analysis 에이전트가 모든 �
 
 ### Multi-Agent 구성 후 분석 결과
 
-![](/images/c7ca36bcd2/03.avif)
+![](https://images.gogumang.com/c7ca36bcd2/03.avif)
 
 프로젝트가 분석된 모습을 시각적으로 표현한 결과입니다. 각 의미는 다음과 같아요.
 * **Seeds**: Semgrep으로 수집한 모든 Untrusted Input 경로
@@ -392,7 +392,7 @@ Discovery 에이전트를 차용한 이유는 Analysis 에이전트가 모든 �
 * **LangSmith**는 SaaS 제품으로 간편하게 사용할 수 있지만, 일정 규모 이상부터는 비용을 지불해야 합니다.
 * **LangGraph**는 오픈소스 프로젝트로 LangSmith와 같은 기능을 제공하지만 직접 구축해야 한다는 번거로움이 있어요.
 
-![](/images/c7ca36bcd2/04.avif) langsmith
+![](https://images.gogumang.com/c7ca36bcd2/04.avif) langsmith
 
 여기에서는 간단한 테스트였기에 빠르게 사용해볼 수 있는 LangSmith를 사용했습니다. 그림처럼 모델의 멀티턴 대화, 도구 호출 결과, Input/Output 토큰 모니터링이 가능해요.
 
@@ -486,7 +486,7 @@ LLM이 잘못된 응답을 반환해서 에러가 발생하면, **Instructor 라
 그중 하나가 **소스코드 인덱싱 서버를 만드는 것**입니다.
 
 모든 서비스의 소스코드를 중앙 서버에 모아두고, 미리 인덱싱해 두는 거예요. 이렇게 구성하면 AI 에이전트는 소스코드를 따로 받을 필요 없이, 항상 최신 상태의 코드를 어디서든 효율적으로 참조할 수 있습니다. 추가로 참조가 필요한 정보는 MCP(Model Context Protocol)를 통해 도구로 제공하는 형태고요.
-![](/images/c7ca36bcd2/05.avif) \*이 이미지는 생성형 AI로 제작되었습니다.
+![](https://images.gogumang.com/c7ca36bcd2/05.avif) \*이 이미지는 생성형 AI로 제작되었습니다.
 
 이 구조에서 중요하게 생각하는 점은, **분석의 주체를 특정 기술에 종속시키지 않는 것**입니다.
 

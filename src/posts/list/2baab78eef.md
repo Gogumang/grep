@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2025-06-27T01:45:00Z"
-sourceThumbnail: "/images/2baab78eef.avif"
+sourceThumbnail: "https://images.gogumang.com/2baab78eef.avif"
 tags: []
 category: "Design"
 author: "정채령"

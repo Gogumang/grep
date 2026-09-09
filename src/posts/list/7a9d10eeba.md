@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-22T02:01:00Z"
-sourceThumbnail: "/images/7a9d10eeba.avif"
+sourceThumbnail: "https://images.gogumang.com/7a9d10eeba.avif"
 tags: []
 category: "Engineering"
 author: "김혜빈/황동진/한주연"

@@ -14,10 +14,10 @@
 
 ### 1. 단 하나의 핵심만 전달하기
 
-![](/images/cdedf94e5c/01.avif)
+![](https://images.gogumang.com/cdedf94e5c/01.avif)
 
 서비스의 모든 장점을 한 줄에 나열하려고 하지말고, 지금 당장 클릭해야 하는 이유 하나만 알려주세요. 구체적인 가치는 클릭 이후에 경험하게 해도 충분해요.
-![](/images/cdedf94e5c/02.avif)
+![](https://images.gogumang.com/cdedf94e5c/02.avif)
 
 <br />
 
@@ -45,7 +45,7 @@
 
 ### 2. 확실한 보상 약속하기
 
-![](/images/cdedf94e5c/03.avif)
+![](https://images.gogumang.com/cdedf94e5c/03.avif)
 
 사용자는 더 이상 최대 혜택에만 반응하지 않아요. 적은 숫자라도 무조건 받을 수 있다는 확실성이 더 중요해요.
 
@@ -85,7 +85,7 @@
 
 ### 3. 행동을 가볍게 표현하기
 
-![](/images/cdedf94e5c/04.avif)
+![](https://images.gogumang.com/cdedf94e5c/04.avif)
 
 같은 행동이라도, 어떤 단어를 쓰느냐에 따라 느껴지는 무게가 달라져요. 사용자의 심리적 부담을 줄일 수 있는 단어를 찾아보세요.
 
@@ -105,7 +105,7 @@
 
 ### 4. 정보가 가진 성격 말해주기
 
-![](/images/cdedf94e5c/05.avif)
+![](https://images.gogumang.com/cdedf94e5c/05.avif)
 
 복잡한 혜택을 설명하기 전에, 이 정보가 어떤 성격인지 먼저 알려주세요. 모아둔 건지, 새로 나온 건지요.
 
@@ -136,7 +136,7 @@
 
 ### 5. 조건•행동 구체적으로 쓰기
 
-![](/images/cdedf94e5c/06.avif)
+![](https://images.gogumang.com/cdedf94e5c/06.avif)
 
 사용자는 자신이 무엇을 얼마나 해야 하는지 명확하게 알 수 있을 때 클릭해요.
 
@@ -174,10 +174,10 @@
 
 ### 6. 일상의 경험을 떠올리게 하기
 
-![](/images/cdedf94e5c/07.avif)
+![](https://images.gogumang.com/cdedf94e5c/07.avif)
 
 일상에서 자주 하는 행동을 떠올리게 하는 표현은 별다른 설명이 없어도 직관적으로 이해돼요.
-![](/images/cdedf94e5c/08.avif)
+![](https://images.gogumang.com/cdedf94e5c/08.avif)
 
 OX 버튼을 눌러 푸는 퀴즈 서비스가 있었어요. 사용자가 실제로 하는 행동은 화면을 '보는' 게 아니라 손가락으로 둘 중 하나를 '찍는' 거였죠. 그래서 '찍기'라는 단어를 써서 행동을 더 직관적으로 떠올릴 수 있게 했어요.
 
