@@ -86,8 +86,21 @@ export function createSearchModal() {
     input.placeholder = '제목과 본문에서 찾기'
     input.setAttribute('aria-label', '검색어')
 
-    const hint = el('span', styles.hint)
-    hint.textContent = 'ESC'
+    /*
+      닫기. 좁은 화면에서는 패널이 화면을 다 덮어 바깥을 누를 배경이 없고,
+      폰에는 ESC 키도 없다 — 누를 수 있는 자리를 반드시 남긴다.
+      넓은 화면에서는 그대로 'ESC'라고 알려준다(CSS가 둘 중 하나만 보여준다).
+    */
+    const closeButton = el('button', styles.closeButton)
+    closeButton.type = 'button'
+    closeButton.setAttribute('aria-label', '검색 닫기')
+    const closeKeyLabel = el('span', styles.closeKeyLabel)
+    closeKeyLabel.textContent = 'ESC'
+    const closeIcon = el('span', styles.closeIcon)
+    closeIcon.textContent = '✕'
+    closeIcon.setAttribute('aria-hidden', 'true')
+    closeButton.append(closeKeyLabel, closeIcon)
+    closeButton.addEventListener('click', close)
 
     const results = el('div', styles.results)
     renderResults(results, '두 글자 이상 입력하면 찾기 시작합니다.')
@@ -119,18 +132,30 @@ export function createSearchModal() {
       renderResults(results, '찾는 중…')
       const current = ++requestId
       timer = setTimeout(async () => {
-        const found = await searchPosts(query, MAX_RESULTS)
-        // 타자를 계속 치면 앞선 요청 결과는 버린다.
-        if (current !== requestId || !overlay) return
+        try {
+          const found = await searchPosts(query, MAX_RESULTS)
+          // 타자를 계속 치면 앞선 요청 결과는 버린다.
+          if (current !== requestId || !overlay) return
 
-        if (found === null) return renderResults(results, '검색 색인이 없습니다. 빌드를 한 번 돌리면 만들어집니다.')
-        hits = found
-        selected = 0
-        renderResults(results, found.length === 0 ? `“${query}”에 맞는 글이 없습니다.` : undefined)
+          if (found === null) {
+            return renderResults(results, '검색 색인이 없습니다. `bun run build`를 한 번 돌리면 만들어집니다.')
+          }
+          hits = found
+          selected = 0
+          renderResults(results, found.length === 0 ? `“${query}”에 맞는 글이 없습니다.` : undefined)
+        } catch {
+          /*
+            색인 조각을 내려받다 끊기는 경우가 있다. 여기서 받지 않으면 거절된 약속이
+            그대로 떠돌고 화면은 '찾는 중…'에 멎는다 — 무엇이 잘못됐는지도 알 수 없다.
+          */
+          if (current !== requestId || !overlay) return
+          hits = []
+          renderResults(results, '검색을 마치지 못했습니다. 잠시 뒤 다시 시도해 주세요.')
+        }
       }, TYPING_PAUSE_MILLISECONDS)
     })
 
-    inputRow.append(input, hint)
+    inputRow.append(input, closeButton)
     panel.append(inputRow, results)
     overlay.append(panel)
     document.body.append(overlay)

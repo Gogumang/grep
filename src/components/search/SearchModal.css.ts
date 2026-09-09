@@ -21,6 +21,10 @@ export const overlay = style({
   paddingTop: '10vh',
   paddingInline: vars.space.lg,
   animation: `${fadeIn} 120ms ease-out`,
+  '@media': {
+    /* 좁은 화면에서는 화면을 다 쓴다 — 여백을 남기면 결과 몇 줄 보려고 스크롤하게 된다. */
+    'screen and (max-width: 640px)': { padding: 0 },
+  },
 })
 
 export const panel = style({
@@ -34,6 +38,15 @@ export const panel = style({
   boxShadow: '0 24px 64px rgba(0, 0, 0, 0.24)',
   overflow: 'hidden',
   animation: `${riseIn} 140ms ease-out`,
+  '@media': {
+    'screen and (max-width: 640px)': {
+      maxWidth: 'none',
+      height: '100%',
+      maxHeight: 'none',
+      borderRadius: 0,
+      boxShadow: 'none',
+    },
+  },
 })
 
 export const inputRow = style({
@@ -42,6 +55,13 @@ export const inputRow = style({
   gap: vars.space.md,
   padding: `${vars.space.lg} ${vars.space.xl}`,
   borderBottom: `1px solid ${vars.color.border}`,
+  '@media': {
+    'screen and (max-width: 640px)': {
+      /* 노치·상태바 아래로 내려 준다. 지원하지 않는 브라우저는 앞의 값을 그대로 쓴다. */
+      paddingTop: `calc(${vars.space.lg} + env(safe-area-inset-top))`,
+      paddingInline: vars.space.lg,
+    },
+  },
 })
 
 export const inputIcon = style({ color: vars.color.inkMuted, flexShrink: 0 })
@@ -56,16 +76,51 @@ export const input = style({
   '::placeholder': { color: vars.color.inkMuted },
 })
 
-export const hint = style({
+/**
+ * 닫는 자리. 넓은 화면에서는 누를 키(ESC)를 알려주고, 좁은 화면에서는 ✕를 보여준다.
+ *
+ * 전체 화면이 되면 바깥을 눌러 닫을 배경이 사라지는데 폰에는 ESC 키도 없다 —
+ * 글로만 'ESC'라고 적어 두면 닫을 방법이 없어진다. 그래서 눌러도 닫히는 버튼이다.
+ */
+export const closeButton = style({
   flexShrink: 0,
-  padding: `2px ${vars.space.sm}`,
+  display: 'grid',
+  placeItems: 'center',
+  minWidth: 32,
+  height: 32,
+  padding: `0 ${vars.space.sm}`,
   borderRadius: vars.radius.sm,
   border: `1px solid ${vars.color.border}`,
+  background: 'none',
   color: vars.color.inkMuted,
   fontSize: vars.fontSize.xs,
+  selectors: {
+    '&:hover': { borderColor: vars.color.borderStrong, color: vars.color.ink },
+  },
 })
 
-export const results = style({ overflowY: 'auto', padding: vars.space.sm })
+/** 키 이름은 키보드가 있는 화면에서만 뜻이 있다. */
+export const closeKeyLabel = style({
+  '@media': { 'screen and (max-width: 640px)': { display: 'none' } },
+})
+
+export const closeIcon = style({
+  fontSize: vars.fontSize.md,
+  lineHeight: 1,
+  '@media': { 'screen and (min-width: 641px)': { display: 'none' } },
+})
+
+export const results = style({
+  overflowY: 'auto',
+  padding: vars.space.sm,
+  '@media': {
+    /* 전체 화면에서는 남는 높이를 결과가 다 쓴다. 홈 인디케이터 밑으로 내용이 깔리지 않게 둔다. */
+    'screen and (max-width: 640px)': {
+      flex: 1,
+      paddingBottom: `calc(${vars.space.sm} + env(safe-area-inset-bottom))`,
+    },
+  },
+})
 
 export const item = style({
   display: 'block',

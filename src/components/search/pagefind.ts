@@ -38,7 +38,13 @@ function loadPagefind(): Promise<PagefindApi | null> {
   return pagefindPromise
 }
 
-/** 색인이 없으면 null. 호출자가 "빌드가 필요하다"고 안내할 수 있게 빈 배열과 구분한다. */
+/**
+ * 색인이 없으면 null. 호출자가 "빌드가 필요하다"고 안내할 수 있게 빈 배열과 구분한다.
+ *
+ * 색인을 연 뒤의 실패(조각 내려받기 실패 등)는 삼키지 않고 그대로 던진다 —
+ * 여기서 조용히 null을 주면 호출자가 "색인이 없다"고 잘못 안내하게 되고,
+ * 던진 것을 아무도 받지 않으면 화면이 "찾는 중…"에서 멎는다. 호출자가 받아 처리한다.
+ */
 export async function searchPosts(query: string, maxResults: number): Promise<SearchHit[] | null> {
   const pagefind = await loadPagefind()
   if (!pagefind) return null
