@@ -46,7 +46,20 @@ const isAnalyticsEnabled = import.meta.env.PROD
       })()
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/*
+      아이콘을 네 벌 둔다. SVG만 두면 탭에는 뜨지만 즐겨찾기·홈 화면에서는 빈다 —
+      그쪽은 대부분 래스터를 찾고, 없으면 글자 아이콘이나 화면 캡처로 대신한다.
+      ico를 먼저 적어도 SVG를 아는 브라우저는 SVG를 고른다(더 구체적인 선언이 이긴다).
+      전부 scripts/makeIcons.mjs가 favicon.svg 하나에서 만든다.
+    */}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    {/* 모바일 브라우저가 주소창을 칠하는 색. 테마별로 따로 준다. */}
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f1319" media="(prefers-color-scheme: dark)" />
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -73,11 +86,21 @@ const isAnalyticsEnabled = import.meta.env.PROD
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="grep" />
+    <meta property="og:locale" content="ko_KR" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+
+    {/*
+      트위터는 og:를 대부분 물려받지만 카드 종류만은 직접 읽는다. 제목·설명까지
+      적어 두는 이유 — 슬랙·디스코드처럼 twitter: 를 먼저 보는 미리보기가 있다.
+    */}
     <meta name="twitter:card" content={ogImageUrl ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
     {structuredData && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />

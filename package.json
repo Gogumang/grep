@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev --port 3000",
     "images": "node scripts/fetchImages.mjs",
+    "icons": "node scripts/makeIcons.mjs",
     "build": "astro build",
     "preview": "astro preview --port 3000",
     "typecheck": "astro check",
