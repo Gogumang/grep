@@ -1,0 +1,39 @@
+## Day 2. Session
+
+# MYSQL HA \& DR Topology
+
+토스의 Database DR 구조에 대해 공유합니다.
+강연에 사용된 자료 출처는 발표자료에서 참고해주세요.
+**Speaker**
+**김피터** 토스코어 Database Administrator
+
+# 세션 더 보기
+
+* ![](https://static.toss.im/slash21/people/profile_day2_1_유결@3x.png)
+
+  **토스 데이터의 흐름과 활용** **유결** 토스코어 Data Platform Team Leader
+* ![](https://static.toss.im/slash21/people/profile_day2_2_유승민@3x.png)
+
+  **빠르게 성장하는 스타트업의 DW****유승민**토스코어 Data Service Team Leader
+* ![](https://static.toss.im/slash21/people/profile_day2_3_김피터@3x.png)
+
+  **MYSQL HA \& DR Topology****김피터**토스코어 Database Administrator
+* ![](https://static.toss.im/slash21/people/profile_day2_4_조한기@3x.png)
+
+  **토스뱅크 데이터 설계사상****조한기**토스뱅크 Core Banking Developer
+* ![](https://static.toss.im/slash21/people/profile_day2_5_조유성@3x.png)
+
+  **Micro-frontend React, 점진적으로 도입하기****조유성**토스코어 Full Stack Developer
+* ![](https://static.toss.im/slash21/people/profile_day2_6_임한솔@3x.png)
+
+  **토스팀을 위한 슬랙봇 설계****임한솔**토스코어 Full Stack Developer
+
+**FINTECH - BEHIND THE SIMPLICITY**
+
+금융을 바꾼 금융 이야기, 토스 다큐멘터리
+**토스팀 비전**
+
+'금융은 반드시'라는 말에 담긴 토스팀의 비전을 소개합니다.
+**토스의 첫 개발자 컨퍼런스,**
+
+**가장 먼저 알려보세요**
