@@ -19,7 +19,7 @@
 주변에서 계속 '이제 그만하자'는 의견에 더 거세질 때도, '딱 2주만 더 해보자'고 버텼습니다. **'나 같은 사용자라면, 보상이 10원에서 8원으로 줄었다고 해서 이 서비스에 아예 등을 돌리진 않을 텐데'** 라는 믿음이 있었거든요. 그 2원의 차이가 사용자를 떠나게 할 결정적인 이유는 아니라고 생각했어요.
 
 그 전까지 만보기의 목표는 MAU(월간 활성 사용자)를 높이는 것이었고, 그 목표는 이미 달성된 상태였어요. 하지만 저는 돈, 즉 '수익화'에 관심이 있었죠. 무엇보다 만보기는 사람들이 알림을 받고 수시로 들어와 걸음 수를 확인하는, 아주 강력한 습관을 만드는 서비스였습니다. 사용자의 일상에 깊숙이 들어와 있는 이 접점을 없애는 건 너무 아깝다고 생각했어요.
-![](https://static.toss.im/ipd-tcs/toss_core/live/d08cd075-4472-4a7e-98a0-a53ff985af50/AD_4nXeCAVfxa4RfDsJXXwYGXOuOKC0a5gv2YJLa2QjmkYc_BBGKmMNl1ec0iEBULuzfwbkaOAHqA6yBi0L55rrQ8oCcFytefkHDv6_IirC-3msdNlDOxy6LPuzhUgEO1YOQ6rAXdPo6)
+![](/images/bd0eefefea/01.avif)
 
 ### 끝나지 않던 실패의 7개월
 
@@ -45,7 +45,7 @@
 
 고민 끝에 답을 찾았습니다. **사람들이 정말로 원하는 것을 기다리게 만들면, 그 시간 동안 기꺼이 광고를 볼 것이다!** 그리고 누구나 원하는 것, 바로 '100만 원 당첨'이라는 기회였죠. 축의금처럼 급전이 필요한 순간들을 생각했어요.
 광고를 보는 시간 동안 당첨 여부를 기다리게 하는, 그 **긴장감의 순간에 가치를 부여**한 겁니다. 동시에 사용자들이 박탈감을 느끼지 않도록 '꽝' 없이 최소 2원은 받을 수 있게 설계했고요.
-![](https://static.toss.im/ipd-tcs/toss_core/live/d8920cb1-00a1-4dda-a4e2-8296cbf49a20/AD_4nXdX0NWPwevYxuOrwmDMGhdn-6_cPivOjHjVcy7_DdQcx7TGxoMB30o3lvEC04VwZkAXTtA2Z6pWXCdGCeR-RKHxjJrxV4O7pPum9hK0N4RAZccYoZHBm5GW9_KC984dExcQp-EdTw)
+![](/images/bd0eefefea/02.avif)
 
 유튜버 조코딩님께서 핵심을 정확히 보셨습니다. '광고 보고 복권 받기'는 광고 시청을 강요하는 서비스가 아니라, **보상에 대한 기대를 통해 광고에 대한 거부감을 설렘으로 바꾸는**서비스입니다.
 
@@ -60,7 +60,7 @@
 예를 들어, '토스 만보기만의 특별한 혜택은 뭘까?'라는 질문에 대한 저희의 답 중 하나는 바로 '보험료 할인'입니다. 지금 만보기에서 특별 약관 보험 할인 이벤트를 하고 있어요. 많이 걷는 사람은 자동차를 탈 일이 적을 테니, 사고 확률도 낮아지겠죠? 그 데이터에 근거해서 **운전자 보험료를 직접 깎아드리는 거예요.**
 
 이것이 바로 저희가 가야 할 길이라고 생각합니다.
-![](https://static.toss.im/ipd-tcs/toss_core/live/3aaa86ce-217d-49e7-9b5a-ce7902f32b21/AD_4nXd5tfC_93filXlmQSZqbCwqi4QtR2m5rRnInvL7J5b9GLg284D5V3y2j7ScNij3e934sSRMPztkCJtZwdtTWd9klefqUvq8ZBCtcWAPYiUz0YqLdS3UHs6WR2QomvW45AucvrQE)
+![](/images/bd0eefefea/03.avif)
 
 ### 가장 보통의 일상, 가장 위대한 기회
 

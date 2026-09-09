@@ -7,14 +7,14 @@
 하지만 Spring REST Docs에는 단점도 있습니다. 장황한 코드 때문에 가독성이 떨어지고, 코드 반복으로 인해 생산성이 떨어지는 아쉬움이 있었습니다. 이런 문제를 해소하기 위해 Kotlin DSL을 구현해서 반복적이고 지루한 Spring REST Docs 코드 작성에 필요한 노력을 줄이는 방법을 [한규주님의 이전 글 'Kotlin으로 DSL 만들기: 반복적이고 지루한 REST Docs 벗어나기'](https://toss.tech/article/kotlin-dsl-restdocs)에서 소개했었습니다.
 
 이번에는 나아가 더 높은 가독성, 더 최소화된 코드 중복, 세부 구현 및 의존성 은닉, 마지막으로 확장에 열려있는 특성을 갖춘 문서화 라이브러리 **'tosspayments-restdocs'**를 소개하고 개발 후기를 공유합니다.
-![](/images/fdcd52e1c3/01.png)
+![](/images/fdcd52e1c3/01.avif)
 
 동일한 컨트롤러를 Spring REST Docs(좌측)와 tosspayments-restdocs(우측)로 문서화했을 때의 차이. 작성한 문서화 코드의 양이 크게 감소했다.
 
 ## 다시 살펴보기: Spring REST Docs의 문제들
 
 Spring REST Docs 기반 문서화 코드의 아쉬운 점을 아래 코드를 통해 다시 한번 살펴볼게요.
-![](/images/fdcd52e1c3/02.png)
+![](/images/fdcd52e1c3/02.avif)
 
 **요청 필드 2개, 응답 필드 3개**로 구성된 단순한 ` `PUT` ` 인터페이스지만, 장황하게 작성된 코드 때문에 전체 구조를 한눈에 파악하기 어렵습니다. 이런 구조의 코드는 처음 작성하는 비용이 많이 들 뿐만 아니라 유지보수 비용도 늘립니다. 위 코드의 문제점을 좀 더 구체적으로 살펴보겠습니다.
 
@@ -43,7 +43,7 @@ given(), prettyPrint(), then(), preprocessRequest(), preprocessResponse() 등의
 위 코드를 tosspayments-restdocs 라이브러리를 사용해서 다시 작성한 코드 예시입니다.
 
 생성될 문서를 직관적으로 예측할 수 있고, 기반 기술을 완전히 추상화해서 코드가 절반 이하로 감소했습니다.
-![](/images/fdcd52e1c3/03.png)
+![](/images/fdcd52e1c3/03.avif)
 
 tosspayments-restdocs를 적용한 결과
 
@@ -51,7 +51,7 @@ tosspayments-restdocs를 적용한 결과
 
 ### 선언형 프로그래밍
 
-![](/images/fdcd52e1c3/04.png)
+![](/images/fdcd52e1c3/04.avif)
 
 <https://developer.mozilla.org/en-US/docs/Glossary/Element>
 
@@ -70,10 +70,10 @@ tosspayments-restdocs를 적용한 결과
 ### 선언형 프로그래밍 구현 - 함수와 확장 함수
 
 tosspayments-restdocs의 문서화 코드 진입점인 documentation 요소 함수를 살펴보겠습니다.
-![](/images/fdcd52e1c3/05.png)
+![](/images/fdcd52e1c3/05.avif)
 
 documentation 함수 호출 예
-![](/images/fdcd52e1c3/06.png)
+![](/images/fdcd52e1c3/06.avif)
 
 documentation 내부 구현(이해를 돕기 위해 단순화하였습니다)
 
@@ -95,15 +95,15 @@ Spring REST Docs의 문제 중 하나는 필드의 타입을 REST Docs Snippet�
 Kotlin에서는 Inline Function 한정으로 [Reified Type Parameter](https://kotlinlang.org/docs/inline-functions.html#reified-type-parameters)를 제공합니다. 타입 정보가 소거되는 일반적인 Generic Function의 Type Parameter와 달리, Reified Type Parameter의 경우에는 타입 정보가 소거되지 않아 라이브러리에서 접근할 수 있습니다.
 
 tosspayments-restdocs에서는 항상 문서화 요소가 샘플을 받게 강제하고, 샘플의 타입과 값을 내부 자료구조에 저장하도록 했습니다.
-![](/images/fdcd52e1c3/07.png)
+![](/images/fdcd52e1c3/07.avif)
 
 sample이 reified T로 선언되어 타입 정보(T::class.java)에 접근이 가능합니다.
 
 타입 정보가 남아있다면 문서를 작성하는 개발자를 대신해 다양한 작업을 자동화 할 수 있습니다. tosspayments-restdocs에서는 타입 명세, 열거형 예시 작성, 포멧 명세 등에 타입 정보를 활용하고 잇습니다.
-![](/images/fdcd52e1c3/08.png)
+![](/images/fdcd52e1c3/08.avif)
 
 타입 정보 활용 예(타입별 양식 자동생성) -- 열거형은 엔트리 나열, 시간 타입은 타임 포멧을 반환
-![](/images/fdcd52e1c3/09.png)
+![](/images/fdcd52e1c3/09.avif)
 
 타입 정보 활용 예(생성된 문서) -- 열거형 타입으로부터 얻은 정보로 ResultType의 엔트리(SUCCESS, ERROR)가 자동생성 되었습니다.
 

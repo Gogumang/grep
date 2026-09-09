@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2021-10-14T13:32:16Z"
-sourceThumbnail: "/images/aaf6dd331e.png"
+sourceThumbnail: "/images/aaf6dd331e.avif"
 tags: []
 category: "Engineering"
 author: "강병훈"

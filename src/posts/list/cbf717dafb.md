@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-19T02:00:00Z"
-sourceThumbnail: "/images/cbf717dafb.png"
+sourceThumbnail: "/images/cbf717dafb.avif"
 tags: []
 category: "Engineering"
 author: "한주연"

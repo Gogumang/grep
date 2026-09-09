@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2023-03-23T07:43:33Z"
-sourceThumbnail: "/images/d547ddfeff.png"
+sourceThumbnail: "/images/d547ddfeff.avif"
 tags: []
 category: "Design"
 author: "박다롱"

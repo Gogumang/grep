@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-01-30T01:59:00Z"
-sourceThumbnail: "/images/cdedf94e5c.png"
+sourceThumbnail: "/images/cdedf94e5c.avif"
 tags: []
 category: "Design"
 author: "유아란"

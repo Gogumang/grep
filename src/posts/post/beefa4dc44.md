@@ -334,7 +334,7 @@ MView 결과 테이블만 간단하게 쿼리하면 실시간으로 완성된 �
     SELECT * FROM ***.service_graph;
 
 세 개의 데이터 소스를 조합해서 MView로 최종 테이블을 만들어 내고 있는 과정 역시 Lineage 검색 서비스에서 바로 확인 가능합니다.
-![](https://static.toss.im/ipd-tcs/toss_core/live/a57e0d4c-3f8b-4a66-a29a-0890dbc3bc28/service_graph_검색.png) 그림 1. service_graph 테이블을 만드는 파이프라인
+![](/images/beefa4dc44/01.avif) 그림 1. service_graph 테이블을 만드는 파이프라인
 
 Lineage 서비스를 개발한 이후로 말로 표현할 수 없는 운영 편의성이 생겼습니다.
 
@@ -350,12 +350,12 @@ Realtime Data Team에서 이 테이블을 만들어 낸 이유는 Lineage에 서
    2. 사라진 연결은 collection에서 제거하는 방식으로 리니지 메타데이터 최신화
 
 이 과정을 통해 그려지는 Kafka Producer / Consumer의 연결 현황입니다.
-![](/images/beefa4dc44/02.png) 그림 2. 특정 Topic으로 메시지를 발행하는 Producer와 발행된 메시지를 소비하는 Consumer 리니지 시각화
+![](/images/beefa4dc44/02.avif) 그림 2. 특정 Topic으로 메시지를 발행하는 Producer와 발행된 메시지를 소비하는 Consumer 리니지 시각화
 
 ClickHouse는 Grafana와의 연동도 잘 되기 때문에 service_graph 테이블로 아래와 같이 구성해볼 수 있습니다.
 
 vector를 검색하면 서비스 명에 vector 라는 단어가 포함된 모든 서비스의 Producer와 Consumer를 볼 수 있고, 어떤 Topic을 활용하는지도 알 수 있습니다.
-![](https://static.toss.im/ipd-tcs/toss_core/live/298b2cf1-0db3-42b6-9b54-25abc538de61/vector_검색_결과.png) 그림3. Grafana에서 서비스 명 vector 검색
+![](/images/beefa4dc44/03.avif) 그림3. Grafana에서 서비스 명 vector 검색
 
 Kafka Client와 Kafka Broker의 실시간 연결 정보를 담은 테이블이 생겼기 때문에 이제 여러 팀에서 니즈에 맞게 창의적으로 활용할 수 있습니다. ClickHouse 테이블로 제공되기 때문에 리니지를 그리는 것은 하나의 사례에 불과하고, SQL로 각종 통계도 쉽고 빠르게 뽑을 수 있고 필요한 데이터도 손 쉽게 추출 가능합니다.
 

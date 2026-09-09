@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2025-12-01T09:01:00Z"
-sourceThumbnail: "/images/e30cf2aea7.png"
+sourceThumbnail: "/images/e30cf2aea7.avif"
 tags: []
 category: "Engineering"
 author: "박순현/양권성"

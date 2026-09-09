@@ -7,7 +7,7 @@
 ## Iceage 프로젝트의 목표
 
 저희 팀의 최종 목표는 다양한 데이터 소스(Kafka, CDC 등)로부터 입수된 데이터를 Iceberg 포맷으로 관리하여, 실시간으로 데이터를 조회하고 수정할 수 있는 효율적인 데이터 파이프라인을 만드는 것입니다. 이를 통해 운영 비용을 절감하고, 데이터 처리 효율성을 높이며, 스키마 진화와 쿼리 성능을 최적화하고자 했습니다.
-![](/images/d46ceb3beb/01.png) Iceage 프로젝트 목표
+![](/images/d46ceb3beb/01.avif) Iceage 프로젝트 목표
 
 좀 더 구체적으로 말씀드리면:
 
@@ -48,7 +48,7 @@
 
 ## Iceberg란 무엇인가요?
 
-![](/images/d46ceb3beb/02.png) Iceberg의 구조 (출처: <https://iceberg.apache.org/spec/#overview>)
+![](/images/d46ceb3beb/02.avif) Iceberg의 구조 (출처: <https://iceberg.apache.org/spec/#overview>)
 
 Iceberg는 오픈 테이블 포맷으로, 데이터를 효율적으로 관리하고 실시간으로 쿼리할 수 있도록 돕는 도구입니다. Iceberg의 설계 핵심은 **데이터와 메타데이터를 분리**하여 저장하는 구조입니다. 이를 통해 데이터의 파티셔닝, 스키마 진화, 트랜잭션 처리 등을 유연하게 관리할 수 있게 되었죠.
 
@@ -69,10 +69,10 @@ Iceberg의 가장 큰 장점은 **스키마 진화와 파티션 관리의 유연
 ## 입수 자동화
 
 데이터 파이프라인 운영에서 자동화는 필수적입니다. Netflix의 사례에서 알 수 있듯, 복잡한 데이터 매쉬 환경에서도 SQL 기반으로 스트리밍 데이터를 관리하고 자동화를 통해 운영의 복잡성을 줄이고 있습니다. 저희도 이를 참고하여 **Kafka Connect 기반의 자동화된 입수 작업**을 구축해 데이터 파이프라인의 운영 효율성을 높였습니다.
-![](/images/d46ceb3beb/03.png) 자동화된 입수파이프라인 요청예시
+![](/images/d46ceb3beb/03.avif) 자동화된 입수파이프라인 요청예시
 
 저희의 자동화된 입수 시스템은 **메타데이터와 리니지 관리**를 통해 실시간 모니터링이 가능하도록 설계되었습니다. 문제가 발생하면 빠르게 대응할 수 있으며, 사내 메신저 알림을 통해 운영 이슈에도 즉각적으로 대처할 수 있는 시스템을 구축해 운영 성숙도를 크게 향상시켰습니다. 이러한 자동화 덕분에 사람의 개입을 최소화하면서도 데이터 파이프라인의 확장성을 크게 높일 수 있었습니다.
-![](/images/d46ceb3beb/04.png) DataLake로 입수되는 Iceberg 모니터링 ![](/images/d46ceb3beb/05.png) 사내 메신저로 즉각적인 대응 ![](https://static.toss.im/ipd-tcs/toss_core/live/7daefc40-1d2b-4503-9329-b71821a0f3e5/inner-1023-tech-inner-1_(1).png) 모니터링하고 있는 모든 지표
+![](/images/d46ceb3beb/04.avif) DataLake로 입수되는 Iceberg 모니터링 ![](/images/d46ceb3beb/05.avif) 사내 메신저로 즉각적인 대응 ![](https://static.toss.im/ipd-tcs/toss_core/live/7daefc40-1d2b-4503-9329-b71821a0f3e5/inner-1023-tech-inner-1_(1).png) 모니터링하고 있는 모든 지표
 
 이 자동화 도구 덕분에 약 천여 개의 입수 파이프라인을 단 세 명이 관리할 수 있게 되었습니다. 운영 인력이 적더라도 실시간 데이터 제공의 품질을 유지하며 안정적으로 데이터를 관리할 수 있었던 것도 이러한 자동화 시스템 덕분입니다.
 
@@ -122,7 +122,7 @@ Iceberg를 유지하고 최적화하는 작업은 데이터 엔지니어에게 �
     row_count_df = spark.sql(f"select count(1) as row_count from spark_catalog.{table}")
     delete_files_df = spark.sql(f"SELECT * FROM spark_catalog.{table}.delete_files")
 
-![](/images/d46ceb3beb/06.png) Iceberg 테이블 모니터링 알람
+![](/images/d46ceb3beb/06.avif) Iceberg 테이블 모니터링 알람
 
 ### 메타데이터 관리
 
@@ -237,7 +237,7 @@ Iceberg 테이블을 운영하다 보면, 여러 가지 이유로 테이블을 �
 또한, 저희 팀은 데이터 입수 작업을 Kafka Connect 기반으로 설정 파일을 통해 관리하면서 메타데이터와 데이터 리니지를 체계적으로 관리했습니다. 이를 통해 스키마나 파티션 변경 시 발생할 수 있는 문제들을 보다 쉽게 해결할 수 있었고, 운영 효율성도 높일 수 있었습니다. 특히, 데이터 파이프라인에서 발생하는 다양한 변경 사항에 유연하게 대응할 수 있어 테이블 복구 및 재구축 작업과 연계하여 안정적인 데이터 운영 환경을 유지할 수 있었습니다.
 
 이와 같은 Iceberg의 복구 및 관리 기능을 통해, 데이터 손실 없이 테이블을 유지하고, 스키마 변경과 같은 변화에도 유연하게 대처할 수 있었습니다.
-![](/images/d46ceb3beb/07.png) Kafka로 입수된 데이터의 리니지와 영향도
+![](/images/d46ceb3beb/07.avif) Kafka로 입수된 데이터의 리니지와 영향도
 
 ## 앞으로의 계획
 

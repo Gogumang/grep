@@ -1,4 +1,4 @@
-![](/images/c9ea512abd/01.png)
+![](/images/c9ea512abd/01.avif)
 
 # UX와 DX, 그 모든 경험을 위한 디자인 시스템
 
@@ -6,38 +6,38 @@
 
 # 세션 더 보기
 
-  * ![](/images/c9ea512abd/02.png)
-  ![](/images/c9ea512abd/03.png)
+  * ![](/images/c9ea512abd/02.avif)
+  ![](/images/c9ea512abd/03.avif)
   **UIKit으로 만들어진 토스 디자인 시스템 SwiftUI에서 쓸 수 있을까?**
 
   **강준구** **토스 iOS Developer**
-  * ![](/images/c9ea512abd/04.png)
-  ![](/images/c9ea512abd/05.png)
+  * ![](/images/c9ea512abd/04.avif)
+  ![](/images/c9ea512abd/05.avif)
   **미친 생산성을 위한 React Native**
 
   **오진성 \& 이현수****토스 iOS Developer \& Frontend Developer**
-  * ![](/images/c9ea512abd/06.png)
-  ![](/images/c9ea512abd/07.png)
+  * ![](/images/c9ea512abd/06.avif)
+  ![](/images/c9ea512abd/07.avif)
   **UX와 DX, 그 모든 경험을 위한 디자인 시스템**
 
   **박민수****토스 Android Developer**
-  * ![](/images/c9ea512abd/08.png)
-  ![](/images/c9ea512abd/09.png)
+  * ![](/images/c9ea512abd/08.avif)
+  ![](/images/c9ea512abd/09.avif)
   **토스 앱 오픈시간 1초를 줄이기까지**
 
   **이종현****토스 Android Developer**
-  * ![](/images/c9ea512abd/10.png)
-  ![](/images/c9ea512abd/11.png)
+  * ![](/images/c9ea512abd/10.avif)
+  ![](/images/c9ea512abd/11.avif)
   **잃어버린 유저의 시간을 찾아서: 100년을 아껴준 SSR 이야기**
 
   **김도환****토스 Frontend DevOps Engineer**
-  * ![](/images/c9ea512abd/12.png)
-  ![](/images/c9ea512abd/13.png)
+  * ![](/images/c9ea512abd/12.avif)
+  ![](/images/c9ea512abd/13.avif)
   **지속 성장 가능한 코드를 만들어가는 방법**
 
   **김재민****토스페이먼츠 Server Developer**
-  * ![](/images/c9ea512abd/14.png)
-  ![](/images/c9ea512abd/15.png)
+  * ![](/images/c9ea512abd/14.avif)
+  ![](/images/c9ea512abd/15.avif)
   **Effective Component 지속 가능한 성장과 컴포넌트**
 
   **한재엽****토스페이먼츠 Frontend Developer**

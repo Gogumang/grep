@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2022-06-08T01:00:00Z"
-sourceThumbnail: "/images/ababd8fc1f.png"
+sourceThumbnail: "/images/ababd8fc1f.avif"
 tags: []
 category: "Engineering"
 author: "하태호"

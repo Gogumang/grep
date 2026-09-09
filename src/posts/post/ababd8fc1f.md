@@ -1,4 +1,4 @@
-![](/images/ababd8fc1f/01.png)
+![](/images/ababd8fc1f/01.avif)
 
 # 어떻게 안정적인 서비스를 빠르게, 자주 출시할 것인가?
 
@@ -7,43 +7,43 @@
 
 # 세션 더 보기
 
-  * ![](/images/ababd8fc1f/02.png)
-  ![](/images/ababd8fc1f/03.png)
+  * ![](/images/ababd8fc1f/02.avif)
+  ![](/images/ababd8fc1f/03.avif)
   **토스팀 인프라 자동화의 시작**
 
   **김정남** **토스 InfraOps Engineer**
-  * ![](/images/ababd8fc1f/04.png)
-  ![](/images/ababd8fc1f/05.png)
+  * ![](/images/ababd8fc1f/04.avif)
+  ![](/images/ababd8fc1f/05.avif)
   **물 흐르듯 자연스러운 ML 서비스 만들기**
 
   **고석현****토스 Machine Learning Engineer**
-  * ![](/images/ababd8fc1f/06.png)
-  ![](/images/ababd8fc1f/07.png)
+  * ![](/images/ababd8fc1f/06.avif)
+  ![](/images/ababd8fc1f/07.avif)
   **토스에서는 테이블 정보를 어떻게 관리하나요?**
 
   **윤아서****토스 Data Engineer**
-  * ![](/images/ababd8fc1f/08.png)
-  ![](/images/ababd8fc1f/09.png)
+  * ![](/images/ababd8fc1f/08.avif)
+  ![](/images/ababd8fc1f/09.avif)
   **iOS앱을 매주 배포 한다고?**
 
   **김준모****토스 iOS Developer**
-  * ![](/images/ababd8fc1f/10.png)
-  ![](/images/ababd8fc1f/11.png)
+  * ![](/images/ababd8fc1f/10.avif)
+  ![](/images/ababd8fc1f/11.avif)
   **잃어버린 개발자의 시간을 찾아서: 매일 하루를 아끼는 DevOps 이야기**
 
   **박서진****토스 Frontend Developer**
-  * ![](/images/ababd8fc1f/12.png)
-  ![](/images/ababd8fc1f/13.png)
+  * ![](/images/ababd8fc1f/12.avif)
+  ![](/images/ababd8fc1f/13.avif)
   **Java Native Memory Leak 원인을 찾아서**
 
   **박동호****토스페이먼츠 Server Developer**
-  * ![](/images/ababd8fc1f/14.png)
-  ![](/images/ababd8fc1f/15.png)
+  * ![](/images/ababd8fc1f/14.avif)
+  ![](/images/ababd8fc1f/15.avif)
   **어떻게 안정적인 서비스를 빠르게, 자주 출시할 것인가?**
 
   **하태호****토스페이먼츠 DevOps Engineer**
-  * ![](/images/ababd8fc1f/16.png)
-  ![](/images/ababd8fc1f/17.png)
+  * ![](/images/ababd8fc1f/16.avif)
+  ![](/images/ababd8fc1f/17.avif)
   **은행 앱에도 Service Mesh 도입이 가능한가요?**
 
   **김동진 \& 하성준****토스뱅크 DevOps Engineer**

@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2025-07-04T02:31:00Z"
-sourceThumbnail: "/images/4f5dddabbf.png"
+sourceThumbnail: "/images/4f5dddabbf.avif"
 tags: []
 category: "Design"
 author: "토스 TNS 길드"

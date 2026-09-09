@@ -31,8 +31,11 @@ const IMAGE_URL_PREFIX = '/images'
  * 이미 우리 저장소에 있지만 다시 구워야 하는 형식. collector가 원문에서 받은 바이트를
  * 그대로 넣기 때문에(grep-airflow e75532d) 새 글은 PNG·JPEG로 들어온다.
  * AVIF·WebP는 이미 줄어든 것이거나 움직이는 이미지라 손대지 않는다.
+ *
+ * GIF도 넣는다 — 마흔 장이 198MB였다(한 장이 27.8MB). 움직이는 것은 아래에서
+ * WebP로 가므로 프레임이 살아 있다.
  */
-const REBAKE_PATTERN = /\.(png|jpe?g)$/i
+const REBAKE_PATTERN = /\.(png|jpe?g|gif)$/i
 
 const REQUEST_TIMEOUT_MS = 20_000
 const CONCURRENCY = 4
@@ -137,9 +140,16 @@ async function saveConverted(source, fallbackBase, maxWidth) {
     return { before: original.length, after: original.length, url: toPublicUrl(`${targetBase}.png`) }
   }
 
-  const isAnimated = ((await sharp(original, { animated: true }).metadata()).pages ?? 1) > 1
+  /**
+   * sharp는 기본적으로 268MP가 넘는 입력을 거부한다(압축 폭탄 방어). 움직이는 이미지는
+   * 프레임을 세로로 이어 붙인 한 장으로 읽혀서, 긴 GIF는 그 상한에 쉽게 닿는다 —
+   * 실제로 열두 장이 여기서 막혀 원본 109MB로 남았다. 우리가 방금 받아둔 파일만
+   * 다루므로 상한을 푼다.
+   */
+  const readOptions = { limitInputPixels: false }
+  const isAnimated = ((await sharp(original, { ...readOptions, animated: true }).metadata()).pages ?? 1) > 1
 
-  const resized = sharp(original, { animated: isAnimated }).resize({
+  const resized = sharp(original, { ...readOptions, animated: isAnimated }).resize({
     width: maxWidth,
     withoutEnlargement: true,
   })

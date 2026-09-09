@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2021-08-30T01:00:00Z"
-sourceThumbnail: "/images/47ef2eb3af.png"
+sourceThumbnail: "/images/47ef2eb3af.avif"
 tags: []
 category: "Design"
 author: "고현선"

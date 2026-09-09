@@ -5,7 +5,7 @@ blogName: "토스"
 blogKey: "toss-tech"
 blogHomepage: "https://toss.tech"
 publishedAt: "2026-04-23T05:00:00Z"
-sourceThumbnail: "/images/3c5a5ca9fa.png"
+sourceThumbnail: "/images/3c5a5ca9fa.avif"
 tags: []
 category: "Engineering"
 author: "이유진"

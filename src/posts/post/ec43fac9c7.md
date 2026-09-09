@@ -9,22 +9,22 @@
 
 # 세션 더 보기
 
-* ![](https://static.toss.im/slash21/people/profile_day2_1_유결@3x.png)
+* ![](/images/ec43fac9c7/01.avif)
 
   **토스 데이터의 흐름과 활용** **유결** 토스코어 Data Platform Team Leader
-* ![](https://static.toss.im/slash21/people/profile_day2_2_유승민@3x.png)
+* ![](/images/ec43fac9c7/02.avif)
 
   **빠르게 성장하는 스타트업의 DW****유승민**토스코어 Data Service Team Leader
-* ![](https://static.toss.im/slash21/people/profile_day2_3_김피터@3x.png)
+* ![](/images/ec43fac9c7/03.avif)
 
   **MYSQL HA \& DR Topology****김피터**토스코어 Database Administrator
-* ![](https://static.toss.im/slash21/people/profile_day2_4_조한기@3x.png)
+* ![](/images/ec43fac9c7/04.avif)
 
   **토스뱅크 데이터 설계사상****조한기**토스뱅크 Core Banking Developer
-* ![](https://static.toss.im/slash21/people/profile_day2_5_조유성@3x.png)
+* ![](/images/ec43fac9c7/05.avif)
 
   **Micro-frontend React, 점진적으로 도입하기****조유성**토스코어 Full Stack Developer
-* ![](https://static.toss.im/slash21/people/profile_day2_6_임한솔@3x.png)
+* ![](/images/ec43fac9c7/06.avif)
 
   **토스팀을 위한 슬랙봇 설계****임한솔**토스코어 Full Stack Developer
 
