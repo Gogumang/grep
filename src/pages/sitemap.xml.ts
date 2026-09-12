@@ -17,6 +17,7 @@ export const GET: APIRoute = async ({ site }) => {
   // 가장 최근 글의 발행 시각을 홈의 lastmod로 쓴다.
   const entries = [
     { path: '/', lastmod: posts[0]?.publishedAt },
+    { path: '/explore/', lastmod: posts[0]?.publishedAt },
     ...posts.map((post) => ({ path: `/posts/${post.id}/`, lastmod: post.publishedAt })),
   ]
 

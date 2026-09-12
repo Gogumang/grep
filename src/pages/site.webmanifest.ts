@@ -11,9 +11,9 @@ import type { APIRoute } from 'astro'
  */
 export const GET: APIRoute = () => {
   const manifest = {
-    name: 'grep — 개발자 블로그 모아보기',
+    name: 'grep — 당신의 별이 빛나는 곳',
     short_name: 'grep',
-    description: '기업 기술블로그의 새 글을 한곳에 모았습니다.',
+    description: '개발자의 발견과 배움, 만드는 여정을 함께합니다.',
     start_url: '/',
     display: 'browser',
     lang: 'ko',

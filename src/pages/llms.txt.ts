@@ -14,8 +14,10 @@ export const GET: APIRoute = async ({ site }) => {
   const lines = [
     '# grep',
     '',
-    '> 기업 기술블로그의 새 글을 한곳에 모은 사이트입니다.',
+    '> 개발자의 발견과 배움, 만드는 여정을 돕는 사이트입니다. 기술 아티클과 개발 학습 리소스를 연결합니다.',
     `> 현재 ${blogNames.length}곳의 블로그에서 글 ${posts.length}건을 모았습니다.`,
+    '',
+    `- [기술 아티클](${new URL('/explore/', site).href})`,
     '',
     '## 알아둘 것',
     '',
