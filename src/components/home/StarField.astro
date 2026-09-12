@@ -1,0 +1,82 @@
+---
+// 카카오 Hello World! 배너의 캐릭터를 윤곽선만 벡터로 딴 것 (로고·글자 제외).
+// 별 입자가 이 path들을 따라 모인다 — 채우기가 아니라 선 길이로 샘플링하므로 윤곽선이면 된다.
+import character from '../../../public/images/particle-shapes/hello-world-character.svg?raw'
+---
+<div class="star-field" data-star-field>
+  <template data-shape-template set:html={character} />
+  <div class="particle-stage" data-particle-stage aria-hidden="true"></div>
+  <div class="star-loading" aria-hidden="true"><span></span><span></span><span></span></div>
+</div>
+<script is:inline src="/vendor/astra/astra-1.1.0.min.js" defer></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const field = document.querySelector('[data-star-field]')
+    const stage = field?.querySelector('[data-particle-stage]')
+    if (!field) return
+    if (!stage || !window.UXPShapeCue) {
+      field.dataset.starState = 'failed'
+      console.error('별 애니메이션 라이브러리를 불러오지 못했습니다.')
+      return
+    }
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+    let cue
+    try {
+      cue = window.UXPShapeCue.createShapeCue(stage, {
+        shape: field.querySelector('[data-shape-template]').innerHTML,
+        transform: reduced.matches ? 'off' : 'scroll',
+        interaction: reduced.matches ? 'none' : 'rotate',
+        interactionLabel: '움직이는 별 입자',
+        palette: 'astra',
+        background: 'transparent',
+        // 원본과 같은 남색 성운 글로우 + 비네트. 색(#23435F)과 투명도(.55)는 라이브러리에
+        // 원본 값 그대로 상수로 박혀 있어 켜기만 하면 된다.
+        ambient: true,
+        // density·size·scatter·twinkle은 원본 Astra와 같은 값.
+        // 개수 자체는 벤더 패치로 나선 팔을 5→20개로 늘려 맞췄다 — public/vendor/astra/PATCHES.md 참고.
+        // 모바일은 팔이 20개로 늘어난 만큼 density를 낮춰 입자 총량을 감당 가능한 선으로 유지한다.
+        // intensity는 원본(1.35)보다 낮춘다. 쉐이더가 밝을수록 별 색을 흰색으로 섞기 때문이다:
+        //   whiteCore = smoothstep(0.9, 2.8, vBrightness) * 0.82
+        //   emission  = mix(vColor, vec3(1.0), whiteCore) * vBrightness
+        // vBrightness = intensity × starBrightness(일반 별 0.46~1.34)이라, 1.35에서는 밝은 쪽
+        // 별이 색을 38%까지 잃는다. 팔을 20개로 늘려 별이 원본의 1.6배가 된 만큼 가산 합성도
+        // 더 쌓이므로 intensity·bloom을 같이 낮춰야 색이 산다.
+        particles: { density: innerWidth < 700 ? 2 : 4, size: 2.05, intensity: 0.85, scatter: 0.4, twinkle: 0.62 },
+        animation: { speed: 0.45, duration: 5, playing: !reduced.matches },
+        bloom: 0.5,
+        padding: 0.1,
+        autoRotate: false,
+        tier: innerWidth < 700 ? 2 : 3,
+        performance: { maxFps: 45, pauseWhenOffscreen: true },
+        config: { faceForward: true, rotationDepth: 1.4, pathShapeAutoRotate: false, dirtyGlass: { enabled: false }, lensFlare: { enabled: true, intensity: 0.28 }, orbitalDust: { enabled: true, density: innerWidth < 700 ? 0.8 : 1.5 } },
+      })
+      if (cue.status === 'error') throw new Error('Star renderer could not initialize')
+      field.dataset.starState = 'ready'
+      // 재생/정지는 이제 prefers-reduced-motion만 따른다 (수동 정지 버튼 없음)
+      const onMotionChange = () => {
+        const playing = !reduced.matches
+        cue.update({ interaction: playing ? 'rotate' : 'none', animation: { playing } })
+        playing ? cue.play() : cue.pause()
+      }
+      reduced.addEventListener('change', onMotionChange)
+      window.addEventListener('pagehide', () => { cue.dispose(); reduced.removeEventListener('change', onMotionChange) }, { once: true })
+    } catch (error) {
+      cue?.dispose()
+      field.dataset.starState = 'failed'
+      console.error('별 애니메이션을 불러오지 못했습니다.', error)
+    }
+  }, { once: true })
+</script>
+<style>
+  .star-field { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .particle-stage { width: 100%; height: 100%; }
+  .star-loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); display: flex; gap: 14px; pointer-events: none; }
+  .star-loading span { width: 6px; height: 6px; border-radius: 50%; background: #bdd7ff; box-shadow: 0 0 10px #74a2ff80; opacity: .25; animation: star-loading 1.4s ease-in-out infinite; }
+  .star-loading span:nth-child(2) { animation-delay: .18s; }
+  .star-loading span:nth-child(3) { animation-delay: .36s; }
+  @keyframes star-loading { 0%, 70%, 100% { opacity: .25; } 35% { opacity: 1; } }
+  /* 실패했을 때도 감춘다 — 멈춘 점 세 개는 '아직 로딩 중'으로 오해된다 */
+  [data-star-state] .star-loading { display: none; }
+  @media (prefers-reduced-motion: reduce) { .star-loading span { animation: none; opacity: .6; } }
+  @media(max-width:800px) { .star-field { inset: 0; width: 100%; height: 100%; } }
+</style>
