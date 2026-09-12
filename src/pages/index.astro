@@ -1,38 +1,166 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { loadManualPickUrls, loadPosts } from '@/service/content'
-import { selectTodayPicks } from '@/service/picks'
-import { PostExplorer } from '@/components/post/PostExplorer'
-import { TodayPicks } from '@/components/post/TodayPicks'
-import * as styles from '@/styles/home.css'
+import StarField from '@/components/home/StarField.astro'
+import * as wordmark from '@/components/header/Wordmark.css'
 
-const [posts, manualPickUrls] = await Promise.all([loadPosts(), loadManualPickUrls()])
-const picks = selectTodayPicks(posts, manualPickUrls)
 
-/** 이 사이트가 무엇인지 알린다. 개별 글의 정본은 각 글 페이지에서 원문을 가리킨다. */
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: 'grep',
-  description: '기업 기술블로그의 새 글을 한곳에 모았습니다.',
-  url: Astro.site?.href,
-  mainEntity: {
-    '@type': 'ItemList',
-    numberOfItems: posts.length,
-    itemListElement: posts.slice(0, 10).map((post, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      url: new URL(`/posts/${post.id}`, Astro.site).href,
-      name: post.title,
-    })),
-  },
-}
 ---
 
-<BaseLayout structuredData={structuredData}>
-  <main class={styles.container}>
-    {/* 캐러셀·필터·페이지 이동이 있어서 붙는다. 초기 HTML은 빌드 때 구워진다. */}
-    <TodayPicks picks={picks} client:load />
-    <PostExplorer posts={posts} client:load />
-  </main>
+<BaseLayout hideHeader>
+  <div class="universe">
+    <header class="nav">
+      <a class:list={['logo', wordmark.brandType]} href="/" aria-label="grep 홈">grep</a>
+      <nav aria-label="메인 메뉴">
+        <a class="active" href="/" aria-current="page">홈</a>
+        <a href="/explore">기술 아티클</a>
+      </nav>
+
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <StarField />
+        <h1 class="hero-title" id="hero-title"><span>별을 읽는 당신도</span><span>하나의 별이 됩니다.</span></h1>
+        <div class="hero-bottom"><span>A LITTLE SPARK, AN INFINITE POSSIBILITY</span></div>
+      </section>
+    </main>
+  </div>
 </BaseLayout>
+
+<style>
+.universe {
+  background: #08090c;
+  color: #eeeff3;
+  --muted: #92939f;
+  font-family: "Pretendard Variable", Pretendard, sans-serif;
+  overflow: clip;
+}
+.nav {
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  border-bottom: 1px solid #ffffff0d;
+  gap: 30px;
+}
+/*
+ * 글꼴·대문자·자간은 헤더와 같은 wordmark.brandType이 준다 (색만 여기서 물려받는다).
+ * 여기에 font-family나 letter-spacing을 다시 쓰면 Astro 스코프 셀렉터가 더 강해 그쪽을 덮으니 쓰지 않는다.
+ */
+.logo {
+  font-size: 34px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+nav {
+  display: flex;
+  gap: 34px;
+  font-size: 14px;
+  color: #a7a8b1;
+}
+nav a {
+  padding: 33px 0;
+  transition: color 0.2s;
+}
+nav a:hover,
+nav .active {
+  color: #fff;
+}
+.hero {
+  min-height: 850px;
+  height: 100svh;
+  max-height: 1150px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 125px 8% 130px;
+}
+h1 {
+  font-size: clamp(65px, 7.4vw, 112px);
+  font-weight: 450;
+  letter-spacing: -6px;
+  line-height: 1.16;
+  margin: 0 0 30px;
+}
+.hero-bottom {
+  position: absolute;
+  bottom: 34px;
+  left: 5%;
+  right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #737684;
+  font: 9px monospace;
+  letter-spacing: 1.5px;
+}
+@media (max-width: 800px) {
+  .nav {
+    height: 76px;
+    padding: 0 6%;
+    gap: 18px;
+  }
+  .logo {
+    font-size: 29px;
+  }
+  nav {
+    gap: 20px;
+    font-size: 12px;
+  }
+  nav a {
+    padding: 28px 0;
+  }
+  nav a:last-child {
+    display: none;
+  }
+  .hero {
+    min-height: 800px;
+    max-height: 950px;
+    padding: 300px 7% 115px;
+    align-items: center;
+  }
+  h1 {
+    font-size: 70px;
+    letter-spacing: -4px;
+  }
+  .hero-bottom {
+    justify-content: center;
+  }
+}
+@media (max-width: 380px) {
+  nav {
+    gap: 13px;
+  }
+  .hero {
+    padding-top: 270px;
+  }
+  h1 {
+    font-size: 61px;
+  }
+}
+/* 입자 필드가 첫 화면이다. 문구는 두 조각으로 갈라 좌우 끝에 붙이고 가운데는 비운다 —
+   캐릭터가 앉을 자리다. 글자가 별 위에 얹히는 자리는 남으니 번지는 어두운 그림자로만 띄운다
+   (상자를 그리면 별밭이 끊긴다).
+   모바일은 좌우로 벌릴 폭이 없어 아래쪽에 두 줄로 쌓는다.
+   굵기 250은 성긴 별 입자와 결을 맞추려는 것이고, 자간은 본문용 -2px이 아니라 -0.01em을 쓴다 —
+   px 자간은 글자가 커질수록 비율이 달라져 디스플레이 크기에서 한글이 뭉친다. */
+.nav { justify-content: flex-start; border-bottom: 0; }
+.nav nav { margin-left: auto; }
+.nav nav a:last-child { display: block; }
+.hero { min-height: 600px; height: 100svh; max-height: none; padding: 0; display: block; background: #000; }
+.hero-title { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; margin: 0; font-size: clamp(32px, 3.8vw, 62px); letter-spacing: -0.01em; line-height: 1.32; font-weight: 250; pointer-events: none; z-index: 1; text-shadow: 0 2px 26px rgba(4,5,9,.7); }
+/* 두 조각을 대각선으로 어긋나게 둔다 — 왼쪽은 위로, 오른쪽은 아래로.
+   transform이라 레이아웃에는 영향이 없고, 가운데 캐릭터 자리도 그대로 비어 있다. */
+.hero-title span:first-child { transform: translateY(-13svh); }
+.hero-title span:last-child { transform: translateY(13svh); }
+.hero-bottom { pointer-events: none; }
+@media(max-width:800px) {
+  .hero { min-height: 620px; height: 100svh; max-height: none; padding: 0; }
+  .hero-title { flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding: 0 7% 18svh; font-size: clamp(25px, 6vw, 40px); letter-spacing: -0.005em; }
+  .hero-title span:first-child, .hero-title span:last-child { transform: none; }
+}
+</style>

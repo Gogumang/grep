@@ -29,9 +29,15 @@ export const text = style({
  * letterSpacing을 text에서 걷어내고 여기서 다시 준다. -0.04em은 Pretendard 기준으로 잡은 값이라
  * 이미 자간이 좁은 잘난체에 그대로 얹으면 글자끼리 붙는다.
  */
-export const brand = style({
+/**
+ * 색을 뺀 워드마크 타이포그래피. 홈(pages/index.astro)은 BaseLayout 헤더를 감추고
+ * 자체 로고를 쓰는데, 항상 어두운 히어로 위라 inkStrong을 쓰면 대비가 깨진다.
+ * 글꼴·대문자·자간만 공유하고 색은 각자 정하도록 분리했다.
+ */
+export const brandType = style({
   fontFamily: vars.font.display,
   textTransform: 'uppercase',
   letterSpacing: '0.01em',
-  color: vars.color.inkStrong,
 })
+
+export const brand = style([brandType, { color: vars.color.inkStrong }])
