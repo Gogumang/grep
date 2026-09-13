@@ -1,5 +1,5 @@
-import { type SearchHit, searchPosts } from './pagefind'
 import * as styles from './SearchModal.css'
+import type { SearchResult, SearchSource } from './searchSources'
 
 /** 타자를 칠 때마다 색인을 훑지 않도록 잠깐 기다린다. */
 const TYPING_PAUSE_MILLISECONDS = 200
@@ -10,10 +10,12 @@ const MAX_RESULTS = 8
  *
  * 헤더에 React를 쓰던 시절에는 글 상세 페이지에서 테마 토글과 검색 버튼 때문에
  * React 런타임 194KB가 통째로 내려갔다. 읽기만 하는 페이지에 그건 과했다.
+ *
+ * 무엇을 찾는지는 source가 정한다 — 글(Pagefind 색인)이나 채용 공고(/jobs.json).
  */
-export function createSearchModal() {
+export function createSearchModal(source: SearchSource) {
   let overlay: HTMLDivElement | null = null
-  let hits: SearchHit[] = []
+  let hits: SearchResult[] = []
   let selected = 0
   let timer: ReturnType<typeof setTimeout> | undefined
   let requestId = 0
@@ -45,17 +47,18 @@ export function createSearchModal() {
       title.textContent = hit.title
       link.append(title)
 
-      const meta = [hit.blogName, hit.publishedAt.slice(0, 10)].filter(Boolean).join(' · ')
-      if (meta) {
+      if (hit.meta) {
         const metaNode = el('p', styles.itemMeta)
-        metaNode.textContent = meta
+        metaNode.textContent = hit.meta
         link.append(metaNode)
       }
 
       // 발췌의 <mark>는 Pagefind가 이스케이프한 본문에 붙인 강조뿐이다.
-      const excerpt = el('p', styles.excerpt)
-      excerpt.innerHTML = hit.excerpt
-      link.append(excerpt)
+      if (hit.excerptHtml) {
+        const excerpt = el('p', styles.excerpt)
+        excerpt.innerHTML = hit.excerptHtml
+        link.append(excerpt)
+      }
 
       container.append(link)
     })
@@ -74,7 +77,7 @@ export function createSearchModal() {
     overlay = el('div', styles.overlay)
     overlay.setAttribute('role', 'dialog')
     overlay.setAttribute('aria-modal', 'true')
-    overlay.setAttribute('aria-label', '글 검색')
+    overlay.setAttribute('aria-label', source.dialogLabel)
     overlay.addEventListener('mousedown', (event) => {
       if (event.target === overlay) close()
     })
@@ -83,7 +86,7 @@ export function createSearchModal() {
     const inputRow = el('div', styles.inputRow)
     const input = el('input', styles.input)
     input.type = 'search'
-    input.placeholder = '제목과 본문에서 찾기'
+    input.placeholder = source.placeholder
     input.setAttribute('aria-label', '검색어')
 
     /*
@@ -98,7 +101,7 @@ export function createSearchModal() {
     closeButton.addEventListener('click', close)
 
     const results = el('div', styles.results)
-    renderResults(results, '두 글자 이상 입력하면 찾기 시작합니다.')
+    renderResults(results, source.hintMessage)
 
     input.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') return close()
@@ -119,25 +122,23 @@ export function createSearchModal() {
     input.addEventListener('input', () => {
       const query = input.value.trim()
       clearTimeout(timer)
-      if (query.length < 2) {
+      if (query.length < source.minimumQueryLength) {
         hits = []
-        return renderResults(results, '두 글자 이상 입력하면 찾기 시작합니다.')
+        return renderResults(results, source.hintMessage)
       }
 
       renderResults(results, '찾는 중…')
       const current = ++requestId
       timer = setTimeout(async () => {
         try {
-          const found = await searchPosts(query, MAX_RESULTS)
+          const found = await source.search(query, MAX_RESULTS)
           // 타자를 계속 치면 앞선 요청 결과는 버린다.
           if (current !== requestId || !overlay) return
 
-          if (found === null) {
-            return renderResults(results, '검색 색인이 없습니다. `bun run build`를 한 번 돌리면 만들어집니다.')
-          }
+          if (found === null) return renderResults(results, source.unavailableMessage)
           hits = found
           selected = 0
-          renderResults(results, found.length === 0 ? `“${query}”에 맞는 글이 없습니다.` : undefined)
+          renderResults(results, found.length === 0 ? source.noMatchMessage(query) : undefined)
         } catch {
           /*
             색인 조각을 내려받다 끊기는 경우가 있다. 여기서 받지 않으면 거절된 약속이

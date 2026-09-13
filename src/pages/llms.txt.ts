@@ -18,6 +18,8 @@ export const GET: APIRoute = async ({ site }) => {
     `> 현재 ${blogNames.length}곳의 블로그에서 글 ${posts.length}건을 모았습니다.`,
     '',
     `- [기술 아티클](${new URL('/explore/', site).href})`,
+    `- [채용](${new URL('/jobs/', site).href}) — 기술 블로그를 운영하는 회사들의 개발 직군 공고. 지원은 각 회사 채용 페이지에서 합니다.`,
+    `- [이벤트](${new URL('/events/', site).href}) — 개발자 컨퍼런스·밋업 일정. 공식 페이지에서 확인한 것만 싣습니다.`,
     '',
     '## 알아둘 것',
     '',

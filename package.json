@@ -10,6 +10,8 @@
     "dev": "astro dev --port 3000",
     "images": "node scripts/fetchImages.mjs",
     "icons": "node scripts/makeIcons.mjs",
+    "jobs": "bun scripts/fetchJobs.ts",
+    "test": "bun test",
     "build": "astro build",
     "preview": "astro preview --port 3000",
     "typecheck": "astro check",
@@ -32,12 +34,16 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@biomejs/biome": "^2.5.12",
+    "@types/bun": "^1.4.2",
     "@types/node": "^22.20.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@types/turndown": "5.0.6",
     "@vanilla-extract/vite-plugin": "^5.2.6",
     "knip": "^6.34.0",
+    "node-html-parser": "9.0.4",
     "sharp": "^0.35.4",
+    "turndown": "7.2.4",
     "typescript": "5.9.3"
   },
   "trustedDependencies": [

@@ -1,11 +1,17 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/pages/**/*.{astro,ts}", "src/components/search/searchModal.ts"],
-  "project": ["src/**/*.{ts,tsx,astro}"],
+  "entry": [
+    "src/pages/**/*.{astro,ts}",
+    "src/components/search/searchModal.ts",
+    "src/components/search/searchSources.ts",
+    "{src,scripts}/**/*.test.ts"
+  ],
+  "project": ["src/**/*.{ts,tsx,astro}", "scripts/**/*.ts"],
   "ignore": [
     "src/styles/home.css.ts",
     "src/styles/post.css.ts",
     "src/styles/notFound.css.ts",
+    "src/styles/events.css.ts",
     "src/components/search/SearchModal.css.ts",
     "src/components/header/SiteHeader.css.ts",
     "src/components/header/Wordmark.css.ts"

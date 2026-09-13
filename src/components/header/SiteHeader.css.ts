@@ -21,6 +21,30 @@ export const inner = style({
 export const spacer = style({ flex: 1 })
 
 /**
+ * 섹션 메뉴. 워드마크 바로 옆에 둔다 — 오른쪽의 검색·테마와 섞이면 도구와 길이 구분되지 않는다.
+ * 폰 폭(390px)에서도 한 줄에 들어가도록 이름을 두세 글자로 줄였다('기술 아티클' → '아티클').
+ */
+export const nav = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.space.md,
+  '@media': {
+    '(max-width: 480px)': { gap: vars.space.sm },
+  },
+})
+
+export const navLink = style({
+  fontSize: vars.fontSize.md,
+  fontWeight: vars.fontWeight.medium,
+  color: vars.color.inkMuted,
+  whiteSpace: 'nowrap',
+  selectors: {
+    '&:hover': { color: vars.color.ink },
+    '&[aria-current="page"]': { color: vars.color.inkStrong, fontWeight: vars.fontWeight.bold },
+  },
+})
+
+/**
  * 검색 자리. 돋보기 하나만 세운다.
  *
  * 알약 배경도, "/를 눌러 검색하세요"라는 안내문도 걷어냈다. 배경은 헤더에 셋뿐인 자리

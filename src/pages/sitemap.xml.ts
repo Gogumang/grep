@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
 import { loadPosts } from '@/service/content'
+import { loadJobs } from '@/service/jobs'
 
 /**
  * @astrojs/sitemap을 쓰지 않고 직접 만든다 — 그 통합은 파일 이름을
@@ -11,13 +12,16 @@ import { loadPosts } from '@/service/content'
  * 어느 페이지를 다시 읽어야 하는지 구분하지 못한다.
  */
 export const GET: APIRoute = async ({ site }) => {
-  const posts = await loadPosts()
+  const [posts, jobs] = await Promise.all([loadPosts(), loadJobs()])
 
   // loadPosts는 최신 글이 앞이다. 홈은 새 글이 실릴 때마다 바뀌므로
   // 가장 최근 글의 발행 시각을 홈의 lastmod로 쓴다.
+  // 이벤트는 표를 고친 시각을 알 길이 없어 lastmod를 비운다.
   const entries = [
     { path: '/', lastmod: posts[0]?.publishedAt },
     { path: '/explore/', lastmod: posts[0]?.publishedAt },
+    { path: '/jobs/', lastmod: jobs.updatedAt ?? undefined },
+    { path: '/events/', lastmod: undefined },
     ...posts.map((post) => ({ path: `/posts/${post.id}/`, lastmod: post.publishedAt })),
   ]
 

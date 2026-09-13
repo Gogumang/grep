@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { JobExplorer } from '@/components/jobs/JobExplorer'
+import { loadJobs } from '@/service/jobs'
+import * as styles from '@/styles/home.css'
+
+const { updatedAt, jobs } = await loadJobs()
+---
+
+<BaseLayout
+  title="채용 — grep"
+  description="기술 블로그를 운영하는 회사들의 개발 직군 채용 공고를 한곳에 모았습니다."
+  searchScope="jobs"
+>
+  <main class={styles.container}>
+    {/* 회사 필터·페이지 이동이 있어서 붙는다. 초기 HTML은 빌드 때 구워진다. */}
+    <JobExplorer jobs={jobs} updatedAt={updatedAt} client:load />
+  </main>
+</BaseLayout>

@@ -59,6 +59,20 @@
 추가하려면 [`src/posts/config/feeds.md`](src/posts/config/feeds.md)의 표에
 한 줄만 더하면 됩니다. 다음 수집부터 반영됩니다.
 
+## 채용 · 이벤트
+
+**채용**(`/jobs`) — 카카오·네이버·우아한형제들·토스·당근·쿠팡의 **개발 직군** 공고를 모읍니다.
+공고를 열면 본문이 그 자리에서 읽히고, 지원은 **원문에서 지원하기** 링크로 각 회사 채용 페이지에서 합니다.
+글과 마찬가지로 공고 페이지의 `canonical`은 원문 공고를 가리킵니다. 마감이 지난 공고는 보이지 않습니다.
+GitHub Actions가 매일 한국 시간 06시에 수집하고, 바뀐 게 있으면 커밋해 배포합니다.
+직접 돌리려면 `bun run jobs`. 회사를 더하거나 멈추려면
+[`src/jobs/config/companies.md`](src/jobs/config/companies.md)의 표를 고칩니다.
+
+**이벤트**(`/events`) — 개발자 컨퍼런스·밋업 일정입니다.
+[`src/events/config/events.md`](src/events/config/events.md)의 표에 한 줄 더하면 다음 배포부터 보이고,
+끝난 행사는 알아서 빠집니다. 행사 공식 페이지에서 확인한 것만 적습니다 —
+다른 행사 모음(Dev-Event 등)은 사용 정책상 옮겨 올 수 없습니다.
+
 맨 위에 올릴 글을 직접 고르고 싶다면
 [`src/posts/config/picks.md`](src/posts/config/picks.md)에 원문 주소를 적으면
 그 순서대로 올라갑니다. 비워두면 자동 선정이 대신합니다.

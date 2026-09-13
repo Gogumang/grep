@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { PostBody } from '@/components/post/PostBody'
+import { loadJobBody, loadJobs } from '@/service/jobs'
+import { formatArticleDate } from '@/shared'
+import * as badge from '@/shared/styles/badge.css'
+import * as styles from '@/styles/post.css'
+
+/**
+ * 공고도 글처럼 빌드 때 구워둔다. 빌드 시점에 마감이 지난 공고는 목록에서 빠지므로
+ * 페이지도 만들어지지 않는다(다음 배포부터 404).
+ */
+export async function getStaticPaths() {
+  const { jobs } = await loadJobs()
+  return jobs.map((job) => ({ params: { jobId: job.id }, props: { job } }))
+}
+
+const { job } = Astro.props
+const body = await loadJobBody(job.id)
+const summary = [job.company, job.jobGroup, job.career].filter(Boolean).join(' · ')
+---
+
+{/*
+  canonical은 원문 공고다 — 글과 같은 판단이다. 옮겨 실은 쪽이 원문 공고를 검색에서 밀어내면 안 된다.
+  구조화 데이터(JobPosting)는 싣지 않는다. 같은 공고가 두 곳에 JobPosting으로 걸리면 중복 공고로 취급된다.
+*/}
+<BaseLayout
+  title={`${job.title} — ${job.company} 채용 — grep`}
+  description={`${summary} 채용 공고`}
+  canonical={job.url}
+  searchScope="jobs"
+>
+  <main class={styles.container}>
+    {job.jobGroup && (
+      <p class={styles.meta}>
+        <span class={badge.category}>{job.jobGroup}</span>
+      </p>
+    )}
+
+    <h1 class={styles.title}>{job.title}</h1>
+
+    <p class={styles.byline}>
+      <span>{job.company}</span>
+      {job.career && (
+        <>
+          <span class={styles.bylineDot} aria-hidden="true">·</span>
+          <span>{job.career}</span>
+        </>
+      )}
+    </p>
+
+    <p class={styles.publishedAt} data-job-deadline={job.deadline ?? ''}>
+      {job.deadline ? `${formatArticleDate(job.deadline)} 마감` : '상시 채용'}
+    </p>
+
+    <div data-job-closed hidden>
+      <p class={styles.missingBody}>마감 시각이 지난 공고입니다. 원문에서 최신 상태를 확인해주세요.</p>
+    </div>
+
+    <a href={job.url} target="_blank" rel="noopener noreferrer" class={styles.sourceLink}>
+      원문에서 지원하기 ↗
+    </a>
+
+    {body ? (
+      <div class={styles.body}>
+        <PostBody body={body} />
+      </div>
+    ) : (
+      <p class={styles.missingBody}>이 공고는 본문을 가져오지 못했습니다. 원문에서 확인해주세요.</p>
+    )}
+
+    {/* 긴 공고를 끝까지 읽은 사람이 다시 위로 올라가지 않게 아래에도 둔다. */}
+    {body && (
+      <a href={job.url} target="_blank" rel="noopener noreferrer" class={styles.sourceLink}>
+        원문에서 지원하기 ↗
+      </a>
+    )}
+  </main>
+</BaseLayout>
+
+<script>
+  // 빌드 뒤에 마감이 지난 공고. 다음 배포 전까지 페이지가 남아 있어 알리기만 한다.
+  const deadline = document.querySelector<HTMLElement>('[data-job-deadline]')?.dataset.jobDeadline
+  if (deadline && new Date(deadline).getTime() <= Date.now()) {
+    const notice = document.querySelector<HTMLElement>('[data-job-closed]')
+    if (notice) notice.hidden = false
+  }
+</script>

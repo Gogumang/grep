@@ -12,6 +12,11 @@ interface Props {
   ogImage?: string
   /** schema.org 구조화 데이터. 검색·AI가 글의 출처·작성자·발행일을 읽는 경로다. */
   structuredData?: Record<string, unknown>
+  /**
+   * 헤더 돋보기(⌘K·'/')가 여는 검색 모달이 무엇을 찾는지. 모달은 같고 찾는 대상만 바뀐다 —
+   * 채용 페이지에서 돋보기를 눌러 아티클이 뜨면 엉뚱하다.
+   */
+  searchScope?: 'posts' | 'jobs'
 }
 
 const {
@@ -21,7 +26,10 @@ const {
   canonical,
   ogImage,
   structuredData,
+  searchScope = 'posts',
 } = Astro.props
+
+const SEARCH_BUTTON_LABELS = { posts: '글 검색 열기', jobs: '채용 공고 검색 열기' }
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href
 const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
@@ -33,6 +41,16 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
  */
 const GA_MEASUREMENT_ID = 'G-CWJ9Q7MFJN'
 const isAnalyticsEnabled = import.meta.env.PROD
+
+/**
+ * 헤더 메뉴. 홈(별 화면)은 워드마크가 대신한다.
+ * 글 페이지(/posts)는 아티클 목록에서 들어오므로 아티클을 현재 위치로 표시한다.
+ */
+const NAVIGATION = [
+  { href: '/explore', label: '아티클', currentPaths: ['/explore', '/posts'] },
+  { href: '/jobs', label: '채용', currentPaths: ['/jobs'] },
+  { href: '/events', label: '이벤트', currentPaths: ['/events'] },
+]
 ---
 
 <!doctype html>
@@ -144,8 +162,19 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
             <span class={wordmark.text}><span class={wordmark.brand}>grep</span></span>
           </span>
         </a>
+        <nav class={header.nav} aria-label="메인 메뉴">
+          {NAVIGATION.map((item) => (
+            <a
+              class={header.navLink}
+              href={item.href}
+              aria-current={item.currentPaths.some((currentPath) => Astro.url.pathname.startsWith(currentPath)) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
         <span class={header.spacer} />
-        <button type="button" class={header.searchField} data-search-open aria-label="글 검색 열기">
+        <button type="button" class={header.searchField} data-search-open data-search-scope={searchScope} aria-label={SEARCH_BUTTON_LABELS[searchScope]}>
           <span class={header.searchIcon} aria-hidden="true">🔍</span>
         </button>
         <button
@@ -160,6 +189,7 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
 
     <script>
       import { createSearchModal } from '@/components/search/searchModal'
+      import { jobSearchSource, postSearchSource } from '@/components/search/searchSources'
 
       const root = document.documentElement
 
@@ -172,12 +202,14 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
 
       // 검색 모듈은 처음 열 때만 받는다 — 읽기만 하는 방문자는 내려받지 않는다.
       let modal: ReturnType<typeof createSearchModal> | null = null
+      const searchButton = document.querySelector<HTMLElement>('[data-search-open]')
       function openSearch() {
-        modal ??= createSearchModal()
+        // 찾는 대상은 페이지가 정한다(BaseLayout의 searchScope). 채용 페이지는 공고를 찾는다.
+        modal ??= createSearchModal(searchButton?.dataset.searchScope === 'jobs' ? jobSearchSource : postSearchSource)
         modal.open()
       }
 
-      document.querySelector('[data-search-open]')?.addEventListener('click', openSearch)
+      searchButton?.addEventListener('click', openSearch)
 
       /*
         '/'와 ⌘K 둘 다 받는다. 헤더에서 안내문을 걷어낸 뒤로는 어디에도 적혀 있지 않지만,
@@ -188,7 +220,7 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
         target instanceof HTMLElement &&
         (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
 
-      addEventListener('keydown', (event) => {
+      window.addEventListener('keydown', (event) => {
         const isCommandK = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k'
         const isSlash = event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey
         if (!isCommandK && !(isSlash && !isTyping(event.target))) return

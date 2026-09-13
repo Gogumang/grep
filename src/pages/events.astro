@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { loadEvents } from '@/service/events'
+import { formatEventDay, formatEventPeriod, groupEventsByMonth } from '@/shared/utils/eventDates'
+import * as layout from '@/styles/home.css'
+import * as styles from '@/styles/events.css'
+
+const months = groupEventsByMonth(await loadEvents())
+---
+
+<BaseLayout title="이벤트 — grep" description="개발자 컨퍼런스와 밋업 일정을 모았습니다.">
+  <main class={layout.container}>
+    <header class={styles.intro}>
+      <h1 class={styles.heading}>이벤트</h1>
+      <p class={styles.lead}>개발자 컨퍼런스와 밋업 일정입니다. 신청은 각 행사 페이지에서 합니다.</p>
+    </header>
+
+    <p class={styles.empty} data-events-empty hidden={months.length > 0}>예정된 행사가 없습니다.</p>
+
+    {months.map((month) => (
+      <section class={styles.month} data-event-month>
+        <h2 class={styles.monthHeading}>{month.label}</h2>
+        <ul class={styles.list}>
+          {month.events.map((event) => (
+            <li data-event-end={event.endDate}>
+              <a class={styles.item} href={event.url} target="_blank" rel="noopener noreferrer">
+                <span class={styles.period}>{formatEventPeriod(event)}</span>
+                <span class={styles.body}>
+                  <span class={styles.title}>{event.title}</span>
+                  <span class={styles.meta}>{[event.host, event.place, event.price].filter(Boolean).join(' · ')}</span>
+                  {event.registrationDeadline && (
+                    <span class={styles.deadline}>신청 마감 {formatEventDay(event.registrationDeadline)}</span>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<script>
+  import { toSeoulDate } from '@/shared/utils/eventDates'
+
+  // 빌드 뒤에 끝난 행사를 숨긴다. 표가 안 바뀌면 다음 배포가 없어서 지난 행사가 남는다.
+  const today = toSeoulDate(new Date())
+  for (const item of document.querySelectorAll<HTMLElement>('[data-event-end]')) {
+    if ((item.dataset.eventEnd ?? '') < today) item.hidden = true
+  }
+  for (const month of document.querySelectorAll<HTMLElement>('[data-event-month]')) {
+    month.hidden = month.querySelector('[data-event-end]:not([hidden])') === null
+  }
+  const empty = document.querySelector<HTMLElement>('[data-events-empty]')
+  if (empty) empty.hidden = document.querySelector('[data-event-end]:not([hidden])') !== null
+</script>
