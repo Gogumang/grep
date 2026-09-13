@@ -59,7 +59,9 @@ import character from '../../../public/images/particle-shapes/hello-world-charac
         playing ? cue.play() : cue.pause()
       }
       reduced.addEventListener('change', onMotionChange)
-      window.addEventListener('pagehide', () => { cue.dispose(); reduced.removeEventListener('change', onMotionChange) }, { once: true })
+      // pagehide에서 dispose하지 않는다. 모바일 브라우저는 앱 전환·뒤로 가기 때 pagehide를 쏘고
+      // 같은 페이지를 bfcache에서 스크립트 재실행 없이 되살리므로, 여기서 치우면 캔버스가 사라진 채로 돌아온다.
+      // 숨김 동안의 정지는 라이브러리가 visibilitychange로 이미 한다.
     } catch (error) {
       cue?.dispose()
       field.dataset.starState = 'failed'
