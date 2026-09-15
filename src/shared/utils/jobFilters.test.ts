@@ -5,12 +5,14 @@ import { buildCompanyFacets, filterJobsByQuery, selectOpenJobs } from './jobFilt
 function job(overrides: Partial<Job>): Job {
   return {
     id: 'id',
-    group: '카카오',
+    companyKey: 'kakao',
     company: '카카오',
     title: '서버 개발자',
     url: 'https://example.com',
     jobGroup: null,
     career: null,
+    location: null,
+    employmentType: null,
     deadline: null,
     postedAt: null,
     ...overrides,
@@ -37,13 +39,19 @@ describe('selectOpenJobs', () => {
 
 describe('filterJobsByQuery', () => {
   const jobs = [
-    job({ id: 'toss-backend', company: '토스뱅크', group: '토스', title: 'Server Developer', jobGroup: 'Backend' }),
-    job({ id: 'toss-ios', company: '토스', group: '토스', title: 'iOS Developer', jobGroup: 'App' }),
-    job({ id: 'kakao-backend', company: '카카오', group: '카카오', title: '백엔드 개발자', career: '경력' }),
+    job({
+      id: 'toss-backend',
+      company: '토스뱅크',
+      companyKey: 'toss',
+      title: 'Server Developer',
+      jobGroup: 'Backend',
+    }),
+    job({ id: 'toss-ios', company: '토스', companyKey: 'toss', title: 'iOS Developer', jobGroup: 'App' }),
+    job({ id: 'kakao-backend', company: '카카오', companyKey: 'kakao', title: '백엔드 개발자', career: '경력' }),
   ]
 
   test('낱말이 모두 들어 있어야 맞고, 회사·직군까지 함께 찾는다', () => {
-    // Arrange — '토스'는 회사(계열사면 group)에서, 'backend'는 직군에서 찾는다
+    // Arrange — '토스'는 회사 이름(토스뱅크)에서, 'backend'는 직군에서 찾는다
     const query = '토스 backend'
 
     // Act

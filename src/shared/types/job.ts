@@ -1,12 +1,14 @@
 /**
- * 채용 공고 하나. 본문은 싣지 않는다 — 제목과 원문 주소만 두고 지원은 원문에서 한다.
- * scripts/fetchJobs.ts가 만들어 src/jobs/jobs.json에 쓴다.
+ * 채용 공고 하나. collector(grep-airflow)가 사람이 어드민에서 검토해 올린 공고만 src/jobs/jobs.json 에 쓴다.
+ * 공고 본문은 src/jobs/body/{id}.md 에 따로 있다(목록 화면이 본문을 읽지 않게).
+ *
+ * 필드 이름은 collector 의 JobSiteJsonWriter 와의 계약이다 — 한쪽을 바꾸면 다른 쪽도 함께 고친다.
  */
 export interface Job {
-  /** 원문 주소의 해시. React key다. */
+  /** 원문 주소의 해시(12자). 공고 페이지 주소(/jobs/{id})이자 React key다. */
   id: string
-  /** src/jobs/config/companies.md의 '회사 이름'. 한 소스에서 온 공고를 묶는 이름이다. */
-  group: string
+  /** 수집 대상 회사(collector job_source.company_key). 계열사 공고도 모회사 키로 묶인다. */
+  companyKey: string
   /** 공고를 낸 회사. 계열사 공고면 계열사 이름이다(예: 카카오페이). */
   company: string
   title: string
@@ -15,6 +17,9 @@ export interface Job {
   jobGroup: string | null
   /** 신입·경력 구분. 원문이 밝히지 않으면 null. */
   career: string | null
+  location: string | null
+  /** 정규직·계약직·인턴 등. */
+  employmentType: string | null
   /** 지원 마감 시각(ISO-8601). 상시 채용이면 null. */
   deadline: string | null
   /** 게시 시각(ISO-8601). 원문이 주지 않으면 null. */
@@ -22,7 +27,7 @@ export interface Job {
 }
 
 export interface JobsSnapshot {
-  /** 공고 목록이 마지막으로 바뀐 시각. 수집만 하고 바뀐 게 없으면 그대로 둔다 — 매일 빈 커밋이 쌓이지 않게. */
+  /** collector 가 목록을 마지막으로 반영한 시각. 아직 한 번도 올린 공고가 없으면 null. */
   updatedAt: string | null
   jobs: Job[]
 }

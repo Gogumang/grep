@@ -61,12 +61,12 @@
 
 ## 채용 · 이벤트
 
-**채용**(`/jobs`) — 카카오·네이버·우아한형제들·토스·당근·쿠팡의 **개발 직군** 공고를 모읍니다.
+**채용**(`/jobs`) — 기술블로그를 운영하는 회사들의 **개발 직군** 공고를 모읍니다. 사람이 한 건씩 보고 올린 공고만 실립니다.
 공고를 열면 본문이 그 자리에서 읽히고, 지원은 **원문에서 지원하기** 링크로 각 회사 채용 페이지에서 합니다.
 글과 마찬가지로 공고 페이지의 `canonical`은 원문 공고를 가리킵니다. 마감이 지난 공고는 보이지 않습니다.
-GitHub Actions가 매일 한국 시간 06시에 수집하고, 바뀐 게 있으면 커밋해 배포합니다.
-직접 돌리려면 `bun run jobs`. 회사를 더하거나 멈추려면
-[`src/jobs/config/companies.md`](src/jobs/config/companies.md)의 표를 고칩니다.
+수집은 collector(grep-airflow)가 매일 하고, 어드민의 채용 검증 화면에서 공개한 공고를 collector가
+[`src/jobs/jobs.json`](src/jobs/jobs.json)과 `src/jobs/body/`에 커밋합니다 — 이 저장소에서는 공고 파일을 손으로 만지지 않습니다.
+원문에서 마감된 공고는 collector가 다음 수집 때 사이트에서 내립니다.
 
 **이벤트**(`/events`) — 개발자 컨퍼런스·밋업 일정입니다.
 [`src/events/config/events.md`](src/events/config/events.md)의 표에 한 줄 더하면 다음 배포부터 보이고,

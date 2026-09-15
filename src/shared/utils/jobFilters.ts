@@ -13,14 +13,14 @@ export function selectOpenJobs(jobs: Job[], now: Date = new Date()): Job[] {
 
 /**
  * 공백으로 나눈 낱말이 모두 들어 있는 공고만 남긴다 — '토스 백엔드'가 토스의 백엔드 공고만 남기게.
- * 공고 본문은 없으니 제목·회사·직군·경력에서 찾는다. 대소문자는 가리지 않는다('ios'로 iOS를 찾는다).
+ * 목록에는 본문이 없으니 제목·회사·직군·경력·근무지에서 찾는다. 대소문자는 가리지 않는다('ios'로 iOS를 찾는다).
  */
 export function filterJobsByQuery(jobs: Job[], query: string): Job[] {
   const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
   if (terms.length === 0) return jobs
 
   return jobs.filter((job) => {
-    const searchable = [job.title, job.company, job.group, job.jobGroup, job.career]
+    const searchable = [job.title, job.company, job.companyKey, job.jobGroup, job.career, job.location]
       .filter(Boolean)
       .join(' ')
       .toLowerCase()

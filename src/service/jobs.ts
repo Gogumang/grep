@@ -3,13 +3,14 @@ import path from 'node:path'
 import type { JobsSnapshot } from '../shared/types'
 import { selectOpenJobs } from '../shared/utils/jobFilters'
 
-/** scripts/fetchJobs.ts가 쓰는 자리다. 옮기면 그쪽과 GitHub Actions 워크플로도 함께 고친다. */
+/** collector(grep-airflow)가 공고를 올릴 때 커밋하는 자리다. 옮기면 그쪽 GitHubProperties.jobsPath·jobBodiesPath 도 함께 고친다. */
 const JOBS_ROOT = path.join(process.cwd(), 'src', 'jobs')
 const JOBS_FILE = path.join(JOBS_ROOT, 'jobs.json')
 /** 공고 본문. 목록(jobs.json)과 갈라 둔 것은 글과 같은 이유다 — 목록 화면은 본문을 읽지 않는다. */
 const BODY_DIRECTORY = path.join(JOBS_ROOT, 'body')
 
-const JOB_ID = /^[0-9a-f]{10}$/
+/** collector JobIdFactory 가 만드는 모양(원문 주소 SHA-256 앞 12자). */
+const JOB_ID = /^[0-9a-f]{12}$/
 
 /** 빌드 시점에 마감이 지난 공고는 뺀다. 빌드 뒤에 지나는 마감은 화면(JobExplorer)이 한 번 더 거른다. */
 export async function loadJobs(now: Date = new Date()): Promise<JobsSnapshot> {

@@ -5,12 +5,14 @@ import { searchJobs } from './jobSearch'
 function job(overrides: Partial<Job>): Job {
   return {
     id: 'id',
-    group: '토스',
+    companyKey: 'toss',
     company: '토스',
     title: 'Server Developer',
     url: 'https://toss.im/career/job-detail?gh_jid=1',
     jobGroup: 'Backend',
     career: null,
+    location: null,
+    employmentType: null,
     deadline: null,
     postedAt: null,
     ...overrides,
