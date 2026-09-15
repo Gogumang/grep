@@ -4,7 +4,15 @@ import * as explorer from '@/components/post/PostExplorer.css'
 import { PAGE_SIZE } from '@/components/post/paging'
 import { FacetPanel } from '@/components/sidebar/FacetPanel'
 import * as sidebar from '@/components/sidebar/Sidebar.css'
-import { buildCompanyFacets, formatPostDate, type Job, selectOpenJobs } from '@/shared'
+import {
+  buildCompanyFacets,
+  type CompanyFilter,
+  EMPTY_COMPANY_FILTER,
+  filterJobsByCompany,
+  formatPostDate,
+  type Job,
+  selectOpenJobs,
+} from '@/shared'
 import { JobList } from './JobList'
 
 /** 글자 검색은 여기 없다 — 헤더 돋보기의 검색 모달이 채용 공고를 찾는다(searchSources의 jobSearchSource). */
@@ -19,22 +27,31 @@ export function JobExplorer({ jobs, updatedAt }: { jobs: Job[]; updatedAt: strin
     setNow(new Date())
   }, [])
 
-  const [company, setCompany] = useState<string | null>(null)
+  const [filter, setFilter] = useState<CompanyFilter>(EMPTY_COMPANY_FILTER)
   const [currentPage, setCurrentPage] = useState(1)
 
   const openJobs = useMemo(() => (now ? selectOpenJobs(jobs, now) : jobs), [jobs, now])
   const companyFacets = useMemo(() => buildCompanyFacets(openJobs), [openJobs])
-  const matched = useMemo(
-    () => (company ? openJobs.filter((job) => job.company === company) : openJobs),
-    [openJobs, company],
-  )
+  const matched = useMemo(() => filterJobsByCompany(openJobs, filter), [openJobs, filter])
+
+  // 모회사가 하나뿐이면 회사 패널이 숨으므로 소분류는 그 회사 기준으로 바로 보인다.
+  const affiliateParent =
+    companyFacets.find((facet) => facet.companyKey === filter.companyKey) ??
+    (companyFacets.length === 1 ? companyFacets[0] : undefined)
 
   const pageCount = Math.max(1, Math.ceil(matched.length / PAGE_SIZE))
   const page = Math.min(currentPage, pageCount)
   const visibleJobs = matched.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  const isFiltered = filter.companyKey !== null || filter.company !== null
 
-  function selectCompany(nextCompany: string | null) {
-    setCompany(nextCompany)
+  /** 모회사를 바꾸면 계열사 선택은 풀린다 — 토스증권을 고른 채 카카오로 옮기면 결과가 비기 때문이다. */
+  function selectCompanyKey(companyKey: string | null) {
+    setFilter({ companyKey, company: null })
+    setCurrentPage(1)
+  }
+
+  function selectAffiliate(company: string | null) {
+    setFilter((previous) => ({ companyKey: affiliateParent?.companyKey ?? previous.companyKey, company }))
     setCurrentPage(1)
   }
 
@@ -54,8 +71,8 @@ export function JobExplorer({ jobs, updatedAt }: { jobs: Job[]; updatedAt: strin
           <span>
             개발 직군 {matched.length}건{updatedAt && ` · ${formatPostDate(updatedAt)} 갱신`}
           </span>
-          {company && (
-            <button type="button" className={explorer.clearButton} onClick={() => selectCompany(null)}>
+          {isFiltered && (
+            <button type="button" className={explorer.clearButton} onClick={() => selectCompanyKey(null)}>
               필터 지우기
             </button>
           )}
@@ -74,9 +91,28 @@ export function JobExplorer({ jobs, updatedAt }: { jobs: Job[]; updatedAt: strin
         {companyFacets.length > 1 && (
           <FacetPanel
             title="회사"
-            rows={companyFacets.map((facet) => ({ value: facet.company, label: facet.company, count: facet.count }))}
-            selected={company}
-            onSelect={selectCompany}
+            rows={companyFacets.map((facet) => ({
+              value: facet.companyKey,
+              label: facet.companyName,
+              count: facet.count,
+            }))}
+            selected={filter.companyKey}
+            onSelect={selectCompanyKey}
+            collapsible
+          />
+        )}
+
+        {/* 계열사가 모회사 하나뿐이면(쿠팡·당근) '전체 99 / 쿠팡 99'만 보여주는 고를 것 없는 필터가 된다. */}
+        {affiliateParent && affiliateParent.affiliates.length > 1 && (
+          <FacetPanel
+            title={`${affiliateParent.companyName} 계열사`}
+            rows={affiliateParent.affiliates.map((facet) => ({
+              value: facet.company,
+              label: facet.company,
+              count: facet.count,
+            }))}
+            selected={filter.company}
+            onSelect={selectAffiliate}
             collapsible
           />
         )}

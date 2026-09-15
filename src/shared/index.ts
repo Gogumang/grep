@@ -1,6 +1,12 @@
 export type { Job, Post } from './types'
 export { formatArticleDate, formatPostDate } from './utils/formatDate'
-export { buildCompanyFacets, selectOpenJobs } from './utils/jobFilters'
+export {
+  buildCompanyFacets,
+  type CompanyFilter,
+  EMPTY_COMPANY_FILTER,
+  filterJobsByCompany,
+  selectOpenJobs,
+} from './utils/jobFilters'
 export {
   type BlogFacet,
   buildBlogFacets,
