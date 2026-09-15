@@ -54,30 +54,6 @@ export const count = style({
   fontVariantNumeric: 'tabular-nums',
 })
 
-export const tagCloud = style({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: vars.space.sm,
-})
-
-export const tagChip = style({
-  border: `1px solid ${vars.color.border}`,
-  background: vars.color.surface,
-  color: vars.color.inkMuted,
-  borderRadius: vars.radius.full,
-  padding: `4px ${vars.space.md}`,
-  fontSize: vars.fontSize.xs,
-  selectors: {
-    '&:hover': { borderColor: vars.color.borderStrong, color: vars.color.ink },
-  },
-})
-
-export const tagChipSelected = style({
-  borderColor: vars.color.accent,
-  background: vars.color.accent,
-  color: vars.color.onAccent,
-})
-
 export const moreButton = style({
   border: 0,
   background: 'transparent',

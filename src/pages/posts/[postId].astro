@@ -31,7 +31,7 @@ const structuredData = {
   url: post.url,
   mainEntityOfPage: { '@type': 'WebPage', '@id': post.url },
   ...(post.author && { author: { '@type': 'Person', name: post.author } }),
-  ...(post.category && { articleSection: post.category }),
+  articleSection: post.category,
   image: post.wideImage,
   publisher: { '@type': 'Organization', name: post.blogName, url: post.blogHomepage },
 }
@@ -49,11 +49,9 @@ const structuredData = {
     <span hidden data-pagefind-meta={`blogName:${post.blogName}`}></span>
     <span hidden data-pagefind-meta={`publishedAt:${post.publishedAt}`}></span>
 
-    {post.category && (
-      <p class={styles.meta}>
-        <span class={badge.category}>{post.category}</span>
-      </p>
-    )}
+    <p class={styles.meta}>
+      <span class={badge.category}>{post.category}</span>
+    </p>
 
     <h1 class={styles.title}>{post.title}</h1>
 

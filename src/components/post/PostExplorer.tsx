@@ -1,15 +1,7 @@
 import { useMemo, useState } from 'react'
 import { PostList } from '@/components/post/PostList'
 import { Sidebar } from '@/components/sidebar/Sidebar'
-import {
-  buildBlogFacets,
-  buildCategoryFacets,
-  buildTagFacets,
-  EMPTY_FILTER,
-  filterPosts,
-  type Post,
-  type PostFilter,
-} from '@/shared'
+import { buildBlogFacets, buildCategoryFacets, EMPTY_FILTER, filterPosts, type Post, type PostFilter } from '@/shared'
 import { Pagination } from './Pagination'
 import * as styles from './PostExplorer.css'
 import { PAGE_SIZE } from './paging'
@@ -20,13 +12,12 @@ export function PostExplorer({ posts }: { posts: Post[] }) {
 
   const blogFacets = useMemo(() => buildBlogFacets(posts), [posts])
   const categoryFacets = useMemo(() => buildCategoryFacets(posts), [posts])
-  const tagFacets = useMemo(() => buildTagFacets(posts), [posts])
   const matched = useMemo(() => filterPosts(posts, filter), [posts, filter])
 
   const pageCount = Math.max(1, Math.ceil(matched.length / PAGE_SIZE))
   const page = Math.min(currentPage, pageCount)
   const visiblePosts = matched.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-  const isFiltered = filter.blogKey !== null || filter.tag !== null || filter.category !== null
+  const isFiltered = filter.blogKey !== null || filter.category !== null
 
   /** 필터가 바뀌면 1페이지부터 다시 본다 — 5페이지에 머문 채 결과가 바뀌면 혼란스럽다. */
   function updateFilter(changes: Partial<PostFilter>) {
@@ -66,13 +57,10 @@ export function PostExplorer({ posts }: { posts: Post[] }) {
       <Sidebar
         blogFacets={blogFacets}
         categoryFacets={categoryFacets}
-        tagFacets={tagFacets}
         selectedBlogKey={filter.blogKey}
         selectedCategory={filter.category}
-        selectedTag={filter.tag}
         onSelectBlog={(blogKey) => updateFilter({ blogKey })}
         onSelectCategory={(category) => updateFilter({ category })}
-        onSelectTag={(tag) => updateFilter({ tag })}
       />
     </div>
   )

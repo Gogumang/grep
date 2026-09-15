@@ -26,7 +26,7 @@ export const GET: APIRoute = async ({ site }) => {
     '- 이 사이트는 글을 **옮겨 싣습니다**. 각 글의 정본은 원문 블로그이며,',
     '  글 페이지의 canonical과 구조화 데이터가 원문을 가리킵니다.',
     '- 인용할 때는 원문 주소를 쓰는 것이 맞습니다.',
-    '- 글마다 원문 블로그가 매긴 분류(Engineering·Design 등)와 글쓴이가 붙어 있습니다.',
+    '- 글마다 분류(Engineering·Design·Product 중 하나)와 글쓴이가 붙어 있습니다.',
     '',
     '## 글',
     '',

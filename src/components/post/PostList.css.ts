@@ -79,7 +79,6 @@ export const tagRow = style({
   marginTop: vars.space.md,
 })
 
-// 사이드바의 tagChip과 같은 색을 쓴다 — 같은 태그가 자리에 따라 다른 무게로 보이면 안 된다.
 export const tag = style({
   fontSize: vars.fontSize.xs,
   color: vars.color.inkMuted,

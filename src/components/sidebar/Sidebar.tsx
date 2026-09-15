@@ -1,29 +1,23 @@
-import type { BlogFacet, CategoryFacet, TagFacet } from '@/shared'
+import type { BlogFacet, CategoryFacet } from '@/shared'
 import { FacetPanel } from './FacetPanel'
 import * as styles from './Sidebar.css'
 
 interface SidebarProps {
   blogFacets: BlogFacet[]
   categoryFacets: CategoryFacet[]
-  tagFacets: TagFacet[]
   selectedBlogKey: string | null
   selectedCategory: string | null
-  selectedTag: string | null
   onSelectBlog: (blogKey: string | null) => void
   onSelectCategory: (category: string | null) => void
-  onSelectTag: (tag: string | null) => void
 }
 
 export function Sidebar({
   blogFacets,
   categoryFacets,
-  tagFacets,
   selectedBlogKey,
   selectedCategory,
-  selectedTag,
   onSelectBlog,
   onSelectCategory,
-  onSelectTag,
 }: SidebarProps) {
   return (
     <aside className={styles.sidebar}>
@@ -45,24 +39,6 @@ export function Sidebar({
           onSelect={onSelectBlog}
           collapsible
         />
-      )}
-
-      {tagFacets.length > 0 && (
-        <section className={styles.panel}>
-          <h2 className={styles.panelTitle}>이번 주 키워드</h2>
-          <div className={styles.tagCloud}>
-            {tagFacets.map((facet) => (
-              <button
-                key={facet.tag}
-                type="button"
-                className={`${styles.tagChip} ${selectedTag === facet.tag ? styles.tagChipSelected : ''}`}
-                onClick={() => onSelectTag(selectedTag === facet.tag ? null : facet.tag)}
-              >
-                #{facet.tag}
-              </button>
-            ))}
-          </div>
-        </section>
       )}
     </aside>
   )

@@ -15,7 +15,7 @@ export function PostList({ posts }: { posts: Post[] }) {
             <a href={`/posts/${post.id}`} className={styles.item}>
               <div>
                 <div className={styles.meta}>
-                  {post.category && <span className={badge.category}>{post.category}</span>}
+                  <span className={badge.category}>{post.category}</span>
                   {post.author && <span className={badge.secondary}>{post.author}</span>}
                   <span className={badge.secondary}>{post.blogName}</span>
                 </div>

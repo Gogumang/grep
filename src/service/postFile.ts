@@ -1,4 +1,27 @@
-import type { Post } from '../shared/types'
+import type { Post, PostCategory } from '../shared/types'
+
+/**
+ * 원문 블로그가 쓰는 분류 이름 → 사이트 분류. 비교는 소문자로 한다.
+ * 지금 분류를 주는 블로그는 토스뿐이다(Engineering·Design·프로덕트).
+ */
+const CATEGORY_ALIASES: Record<string, PostCategory> = {
+  engineering: 'Engineering',
+  개발: 'Engineering',
+  design: 'Design',
+  디자인: 'Design',
+  product: 'Product',
+  프로덕트: 'Product',
+}
+
+/**
+ * 분류가 없거나 모르는 이름이면 Engineering으로 둔다 — 모으는 곳이 전부 기술 블로그라
+ * 분류를 따로 매기지 않는 블로그의 글은 사실상 개발 글이다.
+ */
+const DEFAULT_CATEGORY: PostCategory = 'Engineering'
+
+export function classifyCategory(sourceCategory: string): PostCategory {
+  return CATEGORY_ALIASES[sourceCategory.trim().toLowerCase()] ?? DEFAULT_CATEGORY
+}
 
 /**
  * 파일이 담고 있는 것만 만든다. cardImage·wideImage는 파일 이름의 id가 있어야
@@ -33,7 +56,7 @@ export function parsePostFile(fileContents: string): ParsedPostFile | null {
     summary: (body ?? '').trim(),
     sourceThumbnail: asString(fields.sourceThumbnail) || null,
     tags: Array.isArray(fields.tags) ? fields.tags : [],
-    category: asString(fields.category) || null,
+    category: classifyCategory(asString(fields.category)),
     author: asString(fields.author) || null,
     hidden: fields.hidden === 'true',
   }
