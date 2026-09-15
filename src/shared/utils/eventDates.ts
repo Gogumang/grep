@@ -9,11 +9,7 @@ const SEOUL_DATE = new Intl.DateTimeFormat('en-CA', {
 
 const WEEKDAYS = ['일', '월', '화', '수', '목', '금', '토']
 
-export interface EventMonth {
-  /** '2026년 10월' */
-  label: string
-  events: TechEvent[]
-}
+const WON = new Intl.NumberFormat('ko-KR')
 
 /**
  * 한국 날짜 YYYY-MM-DD. 빌드 서버(UTC)와 방문자 기기가 어느 시간대든 같은 날로 본다 —
@@ -23,45 +19,57 @@ export function toSeoulDate(now: Date): string {
   return SEOUL_DATE.format(now)
 }
 
-/** 끝난 행사를 빼고 시작일 순으로 늘어놓는다. 진행 중인 행사는 남긴다. */
+/** 끝난 행사를 빼고 시작 순으로 늘어놓는다. 진행 중인 행사는 남긴다. */
 export function selectUpcomingEvents(events: TechEvent[], now: Date = new Date()): TechEvent[] {
   const today = toSeoulDate(now)
   return events
     .filter((event) => event.endDate >= today)
-    .sort((left, right) => left.startDate.localeCompare(right.startDate) || left.title.localeCompare(right.title, 'ko'))
+    .sort(
+      (left, right) =>
+        left.startDate.localeCompare(right.startDate) ||
+        left.startTime.localeCompare(right.startTime) ||
+        left.title.localeCompare(right.title, 'ko'),
+    )
 }
 
-/** 시작일이 속한 달로 묶는다. 이미 시작일 순으로 정렬된 목록을 받는다. */
-export function groupEventsByMonth(events: TechEvent[]): EventMonth[] {
-  const months = new Map<string, TechEvent[]>()
-  for (const event of events) {
-    const key = event.startDate.slice(0, 7)
-    months.set(key, [...(months.get(key) ?? []), event])
-  }
-
-  return [...months.entries()].map(([key, monthEvents]) => {
-    const [year, month] = key.split('-')
-    return { label: `${year}년 ${Number(month)}월`, events: monthEvents }
-  })
-}
-
-/** '10월 13일(화) – 14일(수)'. 같은 달이면 끝나는 날의 달을 생략한다. */
-export function formatEventPeriod(event: TechEvent): string {
-  const start = describeDay(event.startDate, true)
+/** '11월 7일(토) 11:00', 여러 날이면 '10월 13일(화) 10:00 – 14일(수)'. 같은 달이면 끝나는 날의 달을 생략한다. */
+export function formatEventSchedule(event: TechEvent): string {
+  const start = `${describeDay(event.startDate, true)} ${event.startTime}`
   if (event.endDate === event.startDate) return start
 
   const isSameMonth = event.startDate.slice(0, 7) === event.endDate.slice(0, 7)
   return `${start} – ${describeDay(event.endDate, !isSameMonth)}`
 }
 
-/** '9월 28일(월)' */
-export function formatEventDay(date: string): string {
-  return describeDay(date, true)
+/**
+ * '무료' · '10,000원' · '10,000원 ~ 20,000원' · '무료 ~ 11,000원'.
+ * 원문에 가격이 없으면 null — 모르는 가격을 무료로 적지 않는다.
+ */
+export function formatEventPrice(event: TechEvent): string | null {
+  const { lowestPrice, highestPrice } = event
+  if (lowestPrice === null) return null
+
+  const lowest = describePrice(lowestPrice)
+  if (highestPrice === null || highestPrice <= lowestPrice) return lowest
+  return `${lowest} ~ ${describePrice(highestPrice)}`
+}
+
+/** 목록 오른쪽 날짜 카드에 크게 적는 시작일. 행사 포스터를 옮길 수 없어 이 카드가 썸네일 자리를 채운다. */
+export function describeEventCardDate(date: string): { month: string; day: string; weekday: string } {
+  const [year = 0, month = 1, day = 1] = date.split('-').map(Number)
+  return { month: `${month}월`, day: String(day), weekday: `${weekdayOf(year, month, day)}요일` }
+}
+
+function describePrice(price: number): string {
+  return price === 0 ? '무료' : `${WON.format(price)}원`
 }
 
 function describeDay(date: string, isMonthShown: boolean): string {
   const [year = 0, month = 1, day = 1] = date.split('-').map(Number)
-  // 날짜만 있는 값이라 UTC로 만들어야 기기 시간대에 따라 요일이 밀리지 않는다.
-  const weekday = WEEKDAYS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()]
-  return `${isMonthShown ? `${month}월 ` : ''}${day}일(${weekday})`
+  return `${isMonthShown ? `${month}월 ` : ''}${day}일(${weekdayOf(year, month, day)})`
+}
+
+// 날짜만 있는 값이라 UTC로 만들어야 기기 시간대에 따라 요일이 밀리지 않는다.
+function weekdayOf(year: number, month: number, day: number): string {
+  return WEEKDAYS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()] ?? ''
 }

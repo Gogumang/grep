@@ -2,54 +2,64 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import type { TechEvent } from '../shared/types'
 import { selectUpcomingEvents } from '../shared/utils/eventDates'
-import { parseMarkdownTableRows } from './markdownTable'
 
-const EVENTS_FILE = path.join(process.cwd(), 'src', 'events', 'config', 'events.md')
+/** collector(grep-airflow)가 커밋하는 자리다. 옮기면 그쪽 GitHubProperties.eventsPath·LocalContentProperties.eventsFile 도 함께 고친다. */
+const EVENTS_FILE = path.join(process.cwd(), 'src', 'events', 'events.json')
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
+const TIME_PATTERN = /^\d{2}:\d{2}$/
+const URL_PATTERN = /^https:\/\/\S+$/
 
 /**
- * 표가 틀리면 빌드를 멈춘다. 손으로 쓰는 파일이라 오타가 흔한데, 틀린 행을 조용히 빼면
- * 행사가 왜 안 보이는지 아무도 모른다.
+ * 모양이 틀리면 빌드를 멈춘다. collector 와의 계약이 어긋난 채 배포되면 행사가 조용히 빠지거나
+ * 'undefined일'이 찍힌다 — 그보다 빌드 실패가 낫다.
  */
-export function parseEventsTable(markdown: string): TechEvent[] {
-  return parseMarkdownTableRows(markdown).map((cells, index) => {
-    const [title = '', url = '', host = '', startDate = '', endDate = '', place = '', deadline = '', price = ''] = cells
-    const rowLabel = `events.md ${index + 1}번째 행(${title || '행사명 없음'})`
-
-    if (!title) throw new Error(`${rowLabel}: 행사명이 비어 있습니다`)
-    if (!/^https?:\/\/\S+$/.test(url)) {
-      throw new Error(`${rowLabel}: 주소는 http(s)로 시작해야 합니다 (예: https://if.kakao.com/2026), 입력값: ${url}`)
-    }
-    if (!host) throw new Error(`${rowLabel}: 주최가 비어 있습니다`)
-
-    const resolvedEndDate = endDate || startDate
-    requireDate(rowLabel, '시작일', startDate)
-    requireDate(rowLabel, '종료일', resolvedEndDate)
-    if (deadline) requireDate(rowLabel, '신청 마감', deadline)
-    if (resolvedEndDate < startDate) {
-      throw new Error(`${rowLabel}: 종료일(${resolvedEndDate})이 시작일(${startDate})보다 앞섭니다`)
-    }
-
-    return {
-      title,
-      url,
-      host,
-      startDate,
-      endDate: resolvedEndDate,
-      place: place || null,
-      registrationDeadline: deadline || null,
-      price: price || null,
-    }
-  })
+export function parseEventsFile(json: string): TechEvent[] {
+  const events = (JSON.parse(json) as { events?: unknown }).events
+  if (!Array.isArray(events)) {
+    throw new Error('events.json 에 events 배열이 없습니다 (예: {"source":"티켓타코","events":[]})')
+  }
+  return events.map((raw, index) => toEvent(raw, index))
 }
 
-function requireDate(rowLabel: string, label: string, value: string): void {
-  if (!DATE_PATTERN.test(value)) {
-    throw new Error(`${rowLabel}: ${label}은 YYYY-MM-DD 형식이어야 합니다 (예: 2026-10-13), 입력값: ${value}`)
+function toEvent(raw: unknown, index: number): TechEvent {
+  const value = (raw ?? {}) as Record<string, unknown>
+  const label = `events.json ${index + 1}번째 행사(${typeof value.title === 'string' ? value.title : '제목 없음'})`
+
+  const text = (field: string, pattern?: RegExp, example?: string): string => {
+    const found = value[field]
+    if (typeof found !== 'string' || found === '') throw new Error(`${label}: ${field} 값이 비어 있습니다`)
+    if (pattern && !pattern.test(found)) {
+      throw new Error(`${label}: ${field} 값은 ${example} 같은 형식이어야 합니다, 입력값: ${found}`)
+    }
+    return found
+  }
+  const nullableNumber = (field: string): number | null => {
+    const found = value[field]
+    if (found === null || found === undefined) return null
+    if (typeof found !== 'number')
+      throw new Error(`${label}: ${field} 값은 숫자(원)나 null 이어야 합니다, 입력값: ${String(found)}`)
+    return found
+  }
+  if (typeof value.isOnline !== 'boolean') {
+    throw new Error(`${label}: isOnline 값은 true 나 false 여야 합니다, 입력값: ${String(value.isOnline)}`)
+  }
+
+  return {
+    id: text('id'),
+    title: text('title'),
+    url: text('url', URL_PATTERN, 'https://ticketa.co/event/c9xsstcs'),
+    host: text('host'),
+    startDate: text('startDate', DATE_PATTERN, '2026-10-13'),
+    startTime: text('startTime', TIME_PATTERN, '19:00'),
+    endDate: text('endDate', DATE_PATTERN, '2026-10-13'),
+    place: value.place === null || value.place === undefined ? null : text('place'),
+    isOnline: value.isOnline,
+    lowestPrice: nullableNumber('lowestPrice'),
+    highestPrice: nullableNumber('highestPrice'),
   }
 }
 
 export async function loadEvents(now: Date = new Date()): Promise<TechEvent[]> {
-  return selectUpcomingEvents(parseEventsTable(await readFile(EVENTS_FILE, 'utf8')), now)
+  return selectUpcomingEvents(parseEventsFile(await readFile(EVENTS_FILE, 'utf8')), now)
 }

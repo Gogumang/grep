@@ -1,6 +1,9 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '@/shared/styles/contract.css'
 
+/** 이 폭 아래에서는 날짜 카드를 작은 정사각형으로 줄인다. PostList와 같은 경계다. */
+const NARROW = '(max-width: 720px)'
+
 export const intro = style({
   paddingTop: vars.space.xxl,
   marginBottom: vars.space.xxl,
@@ -12,6 +15,12 @@ export const heading = style({
   fontSize: vars.fontSize.xxl,
   fontWeight: vars.fontWeight.bold,
   color: vars.color.inkSoft,
+})
+
+// toss.im/career/article 의 '토스 커리어 콘텐츠 356'처럼 제목 옆에 개수를 파란색으로 붙인다.
+export const count = style({
+  color: vars.color.accent,
+  fontVariantNumeric: 'tabular-nums',
 })
 
 export const lead = style({
@@ -29,65 +38,115 @@ export const empty = style({
   fontSize: vars.fontSize.sm,
 })
 
-export const month = style({
-  marginBottom: vars.space.xxl,
-})
-
-export const monthHeading = style({
-  margin: `0 0 ${vars.space.sm}`,
-  fontSize: vars.fontSize.md,
-  fontWeight: vars.fontWeight.semibold,
-  color: vars.color.inkFaint,
-})
-
+// 글 목록(PostList)과 같은 리듬 — 테두리 없이 넓은 여백으로만 항목을 나눈다.
 export const list = style({
   listStyle: 'none',
   margin: 0,
   padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: vars.space.xxxl,
 })
 
 export const item = style({
   display: 'grid',
-  // 날짜 칸 폭을 고정해 제목의 왼쪽 줄을 맞춘다. 달이 바뀌는 기간('10월 31일(토) – 11월 1일(일)')은 두 줄로 접힌다.
-  gridTemplateColumns: '150px 1fr',
-  gap: vars.space.lg,
-  padding: `${vars.space.lg} 0`,
-  borderBottom: `1px solid ${vars.color.border}`,
+  gridTemplateColumns: '1fr 228px',
+  gap: vars.space.xl,
+  alignItems: 'center',
   '@media': {
-    '(max-width: 720px)': { gridTemplateColumns: '1fr', gap: vars.space.xs },
+    [NARROW]: { gridTemplateColumns: '1fr 88px', gap: vars.space.md },
   },
 })
 
-export const period = style({
-  fontSize: vars.fontSize.sm,
-  fontWeight: vars.fontWeight.semibold,
-  color: vars.color.accent,
-  fontVariantNumeric: 'tabular-nums',
-})
-
 export const body = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: vars.space.xs,
   minWidth: 0,
 })
 
 export const title = style({
-  fontSize: vars.fontSize.lg,
+  margin: 0,
+  fontSize: vars.fontSize.xl,
   fontWeight: vars.fontWeight.bold,
   lineHeight: 1.45,
   color: vars.color.inkStrong,
   selectors: {
     'a:hover &': { color: vars.color.accent },
   },
+  '@media': {
+    [NARROW]: { fontSize: vars.fontSize.lg },
+  },
 })
 
-export const meta = style({
-  fontSize: vars.fontSize.sm,
+export const summary = style({
+  margin: `${vars.space.sm} 0 0`,
+  fontSize: vars.fontSize.lg,
+  lineHeight: 1.6,
   color: vars.color.inkMuted,
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  '@media': {
+    [NARROW]: { fontSize: vars.fontSize.md },
+  },
 })
 
-export const deadline = style({
+export const schedule = style({
+  margin: `${vars.space.md} 0 0`,
   fontSize: vars.fontSize.sm,
   color: vars.color.inkFaint,
+  fontVariantNumeric: 'tabular-nums',
+})
+
+/** 포스터 자리. 티켓타코 이미지를 옮길 수 없어(약관 제11조) 시작일을 크게 그린 카드로 채운다. */
+export const dateCard = style({
+  aspectRatio: '228 / 128',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: vars.radius.lg,
+  background: vars.color.accentSoft,
+  color: vars.color.accent,
+  lineHeight: 1.1,
+  fontVariantNumeric: 'tabular-nums',
+  selectors: {
+    'a:hover > &': { background: vars.color.accent, color: vars.color.onAccent },
+  },
+  '@media': {
+    [NARROW]: { aspectRatio: '1' },
+  },
+})
+
+export const dateCardMonth = style({
+  fontSize: vars.fontSize.md,
+  fontWeight: vars.fontWeight.semibold,
+  '@media': {
+    [NARROW]: { fontSize: vars.fontSize.xs },
+  },
+})
+
+export const dateCardDay = style({
+  fontSize: vars.fontSize.display,
+  fontWeight: vars.fontWeight.bold,
+  '@media': {
+    [NARROW]: { fontSize: vars.fontSize.xxl },
+  },
+})
+
+export const dateCardWeekday = style({
+  fontSize: vars.fontSize.sm,
+  '@media': {
+    [NARROW]: { fontSize: vars.fontSize.xs },
+  },
+})
+
+export const source = style({
+  margin: `${vars.space.xxxl} 0 0`,
+  fontSize: vars.fontSize.sm,
+  color: vars.color.inkFaint,
+})
+
+export const sourceLink = style({
+  color: vars.color.inkMuted,
+  textDecoration: 'underline',
 })
