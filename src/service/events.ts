@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import type { TechEvent } from '../shared/types'
+import { FEATURED_EVENTS, type FeaturedEvent } from '../events/config/featured'
+import type { ListedEvent, TechEvent } from '../shared/types'
 import { selectUpcomingEvents } from '../shared/utils/eventDates'
 
 /** collector(grep-airflow)가 커밋하는 자리다. 옮기면 그쪽 GitHubProperties.eventsPath·LocalContentProperties.eventsFile 도 함께 고친다. */
@@ -60,6 +61,16 @@ function toEvent(raw: unknown, index: number): TechEvent {
   }
 }
 
-export async function loadEvents(now: Date = new Date()): Promise<TechEvent[]> {
-  return selectUpcomingEvents(parseEventsFile(await readFile(EVENTS_FILE, 'utf8')), now)
+/** 손으로 고른 행사만 남기고 이미지를 붙인다. 순서는 받은 목록(시작 순)을 따른다. */
+export function pickFeaturedEvents(events: TechEvent[], featured: FeaturedEvent[]): ListedEvent[] {
+  const imageById = new Map(featured.map((item) => [item.id, item.image]))
+  return events.flatMap((event) => {
+    const image = imageById.get(event.id)
+    return image ? [{ ...event, image }] : []
+  })
+}
+
+export async function loadEvents(now: Date = new Date()): Promise<ListedEvent[]> {
+  const events = selectUpcomingEvents(parseEventsFile(await readFile(EVENTS_FILE, 'utf8')), now)
+  return pickFeaturedEvents(events, FEATURED_EVENTS)
 }

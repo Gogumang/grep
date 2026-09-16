@@ -54,12 +54,6 @@ export function formatEventPrice(event: TechEvent): string | null {
   return `${lowest} ~ ${describePrice(highestPrice)}`
 }
 
-/** 목록 오른쪽 날짜 카드에 크게 적는 시작일. 행사 포스터를 옮길 수 없어 이 카드가 썸네일 자리를 채운다. */
-export function describeEventCardDate(date: string): { month: string; day: string; weekday: string } {
-  const [year = 0, month = 1, day = 1] = date.split('-').map(Number)
-  return { month: `${month}월`, day: String(day), weekday: `${weekdayOf(year, month, day)}요일` }
-}
-
 function describePrice(price: number): string {
   return price === 0 ? '무료' : `${WON.format(price)}원`
 }

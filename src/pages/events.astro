@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { loadEvents } from '@/service/events'
-import { describeEventCardDate, formatEventPrice, formatEventSchedule } from '@/shared/utils/eventDates'
+import { formatEventPrice, formatEventSchedule } from '@/shared/utils/eventDates'
 import * as layout from '@/styles/home.css'
 import * as styles from '@/styles/events.css'
 
@@ -20,29 +20,22 @@ const events = await loadEvents()
     <p class={styles.empty} data-events-empty hidden={events.length > 0}>예정된 행사가 없습니다.</p>
 
     <ul class={styles.list}>
-      {events.map((event) => {
-        const cardDate = describeEventCardDate(event.startDate)
-        return (
-          <li data-event-end={event.endDate}>
-            <a class={styles.item} href={event.url} target="_blank" rel="noopener noreferrer">
-              <div class={styles.body}>
-                <h2 class={styles.title}>{event.title}</h2>
-                <p class={styles.summary}>
-                  {[event.host, event.isOnline ? '온라인' : event.place].filter(Boolean).join(' · ')}
-                </p>
-                <p class={styles.schedule}>
-                  {[formatEventSchedule(event), formatEventPrice(event)].filter(Boolean).join(' · ')}
-                </p>
-              </div>
-              <div class={styles.dateCard} aria-hidden="true">
-                <span class={styles.dateCardMonth}>{cardDate.month}</span>
-                <span class={styles.dateCardDay}>{cardDate.day}</span>
-                <span class={styles.dateCardWeekday}>{cardDate.weekday}</span>
-              </div>
-            </a>
-          </li>
-        )
-      })}
+      {events.map((event) => (
+        <li data-event-end={event.endDate}>
+          <a class={styles.item} href={event.url} target="_blank" rel="noopener noreferrer">
+            <div class={styles.body}>
+              <h2 class={styles.title}>{event.title}</h2>
+              <p class={styles.summary}>
+                {[event.host, event.isOnline ? '온라인' : event.place].filter(Boolean).join(' · ')}
+              </p>
+              <p class={styles.schedule}>
+                {[formatEventSchedule(event), formatEventPrice(event)].filter(Boolean).join(' · ')}
+              </p>
+            </div>
+            <img class={styles.thumbnail} src={event.image} alt="" loading="lazy" width={456} height={256} />
+          </a>
+        </li>
+      ))}
     </ul>
 
     <p class={styles.source}>

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import type { TechEvent } from '../shared/types'
-import { parseEventsFile } from './events'
+import { parseEventsFile, pickFeaturedEvents } from './events'
 
 const FLUTTER_KOREA: TechEvent = {
   id: 'c9xsstcs',
@@ -48,5 +48,27 @@ describe('parseEventsFile', () => {
 
   test('events 배열이 없으면 실패한다', () => {
     expect(() => parseEventsFile('{"source":"티켓타코"}')).toThrow('events.json 에 events 배열이 없습니다')
+  })
+})
+
+describe('pickFeaturedEvents', () => {
+  test('고른 행사만 받은 순서대로 남기고 이미지를 붙인다 — 목록에 없는 행사(끝남)는 조용히 빠진다', () => {
+    // Arrange
+    const kakao = { ...FLUTTER_KOREA, id: 'lyohvjgz', title: 'if(kakao)26', startDate: '2026-10-13' }
+    const droidKnights = { ...FLUTTER_KOREA, id: '2o8rdpls', title: '드로이드나이츠 2026', startDate: '2026-11-02' }
+    const featured = [
+      { id: '2o8rdpls', image: '/events/2o8rdpls.avif' },
+      { id: 'lyohvjgz', image: '/events/lyohvjgz.avif' },
+      { id: 'ended', image: '/events/ended.avif' },
+    ]
+
+    // Act
+    const picked = pickFeaturedEvents([kakao, FLUTTER_KOREA, droidKnights], featured)
+
+    // Assert
+    expect(picked.map((event) => [event.title, event.image])).toEqual([
+      ['if(kakao)26', '/events/lyohvjgz.avif'],
+      ['드로이드나이츠 2026', '/events/2o8rdpls.avif'],
+    ])
   })
 })

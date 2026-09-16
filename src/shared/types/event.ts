@@ -24,3 +24,9 @@ export interface TechEvent {
   lowestPrice: number | null
   highestPrice: number | null
 }
+
+/** 이벤트 페이지에 실제로 올리는 행사. 손으로 고른 행사에만 이미지가 붙는다(src/events/config/featured.ts). */
+export interface ListedEvent extends TechEvent {
+  /** public 아래 이미지 경로. */
+  image: string
+}

@@ -1,12 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import type { TechEvent } from '../types'
-import {
-  describeEventCardDate,
-  formatEventPrice,
-  formatEventSchedule,
-  selectUpcomingEvents,
-  toSeoulDate,
-} from './eventDates'
+import { formatEventPrice, formatEventSchedule, selectUpcomingEvents, toSeoulDate } from './eventDates'
 
 function event(overrides: Partial<TechEvent>): TechEvent {
   return {
@@ -75,11 +69,5 @@ describe('formatEventPrice', () => {
 
   test('원문에 가격이 없으면 무료로 적지 않고 null이다', () => {
     expect(formatEventPrice(event({ lowestPrice: null, highestPrice: null }))).toBeNull()
-  })
-})
-
-describe('describeEventCardDate', () => {
-  test('날짜 카드에 넣을 달·날·요일을 나눈다', () => {
-    expect(describeEventCardDate('2026-11-07')).toEqual({ month: '11월', day: '7', weekday: '토요일' })
   })
 })

@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '@/shared/styles/contract.css'
 
-/** 이 폭 아래에서는 날짜 카드를 작은 정사각형으로 줄인다. PostList와 같은 경계다. */
+/** 이 폭 아래에서는 썸네일을 작은 정사각형으로 줄인다. PostList와 같은 경계다. */
 const NARROW = '(max-width: 720px)'
 
 export const intro = style({
@@ -97,46 +97,16 @@ export const schedule = style({
   fontVariantNumeric: 'tabular-nums',
 })
 
-/** 포스터 자리. 티켓타코 이미지를 옮길 수 없어(약관 제11조) 시작일을 크게 그린 카드로 채운다. */
-export const dateCard = style({
+export const thumbnail = style({
+  width: '100%',
+  // width·height 속성은 레이아웃 밀림을 막으려고 두고, 실제 높이는 비율이 정한다.
+  height: 'auto',
   aspectRatio: '228 / 128',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
+  objectFit: 'cover',
   borderRadius: vars.radius.lg,
-  background: vars.color.accentSoft,
-  color: vars.color.accent,
-  lineHeight: 1.1,
-  fontVariantNumeric: 'tabular-nums',
-  selectors: {
-    'a:hover > &': { background: vars.color.accent, color: vars.color.onAccent },
-  },
+  background: vars.color.surfaceSunken,
   '@media': {
     [NARROW]: { aspectRatio: '1' },
-  },
-})
-
-export const dateCardMonth = style({
-  fontSize: vars.fontSize.md,
-  fontWeight: vars.fontWeight.semibold,
-  '@media': {
-    [NARROW]: { fontSize: vars.fontSize.xs },
-  },
-})
-
-export const dateCardDay = style({
-  fontSize: vars.fontSize.display,
-  fontWeight: vars.fontWeight.bold,
-  '@media': {
-    [NARROW]: { fontSize: vars.fontSize.xxl },
-  },
-})
-
-export const dateCardWeekday = style({
-  fontSize: vars.fontSize.sm,
-  '@media': {
-    [NARROW]: { fontSize: vars.fontSize.xs },
   },
 })
 
