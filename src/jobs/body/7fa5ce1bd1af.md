@@ -1,0 +1,124 @@
+**\[팀소개\]**
+
+쿠팡이츠서비스(Coupang Eats Services)는 Delivery service에 대한 차별화 전략을 세우고, 쿠팡이츠의 고객, 상점주, 그리고 배달파트너들에게 한층 더 강화된 서비스와 지원을 제공하고 있습니다.
+
+쿠팡이츠서비스는 원하는 음식을 언제 어디서든 빠르고 안전하게 배달함으로써 고객에게 놀라운 고객 경험을 선사하고, 상점주에게는 주문부터 배달, 고객응대까지 제공하는 원스톱 서비스를 통해 안정적인 판매 기회를 확보할수 있는 시스템을 운영하고 있습니다.
+
+여러 분야의 전문가로 구성된 쿠팡이츠서비스는 하나의 팀으로서 고객과 상점주, 배달파트너가 원하는 가치를 고민하고 연구하며, 새로운 혁신과 패러다임 변화를 이끌어가고 있습니다.
+
+Merchant Systems Engineering 조직의 일원으로 여러분은 쿠팡 이츠에서 주문하는 수백만 명의 고객의 선택에 직접적인 영향을 미치는 수천 명의 업주를 위한 코어 시스템을 구축하는 일을 담당합니다. 또한, 비즈니스 이해관계자와 긴밀하게 협력하여 빠르게 변화하는 환경 속에서 성장을 달성합니다.
+
+\*본 포지션은 쿠팡 본사 소속입니다.
+
+**주요업무**
+
+• Eats Merchant 서비스 엔드투엔드 담당
+
+• 다양한 기술 스택을 활용한 개발
+
+• 손쉬운 쇼핑 경험을 보장하기 위한 사이트 신뢰성에 주력
+
+• 서울, 상하이, 베이징, 샌프란시스코에 걸쳐 소재한 진정한 글로벌 조직
+
+**자격요건**
+
+•컴퓨터 과학 또는 관련 분야 학사 학위 이상
+
+• 대규모 분산 시스템, 시스템 설계 및 알고리즘 관련 분야에서 4년 이상의 경험
+
+• Java 또는 그 외 객체 지향 프로그래밍 언어로 코딩한 4년 이상의 경험
+
+• 객체 지향 프로그래밍 경험 및 Java 또는 그 외의 언어를 능숙하게 다룰 수 있는 경험
+
+• 대규모 서비스 설계 및 구축, 운영 경험
+
+• 공격적으로 문제를 진단하고 창의적으로 문제를 해결할 수 있는 능력
+
+• AWS, Spring 프레임워크 사용에 능숙
+
+**우대사항**
+
+• 이커머스, O2O 업계에서 근무한 경험
+
+• 빠르게 변화하는 환경 속에서 여러 경쟁 우선순위를 처리할 수 있는 능력
+
+• 복잡한 비즈니스 오퍼링을 위한 대규모 서비스의 배송 물류를 선도하는 전문성 보유
+
+• 뛰어난 영어 구두 및 서면 의사소통 능력
+
+• 위치 및 물류 관련 개발 경험
+
+**전형 절차 :**
+
+* 서류전형 - 1차면접 - 2차면접 -- 최종 합격  
+* 전형 절차는 직무별로 다르게 운영될 수 있으며, 일정 및 상황에 따라 변동될 수 있습니다.  
+* 전형 일정 및 결과는 지원서에 등록하신 이메일로 개별 안내 드립니다.
+
+**참고 사항 :**
+
+* 본 공고는 모집 완료 시 조기 마감될 수 있습니다.  
+* 지원서 내용 중 허위사실이 있는 경우에는 합격이 취소될 수 있습니다.  
+* 보훈대상자 및 장애인 여부는 채용 과정에서 어떠한 불이익도 미치지 않습니다.
+
+**개인정보 처리방침 :**
+
+* 쿠팡 그룹은 입사지원자 개인정보 처리방침(아래 링크)에 따라 귀하의 개인정보를 수집하여 처리합니다.  
+* https://rocketyourcareer.kr.coupang.com/privacy-policy
+
+**About the Team**
+
+Since its launch in 2019, **Coupang Eats** has achieved remarkable growth in the highly competitive food delivery market. As a **multi-sided platform** , we deliver innovative experiences and services for consumers, merchants, and delivery partners. Leveraging Coupang's cutting-edge technology and operational expertise, Coupang Eats has built a fast-paced, startup-like culture within a large organization. Our teams---including Product Owners, Operations, and Engineers---collaborate to solve complex problems with one goal in mind: **delighting our customers**.
+
+Coupang Eats is Coupang's food delivery service, bringing high-quality meals from restaurants and cafés straight to customers' doors. The team develops merchant-facing apps, POS systems, and tools for stores and operations centers to ensure a seamless order management experience. With benefits like **Wow Membership discounts and promotions**, we create strong synergies for customers and merchants alike. You'll gain experience in a dynamic environment that combines the agility of a startup with the scale of a unicorn.
+
+As part of the **Merchant Systems Engineering** organization, you will build core systems for thousands of merchants that directly influence the choices of millions of Coupang Eats customers. You'll work closely with business stakeholders to drive growth in a fast-changing environment.
+
+*This position is based at Coupang headquarters.*
+
+**Key Responsibilities**
+
+* Own end-to-end development of **Eats Merchant services**  
+* Build and maintain systems using diverse technologies such as:  
+* Ensure site reliability to deliver a seamless shopping experience  
+* Collaborate within a truly global organization across **Seoul, Shanghai, Beijing, and San Francisco**
+
+**Basic Qualifications**
+
+* Bachelor's degree or higher in **Computer Science** or related field  
+* **4+ years** of experience in large-scale distributed systems, system design, and algorithms  
+* **4+ years** of coding experience in **Java** or other object-oriented programming languages  
+* Strong object-oriented programming skills and proficiency in Java or similar languages  
+* Proven experience designing, building, and operating large-scale services  
+* Ability to diagnose issues aggressively and solve problems creatively  
+* Proficiency with **AWS** and **Spring Framework**
+
+**Preferred Qualifications**
+
+* Experience in **e-commerce** or **O2O (Online-to-Offline)** industries  
+* Ability to manage multiple competing priorities in a fast-paced environment  
+* Expertise in logistics for large-scale services with complex business offerings  
+* Excellent verbal and written communication skills in English  
+* Development experience related to **location-based services** or **logistics**
+
+**\[Recruitment Process and Others\]**
+
+**Recruitment Process**
+
+* Application Review - Phone Interview - Onsite (or Virtual Onsite) Interview -- Offer  
+* The exact nature of the recruitment process may vary according to the specific job and may be changed due to scheduling or other circumstances.  
+* Interview schedules and the results will be informed to the applicant via the e-mail address submitted at the application stage.
+
+**Details to Consider**
+
+* This job posting may be closed prior to the stated end date for application if all openings are filled.  
+* Coupang has the right to rescind an offer of employment if a candidate is found to have submitted false information as part of the application process.  
+* Coupang does not discriminate against disabled applicants or those with veteran status. We are proud to offer equal opportunities for all applicants.  
+* Job titles and responsibilities may be subject to change depending on the candidate's overall experience, etc. This will be communicated to the candidate at the appropriate time before the offer.
+
+**Document Return Policy**
+
+* This notification is given pursuant to Article 11 (6) of the Fair Hiring Procedure Act.  
+* A job applicant, who has applied but not been finally selected for a position at Coupang (the "**Company**"), may request the Company to return his/her hiring documents submitted pursuant to the Fair Hiring Procedure Act. However, this will not apply where the hiring documents were submitted via the website of the Company or e-mail, or where the job applicant submitted those documents voluntarily without a request from the Company. In addition, if the hiring documents were destroyed due to a natural disaster or any other reasons not attributable to the Company, such documents will be deemed to have been returned to the job applicant.  
+* A job applicant who wishes to request the return of his/her hiring documents pursuant to the main sentence of paragraph 2 above should fill out a "Request for Return of Hiring Documents" \[Annex Form No. 3 in the Enforcement Rule of the Fair Hiring Procedure Act\] and submit the request to the Company (Coupang Recruiting Team, Tower 730, 570 Songpa-daero, Songpa-gu, Seoul). In such case, within fourteen (14) days from the date of identifying the receipt of the request, the Company will send the hiring documents to the job applicant's designated address via registered mail. Please be informed that the job applicant is required to pay the postage on the registered mail.  
+* In preparation for a job applicant's request for the return of hiring documents pursuant to the main sentence of paragraph 2 above, the Company shall retain the original hiring documents submitted by the job applicant for 180 days from the completion of the recruiting process. If no request is made until the end of this period, all of his/her hiring documents will be destroyed immediately in accordance with the Personal Information Protection Act.  
+* Hiring may be restricted in case the legal qualifications required for hiring and work performance are not met.

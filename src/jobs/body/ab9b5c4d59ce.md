@@ -1,0 +1,93 @@
+**Company Introduction**
+
+We exist to wow our customers. We know we're doing the right thing when we hear our customers say, "How did we ever live without Coupang?" Born out of an obsession to make shopping, eating, and living easier than ever, we're collectively disrupting the multi-billion-dollar e-commerce industry from the ground up. We are one of the fastest-growing e-commerce companies that established an unparalleled reputation for being a dominant and reliable force in South Korean commerce.
+
+We are proud to have the best of both worlds --- a startup culture with the resources of a large global public company. This fuels us to continue our growth and launch new services at the speed we have been since our inception. We are all entrepreneurs surrounded by opportunities to drive new initiatives and innovations. At our core, we are bold and ambitious people that like to get our hands dirty and make a hands-on impact. At Coupang, you will see yourself, your colleagues, your team, and the company grow every day.
+
+Our mission to build the future of commerce is real. We push the boundaries of what's possible to solve problems and break traditional tradeoffs. Join Coupang now to create an epic experience in this always-on, high-tech, and hyper-connected world.
+
+### **Organization Overview**
+
+**Transportation Technology:**
+
+The Transportation Technology team develops processes to ensure accurate and fast delivery, working closely with large-scale freight and transportation companies to make sure every shipment reaches the right destination. Engineers in Coupang's Transportation Technology team play a key role in driving innovation by responding to rapidly changing business needs while keeping the big picture and long-term company goals in mind. Expansion and growth are critical objectives, providing opportunities to enter new markets and leave a lasting impact.
+
+**Fulfillment Technologies:**
+
+The Fulfillment Technologies team manages end-to-end processes within fulfillment centers, building systems to improve efficiency in receiving, shelving, inventory, picking, and shipping. The team aims to deliver fast and accurate services to customers by introducing cutting-edge logistics processes and automation. We focus on providing specialized, user-centric services and applying new technologies to build innovative processes.
+
+### **Responsibilities**
+
+* Serve as a Tech Lead within the Global Ops Tech organization across the entire software development lifecycle.  
+* Act as a key participant in architecture reviews for new platforms, services, and solutions within Coupang.  
+* Lead company-wide projects as a technical leader.  
+* Be a trusted problem solver for technical challenges within Global Ops Tech and across Coupang.  
+* Collaborate with project owners, stakeholders, and designers to improve or implement new applications.  
+* Continuously pursue improvements in practices to meet industry-standard expectations for quality and timelines.  
+* Share best practices and drive process improvements across agile teams, enhancing engineering productivity and advancing technical depth and breadth within the team.
+
+### **Qualifications**
+
+* 10+ years of hands-on experience working within engineering teams in fast-paced environments.  
+* 10+ years of experience designing and developing complex financial systems.  
+* 5+ years of experience designing and building scalable, high-performance platforms and data pipelines.  
+* Strong knowledge and experience with big data stacks (e.g., Cassandra, Kafka, Spark, Flink, Hive, S3, Redshift) and NoSQL databases for large-scale data streaming and near real-time processing.  
+* Proficiency in Java and Spring Framework, with extensive experience in AWS environments.  
+* Proven experience collaborating with multiple teams to define mission, vision, and roadmap.  
+* Experience working closely with product and program management teams.
+
+**회사 소개**
+
+쿠팡은 고객 감동 실현을 위해 존재합니다. 고객들이 "쿠팡 없이 그동안 어떻게 살았을까?" 라고 말할 때, 비로소 우리의 미션을 실현하고 있음을 알 수 있습니다. 고객들의 쇼핑과 식사, 생활 전반을 편하게 만들겠다는 유일한 집념으로 쿠팡은 수억 달러 규모의 이커머스 산업 전반의 혁신을 이끌고 있습니다. 쿠팡은 가장 빠르게 성장하는 이커머스 기업 중 하나로, 국내 커머스 업계에서의 독보적인 입지와, 고객 신뢰를 구축했습니다.
+
+쿠팡은 스타트업 문화를 기반으로 한 글로벌 대형 상장사라고 자부합니다. 이것이 창립 당시의 기민함을 유지하며, 신규 서비스를 끊임없이 출시하며 비즈니스를 확장해 나가는 우리의 성장 동력입니다. 쿠팡의 모든 임직원에게는 기업가 정신을 갖추고 새로운 혁신과 이니셔티브를 추진할 수 있는 기회가 주어집니다. 주저 없이 일에 뛰어들어 성과를 이루고자 하는 과감성이, 바로 쿠팡이 일하는 방식의 본질입니다. 쿠팡에서는 여러분 자신, 동료, 팀 그리고 회사 전체가 매일 성장하는 모습을 목격할 것입니다.
+
+쿠팡의 모든 직원은 커머스의 미래를 만들겠다는 쿠팡의 미션에 진심입니다. 우리는 고객의 문제를 해결해 나가고, 전통적인 관념과 통념에 맞서며 실현 가능한 한계를 뛰어넘고 있습니다. 고가용성 (always-on) 과 최첨단의 앞선 기술 (high-tech), 초연결사회 (hyper-connected world) 에서의 놀라운 업무 경험을 원하신다면, 지금 바로 쿠팡에 합류하세요.
+
+**조직 소개:**
+
+- Transportation Technology:
+
+Transportation Technology팀은 정확하고 빠른 배송을 위한 프로세스를 개발하여 대규모의 화물 및 운송회사들과 긴밀하게 협력하여 모든 운송이 알맞은 곳에 도착할 수 있도록 합니다. 쿠팡의 Transportation Technology엔지니어의 역할은 빠르게 변화하는 비지니스에 대응하며, 한발 더 나아가는 큰 그림과 회사의 장기적인 목표를 고려하여 혁신을 이루어 내는 것입니다. 확장과 성장은 새로운 시장에 진출하며 지속적인 발자취를 남길 수 있는 기회를 가진 Transportation Technology 의 중요한 업무 목표입니다.
+
+- Fulfillment Technologies:
+
+Fulfilment Technologies팀은 물류센터의 전반적인 프로세스를 통합 관리하며, 입고, 진열, 재고, 집품, 출고 등 물류센터 업무 효율을 높이기 위한 프로세스를 구축합니다. 또한 최신 물류 프로세스를 도입하고 업무 자동화를 구축하여 고객에게 빠르고 정확한 서비스를 제공하여 사용자 관점의 특화된 서비스를 제공하고, 새로운 프로세스를 구축하기 위해 다양한 신기술을 적용하는 것을 목표로 합니다.
+
+**업무** **내용**
+
+* 소프트웨어 개발 라이프사이클 전반에 걸쳐 Global Ops Tech 조직의 테크리드로 역할  
+* 쿠팡 내 신규 플랫폼, 서비스, 솔루션 진행 시 아키텍처 리뷰의 핵심 참가자로 기여  
+* 전사 프로젝트를 추진하는 테크 리드  
+* Global Ops Tech 조직 및 쿠팡 내에서 발생하는 기술적 문제에 대한 믿음직한 해결사  
+* 프로젝트 오너, 스테이크 홀더, 디자이너들과 협력하여 어플리케이션 개선 또는 신규 구현  
+* 업계에서 필수 수준이라 기대되는 품질/시간을 충족시키는데 필요한 지속적인 프랙티스 개선을 성실히 추구  
+* 팀 내 애자일 조직 전반에 걸친 베스트 프랙티스 공유와 프로세스 개선, 그리고 이를 통한 엔지니어링 생산성 향상, 기술적인 폭과 깊이를 끌어올림으로써 팀의 발전 도모
+
+**자격** **조건**
+
+* 빠르게 변화하는 환경 속 엔지니어링 팀 내에서 직접 근무한 경험 10년 이상  
+* 복잡한 금융 시스템 설계 및 개발 경력 10년 이상  
+* 확장 가능한 고성능 플랫폼 및 데이터 파이프라인을 설계하고 구축한 경험 5년 이상  
+* 방대한 양의 데이터 스트리밍 및 실시간에 가까운 데이터 처리에 필요한 빅데이터 스택(Cassandra, Kafka, Spark, Flink, Hive, S3, Redshift 등의 NoSQL 데이터베이스) 관련 탄탄한 지식 및 경험  
+* Java 및 Spring Framework를 활용한 개발 지식 및 AWS 환경에서의 경험 다수  
+* 미션, 비전, 로드맵 정의를 위해 여러 부서의 팀과 협업한 경험  
+* 프로덕트 및 프로그램 관리 팀과 협력한 경험
+
+**전형 절차 및**   **안내**   **사항**
+
+* **전형**   **절차**  
+  * 서류전형 - 전화면접 - 대면면접 -- 최종 합격  
+  * 전형 절차는 직무별로 다르게 운영될 수 있으며, 일정 및 상황에 따라 변동될 수 있습니다.   
+  * 전형 일정 및 결과는 지원서에 등록하신 이메일로 개별안내드립니다.   
+* **참고**   **사항**  
+  * 본 공고는 모집 완료 시 조기 마감될 수 있습니다.   
+  * 지원서 내용 중 허위사실이 있는 경우에는 합격이 취소될 수 있습니다.  
+  * 취업 보호 대상자(보훈대상자, 장애인 등)는 관련 법률에 따라 채용우대를 받을 수 있습니다.  
+* **개인정보 처리방침**    
+  * 쿠팡 그룹은 입사지원자 개인정보 처리방침(아래 링크)에 따라 귀하의 개인정보를 수집하여 처리합니다.  <https://www.coupang.jobs/kr/privacy-policy/>   
+* **서류**   **반환 정책**    
+  * 본 고지는 『채용절차의 공정화에 관한 법률』 제11조 제6항에 따른 것입니다.   
+  * 당사 채용에 응시한 구직자 중 최종합격이 되지 못한 구직자는 『채용절차의 공정화에 관한 법률』에 따라 제출한 채용서류의 반환을 청구할 수 있음을 알려 드립니다. 다만, 홈페이지 또는 전자우편으로 제출된 경우나 구직자가 당사의 요구 없이 자발적으로 제출한 경우에는 그러하지 아니하며, 천재지변이나 그 밖에 당사에게 책임 없는 사유로 채용서류가 멸실된 경우에는 반환한 것으로 봅니다.   
+  * 위 2항 본문에 따라 채용서류 반환 청구를 하는 구직자는 채용서류 반환청구서\[채용절차의 공정화에 관한 법률 시행규칙 별지 제3호 서식\]를 작성하여 당사 이메일( recruitingops@coupang.com )로 제출하면, 제출이 확인된 날로부터 14일 이내에 지정한 주소지로 등기우편을 통하여 발송해 드립니다. 이 경우 등기우편요금은 수신자 부담으로 하게 되오니 유념하시기 바랍니다.   
+  * 당사는 위 2항 본문에 따른 구직자의 반환 청구에 대비하여 채용 여부가 확정된 날로부터 180일간 구직자가 제출한 채용서류 원본을 보관하게 되며, 그때까지 채용서류의 반환을 청구하지 아니할 경우에는 『개인정보 보호법』에 따라 지체 없이 채용서류 일체를 파기할 예정입니다.
