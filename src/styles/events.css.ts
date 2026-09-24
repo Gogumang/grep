@@ -109,14 +109,3 @@ export const thumbnail = style({
     [NARROW]: { aspectRatio: '1' },
   },
 })
-
-export const source = style({
-  margin: `${vars.space.xxxl} 0 0`,
-  fontSize: vars.fontSize.sm,
-  color: vars.color.inkFaint,
-})
-
-export const sourceLink = style({
-  color: vars.color.inkMuted,
-  textDecoration: 'underline',
-})
