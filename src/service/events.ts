@@ -1,11 +1,29 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import { FEATURED_EVENTS, type FeaturedEvent } from '../events/config/featured'
 import type { ListedEvent, TechEvent } from '../shared/types'
 import { selectUpcomingEvents } from '../shared/utils/eventDates'
 
 /** collector(grep-airflow)가 커밋하는 자리다. 옮기면 그쪽 GitHubProperties.eventsPath·LocalContentProperties.eventsFile 도 함께 고친다. */
 const EVENTS_FILE = path.join(process.cwd(), 'src', 'events', 'events.json')
+
+/**
+ * 이벤트 페이지에 올린 행사. 어드민 행사 화면에서 올리고 내리면 collector 가 이 파일을 커밋한다
+ * (그쪽 GitHubProperties.featuredEventsPath). events.json 에서 **여기 적힌 행사만** 보이고, 끝난 행사는 알아서 빠진다.
+ *
+ * 이미지는 주최 측 공식 사이트 것을 쓴다 — 티켓타코 약관 제11조가 서비스 콘텐츠 복제를 막는다.
+ * 어드민에서 올린 행사는 R2 전체 주소(https://images.gogumang.com/events/{id}.avif),
+ * 예전에 손으로 올린 세 건은 public/events 아래 사이트 경로다.
+ */
+const FEATURED_FILE = path.join(process.cwd(), 'src', 'events', 'featured.json')
+
+export interface FeaturedEvent {
+  /** 티켓타코 행사 코드. events.json 의 id 와 같다. */
+  id: string
+  /** 사이트 기준 경로(/events/x.avif)나 https 전체 주소. */
+  image: string
+}
+
+const IMAGE_PATTERN = /^(\/|https:\/\/)\S+$/
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
 const TIME_PATTERN = /^\d{2}:\d{2}$/
@@ -61,7 +79,29 @@ function toEvent(raw: unknown, index: number): TechEvent {
   }
 }
 
-/** 손으로 고른 행사만 남기고 이미지를 붙인다. 순서는 받은 목록(시작 순)을 따른다. */
+/** 모양이 틀리면 빌드를 멈춘다. 조용히 빈 목록으로 읽으면 올린 행사가 전부 사라진 채 배포된다. */
+export function parseFeaturedFile(json: string): FeaturedEvent[] {
+  const events = (JSON.parse(json) as { events?: unknown }).events
+  if (!Array.isArray(events)) {
+    throw new Error(
+      'featured.json 에 events 배열이 없습니다 (예: {"events":[{"id":"lyohvjgz","image":"/events/lyohvjgz.avif"}]})',
+    )
+  }
+  return events.map((raw, index) => {
+    const value = (raw ?? {}) as Record<string, unknown>
+    const { id, image } = value
+    if (typeof id !== 'string' || id === '')
+      throw new Error(`featured.json ${index + 1}번째 행사: id 값이 비어 있습니다`)
+    if (typeof image !== 'string' || !IMAGE_PATTERN.test(image)) {
+      throw new Error(
+        `featured.json ${index + 1}번째 행사(${id}): image 는 /events/x.avif 나 https:// 주소여야 합니다, 입력값: ${String(image)}`,
+      )
+    }
+    return { id, image }
+  })
+}
+
+/** 고른 행사만 남기고 이미지를 붙인다. 순서는 받은 목록(시작 순)을 따른다. */
 export function pickFeaturedEvents(events: TechEvent[], featured: FeaturedEvent[]): ListedEvent[] {
   const imageById = new Map(featured.map((item) => [item.id, item.image]))
   return events.flatMap((event) => {
@@ -71,6 +111,7 @@ export function pickFeaturedEvents(events: TechEvent[], featured: FeaturedEvent[
 }
 
 export async function loadEvents(now: Date = new Date()): Promise<ListedEvent[]> {
-  const events = selectUpcomingEvents(parseEventsFile(await readFile(EVENTS_FILE, 'utf8')), now)
-  return pickFeaturedEvents(events, FEATURED_EVENTS)
+  const [eventsFile, featuredFile] = await Promise.all([readFile(EVENTS_FILE, 'utf8'), readFile(FEATURED_FILE, 'utf8')])
+  const events = selectUpcomingEvents(parseEventsFile(eventsFile), now)
+  return pickFeaturedEvents(events, parseFeaturedFile(featuredFile))
 }

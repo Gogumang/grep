@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import type { TechEvent } from '../shared/types'
-import { parseEventsFile, pickFeaturedEvents } from './events'
+import { parseEventsFile, parseFeaturedFile, pickFeaturedEvents } from './events'
 
 const FLUTTER_KOREA: TechEvent = {
   id: 'c9xsstcs',
@@ -70,5 +70,33 @@ describe('pickFeaturedEvents', () => {
       ['if(kakao)26', '/events/lyohvjgz.avif'],
       ['드로이드나이츠 2026', '/events/2o8rdpls.avif'],
     ])
+  })
+})
+
+describe('parseFeaturedFile', () => {
+  test('collector가 쓴 파일을 읽는다 — 손으로 올린 사이트 경로와 어드민에서 올린 R2 주소가 섞여 있어도 된다', () => {
+    // Arrange
+    const json = JSON.stringify({
+      events: [
+        { id: 'lyohvjgz', image: '/events/lyohvjgz.avif' },
+        { id: 'new1', image: 'https://images.gogumang.com/events/new1.avif' },
+      ],
+    })
+
+    // Act
+    const featured = parseFeaturedFile(json)
+
+    // Assert
+    expect(featured.map((event) => event.id)).toEqual(['lyohvjgz', 'new1'])
+  })
+
+  test('events 배열이 없으면 실패한다 — 빈 목록으로 읽으면 올린 행사가 전부 사라진 채 배포된다', () => {
+    expect(() => parseFeaturedFile('{"featured":[]}')).toThrow('featured.json 에 events 배열이 없습니다')
+  })
+
+  test('이미지가 사이트 경로도 https 주소도 아니면 몇 번째 행사인지 담아 실패한다', () => {
+    expect(() => parseFeaturedFile('{"events":[{"id":"a","image":"http://example.com/a.png"}]}')).toThrow(
+      'featured.json 1번째 행사(a)',
+    )
   })
 })

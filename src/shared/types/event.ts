@@ -25,8 +25,8 @@ export interface TechEvent {
   highestPrice: number | null
 }
 
-/** 이벤트 페이지에 실제로 올리는 행사. 손으로 고른 행사에만 이미지가 붙는다(src/events/config/featured.ts). */
+/** 이벤트 페이지에 실제로 올리는 행사. 어드민에서 올린 행사에만 이미지가 붙는다(src/events/featured.json). */
 export interface ListedEvent extends TechEvent {
-  /** public 아래 이미지 경로. */
+  /** 사이트 기준 경로(/events/x.avif)나 https 전체 주소. */
   image: string
 }
