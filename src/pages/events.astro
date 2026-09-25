@@ -8,7 +8,11 @@ import * as styles from '@/styles/events.css'
 const events = await loadEvents()
 ---
 
-<BaseLayout title="이벤트 — grep" description="개발자 컨퍼런스·밋업·해커톤 일정을 티켓타코·이벤터스에서 모았습니다.">
+<BaseLayout
+  title="이벤트 — grep"
+  description="개발자 컨퍼런스·밋업·해커톤 일정을 티켓타코·이벤터스에서 모았습니다."
+  searchScope="events"
+>
   <main class={layout.container}>
     <header class={styles.intro}>
       <h1 class={styles.heading}>

@@ -11,7 +11,7 @@ const MAX_RESULTS = 8
  * 헤더에 React를 쓰던 시절에는 글 상세 페이지에서 테마 토글과 검색 버튼 때문에
  * React 런타임 194KB가 통째로 내려갔다. 읽기만 하는 페이지에 그건 과했다.
  *
- * 무엇을 찾는지는 source가 정한다 — 글(Pagefind 색인)이나 채용 공고(/jobs.json).
+ * 무엇을 찾는지는 source가 정한다 — 글(Pagefind 색인), 채용 공고(/jobs.json), 행사(/events.json).
  */
 export function createSearchModal(source: SearchSource) {
   let overlay: HTMLDivElement | null = null
@@ -38,6 +38,10 @@ export function createSearchModal(source: SearchSource) {
     hits.forEach((hit, index) => {
       const link = el('a', `${styles.item} ${index === selected ? styles.itemSelected : ''}`)
       link.href = hit.url
+      if (hit.isExternal) {
+        link.target = '_blank'
+        link.rel = 'noopener noreferrer'
+      }
       link.addEventListener('mouseenter', () => {
         selected = index
         renderResults(container)
@@ -115,7 +119,9 @@ export function createSearchModal(source: SearchSource) {
       } else if (event.key === 'Enter') {
         event.preventDefault()
         const hit = hits[selected]
-        if (hit) window.location.href = hit.url
+        if (!hit) return
+        if (hit.isExternal) window.open(hit.url, '_blank', 'noopener,noreferrer')
+        else window.location.href = hit.url
       }
     })
 

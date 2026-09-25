@@ -14,9 +14,9 @@ interface Props {
   structuredData?: Record<string, unknown>
   /**
    * 헤더 돋보기(⌘K·'/')가 여는 검색 모달이 무엇을 찾는지. 모달은 같고 찾는 대상만 바뀐다 —
-   * 채용 페이지에서 돋보기를 눌러 아티클이 뜨면 엉뚱하다.
+   * 채용·이벤트 페이지에서 돋보기를 눌러 아티클이 뜨면 엉뚱하다.
    */
-  searchScope?: 'posts' | 'jobs'
+  searchScope?: 'posts' | 'jobs' | 'events'
 }
 
 const {
@@ -29,7 +29,7 @@ const {
   searchScope = 'posts',
 } = Astro.props
 
-const SEARCH_BUTTON_LABELS = { posts: '글 검색 열기', jobs: '채용 공고 검색 열기' }
+const SEARCH_BUTTON_LABELS = { posts: '글 검색 열기', jobs: '채용 공고 검색 열기', events: '이벤트 검색 열기' }
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href
 const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined
@@ -189,7 +189,12 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
 
     <script>
       import { createSearchModal } from '@/components/search/searchModal'
-      import { jobSearchSource, postSearchSource } from '@/components/search/searchSources'
+      import {
+        eventSearchSource,
+        jobSearchSource,
+        postSearchSource,
+        type SearchSource,
+      } from '@/components/search/searchSources'
 
       const root = document.documentElement
 
@@ -200,12 +205,14 @@ gtag('config', '${GA_MEASUREMENT_ID}');`}
         localStorage.setItem('grep-theme', next)
       })
 
+      const SEARCH_SOURCES: Record<string, SearchSource> = { jobs: jobSearchSource, events: eventSearchSource }
+
       // 검색 모듈은 처음 열 때만 받는다 — 읽기만 하는 방문자는 내려받지 않는다.
       let modal: ReturnType<typeof createSearchModal> | null = null
       const searchButton = document.querySelector<HTMLElement>('[data-search-open]')
       function openSearch() {
-        // 찾는 대상은 페이지가 정한다(BaseLayout의 searchScope). 채용 페이지는 공고를 찾는다.
-        modal ??= createSearchModal(searchButton?.dataset.searchScope === 'jobs' ? jobSearchSource : postSearchSource)
+        // 찾는 대상은 페이지가 정한다(BaseLayout의 searchScope). 채용 페이지는 공고를, 이벤트 페이지는 행사를 찾는다.
+        modal ??= createSearchModal(SEARCH_SOURCES[searchButton?.dataset.searchScope ?? ''] ?? postSearchSource)
         modal.open()
       }
 
