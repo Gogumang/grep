@@ -92,6 +92,19 @@
     "highestPrice" : 0,
     "source" : "티켓타코"
   }, {
+    "id" : "jlepqncy",
+    "title" : "우아한형제들의 기술 콘퍼런스, WOOWACON 2026이 열립니다!",
+    "url" : "https://ticketa.co/event/jlepqncy",
+    "host" : "WOOWACON 2026",
+    "startDate" : "2026-10-28",
+    "startTime" : "10:00",
+    "endDate" : "2026-10-28",
+    "place" : "그랜드인터컨티넨탈 서울파르나스",
+    "isOnline" : false,
+    "lowestPrice" : null,
+    "highestPrice" : null,
+    "source" : "티켓타코"
+  }, {
     "id" : "ql1tygi5",
     "title" : "GitHub Copilot Dev Days | Jeju",
     "url" : "https://ticketa.co/event/ql1tygi5",
