@@ -15,6 +15,7 @@ function event(overrides: Partial<TechEvent>): TechEvent {
     isOnline: false,
     lowestPrice: null,
     highestPrice: null,
+    source: '티켓타코',
     ...overrides,
   }
 }

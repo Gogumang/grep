@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
-import type { ListedEvent, TechEvent } from '../shared/types'
+import type { EventSource, ListedEvent, TechEvent } from '../shared/types'
 import { selectUpcomingEvents } from '../shared/utils/eventDates'
 
 /** collector(grep-airflow)가 커밋하는 자리다. 옮기면 그쪽 GitHubProperties.eventsPath·LocalContentProperties.eventsFile 도 함께 고친다. */
@@ -17,7 +17,7 @@ const EVENTS_FILE = path.join(process.cwd(), 'src', 'events', 'events.json')
 const FEATURED_FILE = path.join(process.cwd(), 'src', 'events', 'featured.json')
 
 export interface FeaturedEvent {
-  /** 티켓타코 행사 코드. events.json 의 id 와 같다. */
+  /** events.json 의 id 와 같다(티켓타코 행사 코드, 이벤터스는 eventus-{번호}). */
   id: string
   /** 사이트 기준 경로(/events/x.avif)나 https 전체 주소. */
   image: string
@@ -29,6 +29,8 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
 const TIME_PATTERN = /^\d{2}:\d{2}$/
 const URL_PATTERN = /^https:\/\/\S+$/
 
+const EVENT_SOURCES: readonly EventSource[] = ['티켓타코', '이벤터스']
+
 /**
  * 모양이 틀리면 빌드를 멈춘다. collector 와의 계약이 어긋난 채 배포되면 행사가 조용히 빠지거나
  * 'undefined일'이 찍힌다 — 그보다 빌드 실패가 낫다.
@@ -36,7 +38,7 @@ const URL_PATTERN = /^https:\/\/\S+$/
 export function parseEventsFile(json: string): TechEvent[] {
   const events = (JSON.parse(json) as { events?: unknown }).events
   if (!Array.isArray(events)) {
-    throw new Error('events.json 에 events 배열이 없습니다 (예: {"source":"티켓타코","events":[]})')
+    throw new Error('events.json 에 events 배열이 없습니다 (예: {"source":"티켓타코·이벤터스","events":[]})')
   }
   return events.map((raw, index) => toEvent(raw, index))
 }
@@ -60,6 +62,11 @@ function toEvent(raw: unknown, index: number): TechEvent {
       throw new Error(`${label}: ${field} 값은 숫자(원)나 null 이어야 합니다, 입력값: ${String(found)}`)
     return found
   }
+  // 출처가 없는 파일은 이벤터스를 붙이기 전 것이라 티켓타코다. 모르는 값은 계약이 어긋난 것이라 멈춘다.
+  const source = value.source === undefined ? '티켓타코' : value.source
+  if (!EVENT_SOURCES.includes(source as EventSource)) {
+    throw new Error(`${label}: source 값은 ${EVENT_SOURCES.join('·')} 중 하나여야 합니다, 입력값: ${String(source)}`)
+  }
   if (typeof value.isOnline !== 'boolean') {
     throw new Error(`${label}: isOnline 값은 true 나 false 여야 합니다, 입력값: ${String(value.isOnline)}`)
   }
@@ -76,6 +83,7 @@ function toEvent(raw: unknown, index: number): TechEvent {
     isOnline: value.isOnline,
     lowestPrice: nullableNumber('lowestPrice'),
     highestPrice: nullableNumber('highestPrice'),
+    source: source as EventSource,
   }
 }
 
