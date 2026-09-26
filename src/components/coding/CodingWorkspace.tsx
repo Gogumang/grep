@@ -4,6 +4,7 @@ import type { GradeReport, GradeScope, JudgeLanguage, TestCase } from '@/shared/
 import { CodeEditor } from './CodeEditor'
 import * as styles from './CodingWorkspace.css'
 import { type GradeState, ResultPanel } from './ResultPanel'
+import { useGradeThrottle } from './useGradeThrottle'
 
 /** 마지막으로 고른 언어와 편집기 높이는 문제를 옮겨 다녀도 유지한다. 코드는 문제·언어마다 따로 둔다. */
 const LANGUAGE_STORAGE_KEY = 'grep-coding-language'
@@ -26,6 +27,9 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
   const [gradeState, setGradeState] = useState<GradeState>({ kind: 'idle' })
   const [editorShare, setEditorShare] = useState(() => readEditorShare())
   const isRunning = gradeState.kind === 'running'
+  const throttle = useGradeThrottle()
+  const isGradeDisabled = isRunning || throttle.isBlocked
+  const waitSuffix = throttle.isBlocked ? ` (${throttle.waitSeconds})` : ''
   const languageOption = findLanguageOption(language)
 
   const changeLanguage = (next: JudgeLanguage) => {
@@ -48,6 +52,13 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
 
   const grade = useCallback(
     async (scope: GradeScope) => {
+      if (throttle.isBlocked) {
+        setGradeState({
+          kind: 'failed',
+          message: `너무 자주 채점했습니다. ${throttle.waitSeconds}초 뒤 다시 시도해주세요.`,
+        })
+        return
+      }
       setGradeState({ kind: 'running', scope })
       try {
         const response = await fetch('/api/judge', {
@@ -63,21 +74,24 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
         setGradeState({ kind: 'done', scope, report: payload })
       } catch {
         setGradeState({ kind: 'failed', message: '채점 서버에 연결하지 못했습니다. 잠시 뒤 다시 시도해주세요.' })
+      } finally {
+        // 끝난 뒤에 센다 — 결과를 읽기 전에 연달아 누르는 것을 막는 대기 시간이 채점이 끝난 때부터 흐른다.
+        throttle.record()
       }
     },
-    [problemId, language, code],
+    [problemId, language, code, throttle],
   )
 
   // ⌘/Ctrl + Enter로 코드 실행. 편집기 안에서 눌러도 동작한다.
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Enter' || !(event.metaKey || event.ctrlKey) || isRunning) return
+      if (event.key !== 'Enter' || !(event.metaKey || event.ctrlKey) || isGradeDisabled) return
       event.preventDefault()
       void grade('examples')
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [grade, isRunning])
+  }, [grade, isGradeDisabled])
 
   const workspaceRef = useRef<HTMLElement>(null)
   const startResize = (event: PointerEvent<HTMLDivElement>) => {
@@ -145,11 +159,16 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
         <button type="button" className={styles.ghostButton} disabled={isRunning} onClick={resetCode}>
           초기화
         </button>
-        <button type="button" className={styles.secondaryButton} disabled={isRunning} onClick={() => grade('examples')}>
-          코드 실행
+        <button
+          type="button"
+          className={styles.secondaryButton}
+          disabled={isGradeDisabled}
+          onClick={() => grade('examples')}
+        >
+          코드 실행{waitSuffix}
         </button>
-        <button type="button" className={styles.primaryButton} disabled={isRunning} onClick={() => grade('all')}>
-          제출 후 채점하기
+        <button type="button" className={styles.primaryButton} disabled={isGradeDisabled} onClick={() => grade('all')}>
+          제출 후 채점하기{waitSuffix}
         </button>
       </div>
     </section>

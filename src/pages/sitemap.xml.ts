@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
 import { loadPosts } from '@/service/content'
+import { PROBLEMS } from '@/coding/problems'
 import { loadJobs } from '@/service/jobs'
 
 /**
@@ -16,12 +17,14 @@ export const GET: APIRoute = async ({ site }) => {
 
   // loadPosts는 최신 글이 앞이다. 홈은 새 글이 실릴 때마다 바뀌므로
   // 가장 최근 글의 발행 시각을 홈의 lastmod로 쓴다.
-  // 이벤트는 표를 고친 시각을 알 길이 없어 lastmod를 비운다.
+  // 이벤트·코딩테스트 문제는 표를 고친 시각을 알 길이 없어 lastmod를 비운다.
   const entries = [
     { path: '/', lastmod: posts[0]?.publishedAt },
     { path: '/explore/', lastmod: posts[0]?.publishedAt },
     { path: '/jobs/', lastmod: jobs.updatedAt ?? undefined },
     { path: '/events/', lastmod: undefined },
+    { path: '/coding/', lastmod: undefined },
+    ...PROBLEMS.map((problem) => ({ path: `/coding/${problem.id}/`, lastmod: undefined })),
     ...posts.map((post) => ({ path: `/posts/${post.id}/`, lastmod: post.publishedAt })),
   ]
 

@@ -75,12 +75,14 @@ collector(grep-airflow)가 매일 티켓타코 행사를 읽어 개발 행사만
 신청은 티켓타코 행사 페이지에서 합니다.
 다른 행사 모음(Dev-Event 등)은 사용 정책상 옮겨 올 수 없습니다.
 
-## 코딩테스트 (준비 중)
+## 코딩테스트
 
-**코딩테스트**(`/coding`, 준비 중) — `/desk`처럼 메뉴·사이트맵·검색에 없고(`noindex`) 주소로만 들어갑니다.
+**코딩테스트**(`/coding`) — 헤더 메뉴에서 들어갑니다.
 문제를 골라 C · C++ · Java · Kotlin · Go · Python · Ruby · JavaScript · TypeScript로 풀고,
 **코드 실행**은 예시만, **제출 후 채점하기**는 숨은 테스트까지 채점합니다(표준 입력 → 표준 출력).
 코드·언어·칸 크기는 브라우저(localStorage)에 저장됩니다.
+채점을 너무 자주 누르지 못하게 화면에서 막습니다 — 한 번 끝나면 5초, 1분에 10번까지([`src/coding/gradeThrottle.ts`](src/coding/gradeThrottle.ts)).
+채점 서버(collector) 쪽 제한은 없어서 `/api/judge`를 직접 부르는 요청까지 막지는 못합니다.
 
 - **문제** — 어드민(grep-admin)에서 쓰고 공개하면 collector(grep-airflow)가 [`src/coding/problems.json`](src/coding/problems.json)에
   커밋합니다 — 이 저장소에서는 문제 파일을 손으로 만지지 않습니다. 이 저장소는 공개라 **숨은 테스트와 참조 풀이는 collector에만** 있고,
