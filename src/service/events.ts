@@ -29,7 +29,7 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/
 const TIME_PATTERN = /^\d{2}:\d{2}$/
 const URL_PATTERN = /^https:\/\/\S+$/
 
-const EVENT_SOURCES: readonly EventSource[] = ['티켓타코', '이벤터스']
+const EVENT_SOURCES: readonly EventSource[] = ['티켓타코', '이벤터스', 'Dev-Event']
 
 /**
  * 모양이 틀리면 빌드를 멈춘다. collector 와의 계약이 어긋난 채 배포되면 행사가 조용히 빠지거나

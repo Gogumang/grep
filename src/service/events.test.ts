@@ -64,10 +64,26 @@ describe('parseEventsFile', () => {
     expect(events.map((event) => event.source)).toEqual(['티켓타코', '이벤터스'])
   })
 
+  test('Dev-Event 해커톤은 Dev-Event 로 읽는다 — 주소는 행사 공식 사이트다', () => {
+    const fromDevEvent = {
+      ...FLUTTER_KOREA,
+      id: 'dev-event-3f2a9c1b7d4e',
+      title: 'SK하이닉스 AI 해커톤 2026',
+      url: 'https://skhynix-hackathon.com/ai-2026',
+      source: 'Dev-Event',
+    }
+
+    const [event] = parseEventsFile(file([fromDevEvent]))
+
+    expect(event?.source).toBe('Dev-Event')
+  })
+
   test('모르는 source 는 실패한다 — collector 와 계약이 어긋난 채 배포되지 않게', () => {
     const json = file([{ ...FLUTTER_KOREA, source: 'Meetup' }])
 
-    expect(() => parseEventsFile(json)).toThrow('source 값은 티켓타코·이벤터스 중 하나여야 합니다, 입력값: Meetup')
+    expect(() => parseEventsFile(json)).toThrow(
+      'source 값은 티켓타코·이벤터스·Dev-Event 중 하나여야 합니다, 입력값: Meetup',
+    )
   })
 
   test('events 배열이 없으면 실패한다', () => {

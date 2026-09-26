@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ site }) => {
     '',
     `- [기술 아티클](${new URL('/explore/', site).href})`,
     `- [채용](${new URL('/jobs/', site).href}) — 기술 블로그를 운영하는 회사들의 개발 직군 공고. 지원은 각 회사 채용 페이지에서 합니다.`,
-    `- [이벤트](${new URL('/events/', site).href}) — 개발자 컨퍼런스·밋업·해커톤 일정. 티켓타코·이벤터스에서 모았고 신청은 각 행사 페이지에서 합니다.`,
+    `- [이벤트](${new URL('/events/', site).href}) — 개발자 컨퍼런스·밋업·해커톤 일정. 티켓타코·이벤터스·Dev-Event에서 모았고 신청은 각 행사 페이지에서 합니다.`,
     '',
     '## 알아둘 것',
     '',
