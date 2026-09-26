@@ -1,12 +1,15 @@
 /**
  * 사이트가 쓰는 분류 셋이자 사이드바 순서. 글마다 하나다 — 원문 블로그가 매긴 분류(토스만 준다)가 아니라
  * 글의 주제로 직접 매긴다(2026-09-27, 글 1,082개). Engineering 은 어디에도 딱 맞지 않는 일반 개발 글이다
- * (언어·패러다임·아키텍처·개발 도구·게임).
+ * (언어·패러다임·아키텍처·개발 도구·게임). 모바일은 Android·iOS 로 나누고, React Native·Flutter·KMP 와 두 플랫폼 공통 앱 글은
+ * Cross-platform 이다.
  */
 export const POST_CATEGORIES = [
   'Frontend',
   'Backend',
-  'Mobile',
+  'Android',
+  'iOS',
+  'Cross-platform',
   'DevOps',
   'Data',
   'AI/ML',

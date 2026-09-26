@@ -28,13 +28,13 @@ describe('classifyCategory', () => {
 
   test('사이트 분류 이름은 대소문자와 상관없이 그대로 받는다', () => {
     // Arrange
-    const sourceCategories = ['Frontend', 'backend', 'AI/ML', 'ai/ml', 'DevOps', 'Culture']
+    const sourceCategories = ['Frontend', 'backend', 'AI/ML', 'ai/ml', 'ios', 'Cross-platform']
 
     // Act
     const categories = sourceCategories.map(classifyCategory)
 
     // Assert
-    expect(categories).toEqual(['Frontend', 'Backend', 'AI/ML', 'AI/ML', 'DevOps', 'Culture'])
+    expect(categories).toEqual(['Frontend', 'Backend', 'AI/ML', 'AI/ML', 'iOS', 'Cross-platform'])
   })
 
   test('분류가 없거나 모르는 이름이면 Engineering이다', () => {
