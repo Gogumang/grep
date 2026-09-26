@@ -19,5 +19,5 @@ export type {
 } from './desk'
 export type { EventSource, ListedEvent, TechEvent } from './event'
 export type { Job, JobsSnapshot } from './job'
-export { POST_CATEGORIES } from './post'
 export type { Post, PostCategory } from './post'
+export { POST_CATEGORIES } from './post'

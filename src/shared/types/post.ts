@@ -1,27 +1,16 @@
+import categoryFile from '../../posts/config/categories.json'
+
 /**
  * 사이트가 쓰는 분류 셋이자 사이드바 순서. 글마다 하나다 — 원문 블로그가 매긴 분류(토스만 준다)가 아니라
- * 글의 주제로 직접 매긴다(2026-09-27, 글 1,082개). Engineering 은 어디에도 딱 맞지 않는 일반 개발 글이다
- * (언어·패러다임·아키텍처·개발 도구·게임). 모바일은 Android·iOS 로 나누고, React Native·Flutter·KMP 와 두 플랫폼 공통 앱 글은
- * Cross-platform 이다.
+ * 글의 주제로 직접 매긴다(2026-09-27, 글 1,082개).
+ *
+ * 목록은 코드가 아니라 src/posts/config/categories.json 에 있다. 어드민 '블로그 → 분류' 화면에서 고치면 collector 가
+ * 이 파일(과 이름이 바뀐 글 파일)을 커밋한다 — 여기를 손으로 고치지 않는다. 분류를 아직 매기지 않은 글은 Engineering 이다.
  */
-export const POST_CATEGORIES = [
-  'Frontend',
-  'Backend',
-  'Android',
-  'iOS',
-  'Cross-platform',
-  'DevOps',
-  'Data',
-  'AI/ML',
-  'Security',
-  'QA',
-  'Engineering',
-  'Design',
-  'Product',
-  'Culture',
-] as const
+export const POST_CATEGORIES: readonly string[] = categoryFile.categories
 
-export type PostCategory = (typeof POST_CATEGORIES)[number]
+/** POST_CATEGORIES 중 하나. 목록이 코드 밖(categories.json)에 있어 문자열이다. */
+export type PostCategory = string
 
 /** src/posts/*.md 파일 하나에 대응하는 글. */
 export interface Post {
