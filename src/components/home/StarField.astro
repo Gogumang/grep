@@ -2,10 +2,24 @@
 // 카카오 Hello World! 배너의 캐릭터를 윤곽선만 벡터로 딴 것 (로고·글자 제외).
 // 별 입자가 이 path들을 따라 모인다 — 채우기가 아니라 선 길이로 샘플링하므로 윤곽선이면 된다.
 import character from '../../../public/images/particle-shapes/hello-world-character.svg?raw'
+// 드로이드나이츠 2026 배너에서 행성 너머로 빼꼼 내민 안드로이드를 같은 방식으로 윤곽선만 딴 것.
+// 가려진 선(행성 아래 몸통, 앞발 뒤 수평선, 머리 속 안테나 뿌리)은 미리 지워 두었다 — 입자는 가림을 모른다.
+// 좌표를 고치려면 scripts/makeDroidKnightsShape.mjs의 상수를 바꾸고 `node scripts/makeDroidKnightsShape.mjs`.
+import droidKnightsAndroid from '../../../public/images/particle-shapes/droidknights-android.svg?raw'
+// 야자수와 비치 의자가 있는 무인도. scripts/makeIslandShape.mjs로 만든다.
+import island from '../../../public/images/particle-shapes/island.svg?raw'
 ---
 <div class="star-field" data-star-field>
   <template data-shape-template set:html={character} />
+  <template data-shape-template set:html={droidKnightsAndroid} />
+  <template data-shape-template set:html={island} />
   <div class="particle-stage" data-particle-stage aria-hidden="true"></div>
+  <button class="shape-step shape-step-previous" type="button" data-shape-step="-1" aria-label="이전 별 모양">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+  </button>
+  <button class="shape-step shape-step-next" type="button" data-shape-step="1" aria-label="다음 별 모양">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+  </button>
   <div class="star-loading" aria-hidden="true"><span></span><span></span><span></span></div>
 </div>
 <script is:inline src="/vendor/astra/astra-1.1.0.min.js" defer></script>
@@ -20,10 +34,26 @@ import character from '../../../public/images/particle-shapes/hello-world-charac
       return
     }
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
+    const shapes = Array.from(field.querySelectorAll('[data-shape-template]'), (template) => template.innerHTML)
+    // 펼쳐졌다 다시 모이는 데 3초 남짓 걸리니, 한 모양을 충분히 보여 줄 만큼 둔다
+    const SHAPE_SWAP_INTERVAL_MS = 14000
+    // 모양 전환 때의 흩어짐·모임 속도. 라이브러리는 1 - e^(-(5.5 / duration)·t)로 목표를 따라가서
+    // duration 2.5면 약 1.4초에 95% 도달한다 (처음 인트로의 5는 모양을 천천히 보여 주려는 값이라 전환에는 느리다).
+    // 인트로가 끝난 뒤 첫 전환부터 바꾼다 — 생성 옵션을 낮추면 페이지 첫 등장까지 빨라진다.
+    const TRANSITION_DURATION = 2.5
+    // 별이 펼쳐지는 시간. 95% 펼쳐진 뒤에 바꾼다 — 덜 펼친 채 바꾸면 옛 모양 윤곽이 남은 채로 새 자리로 미끄러진다.
+    const DISPERSE_MS = 1400
+    // scroll 모드에서 모양의 세기는 스크롤 진행도(첫 화면에서 약 0.5)가 gather 구간을 얼마나 지났나로 정해진다.
+    // 구간을 진행도보다 뒤로 밀면 세기가 0으로 가며 원본 Astra의 스크롤 흩어짐처럼 펼쳐지고,
+    // 기본 구간(라이브러리 기본값과 같다)으로 되돌리면 다시 모인다.
+    // 라이브러리가 0~1 밖의 값은 RangeError로 거부하므로 끝자락 [0.99, 1]을 쓴다
+    // (진행도가 0.86을 넘으면 어차피 disperse 구간이 흩어 놓는다).
+    const GATHER_RANGE = [0, 0.36]
+    const DISPERSED_RANGE = [0.99, 1]
     let cue
     try {
       cue = window.UXPShapeCue.createShapeCue(stage, {
-        shape: field.querySelector('[data-shape-template]').innerHTML,
+        shape: shapes[0],
         transform: reduced.matches ? 'off' : 'scroll',
         interaction: reduced.matches ? 'none' : 'rotate',
         interactionLabel: '움직이는 별 입자',
@@ -59,6 +89,43 @@ import character from '../../../public/images/particle-shapes/hello-world-charac
         playing ? cue.play() : cue.pause()
       }
       reduced.addEventListener('change', onMotionChange)
+      // setShape만 부르면 별이 옛 자리에서 새 자리로 곧장 미끄러진다. 원본처럼 먼저 펼쳤다가,
+      // 다 펼쳐진 뒤(어느 별이 어디로 가는지 안 보일 때) 모양을 바꾸고 다시 모은다.
+      let shapeIndex = 0
+      let pendingGather
+      let autoTimer
+      const showShape = (index) => {
+        shapeIndex = (index + shapes.length) % shapes.length
+        // reduced-motion에서는 transform이 off라 펼침이 없다 — 버튼으로 고른 모양만 바로 보여 준다
+        if (reduced.matches) {
+          cue.setShape(shapes[shapeIndex])
+          return
+        }
+        // 펼쳐지는 중에 또 누르면 목적지만 바꾼다. 타이머를 새로 걸어 마지막으로 고른 모양으로 모인다
+        clearTimeout(pendingGather)
+        cue.update({ animation: { duration: TRANSITION_DURATION }, scroll: { gather: DISPERSED_RANGE } })
+        pendingGather = setTimeout(() => {
+          cue.setShape(shapes[shapeIndex])
+          cue.update({ scroll: { gather: GATHER_RANGE } })
+        }, DISPERSE_MS)
+      }
+      // 자동 전환은 큰 움직임이라 reduced-motion이면 하지 않는다.
+      // 숨은 탭에서도 건너뛴다 — 렌더가 멈춘 사이 바꾸면 돌아왔을 때 모이는 장면 없이 모양만 바뀌어 있다.
+      // 버튼을 누르면 타이머를 다시 건다 — 고르자마자 자동 전환이 덮어쓰지 않게.
+      const scheduleAuto = () => {
+        clearTimeout(autoTimer)
+        autoTimer = setTimeout(() => {
+          if (!reduced.matches && document.visibilityState === 'visible') showShape(shapeIndex + 1)
+          scheduleAuto()
+        }, SHAPE_SWAP_INTERVAL_MS)
+      }
+      scheduleAuto()
+      field.querySelectorAll('[data-shape-step]').forEach((button) => {
+        button.addEventListener('click', () => {
+          showShape(shapeIndex + Number(button.dataset.shapeStep))
+          scheduleAuto()
+        })
+      })
       // pagehide에서 dispose하지 않는다. 모바일 브라우저는 앱 전환·뒤로 가기 때 pagehide를 쏘고
       // 같은 페이지를 bfcache에서 스크립트 재실행 없이 되살리므로, 여기서 치우면 캔버스가 사라진 채로 돌아온다.
       // 숨김 동안의 정지는 라이브러리가 visibilitychange로 이미 한다.
@@ -80,5 +147,20 @@ import character from '../../../public/images/particle-shapes/hello-world-charac
   /* 실패했을 때도 감춘다 — 멈춘 점 세 개는 '아직 로딩 중'으로 오해된다 */
   [data-star-state] .star-loading { display: none; }
   @media (prefers-reduced-motion: reduce) { .star-loading span { animation: none; opacity: .6; } }
-  @media(max-width:800px) { .star-field { inset: 0; width: 100%; height: 100%; } }
+  /* 화면 양 끝의 이전/다음 버튼. 별밭을 가리지 않게 테두리·배경 없이 화살표만 보인다.
+     누르는 영역은 48px로 넓게 두어 화살표보다 크다. 별이 준비된 뒤에만 보인다
+     (실패하면 누를 대상이 없다). z-index는 가운데 문구(1)보다 위라야 눌린다. */
+  .shape-step { position: absolute; top: 50%; z-index: 2; display: none; place-items: center; width: 48px; height: 48px; margin-top: -24px; padding: 0; border: 0; border-radius: 8px; background: none; color: #a7a8b1; cursor: pointer; transition: color .2s; }
+  .shape-step svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 6px rgba(4,5,9,.8)); }
+  .shape-step:hover { color: #fff; }
+  .shape-step:focus-visible { outline: 2px solid #9fc2ff; outline-offset: 3px; }
+  .shape-step-previous { left: 24px; }
+  .shape-step-next { right: 24px; }
+  [data-star-state="ready"] .shape-step { display: grid; }
+  @media(max-width:800px) {
+    .star-field { inset: 0; width: 100%; height: 100%; }
+    .shape-step { width: 40px; height: 40px; margin-top: -20px; }
+    .shape-step-previous { left: 12px; }
+    .shape-step-next { right: 12px; }
+  }
 </style>
