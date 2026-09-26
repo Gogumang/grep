@@ -15,6 +15,7 @@ import * as wordmark from '@/components/header/Wordmark.css'
         <a href="/explore">기술 아티클</a>
         <a href="/jobs">채용</a>
         <a href="/events">이벤트</a>
+        <a href="/coding">코딩테스트</a>
       </nav>
 
     </header>
@@ -153,6 +154,14 @@ h1 {
 .nav { justify-content: flex-start; border-bottom: 0; }
 .nav nav { margin-left: auto; }
 .nav nav a:last-child { display: block; }
+/* 메뉴가 다섯 개라 좁은 폰에서 넘친다(320px에서 349px 필요). 로고가 이미 홈으로 가니 '홈'부터 뺀다. */
+@media (max-width: 400px) {
+  .nav nav a[href="/"] { display: none; }
+}
+@media (max-width: 340px) {
+  .nav nav { gap: 10px; }
+  .logo { font-size: 25px; }
+}
 .hero { min-height: 600px; height: 100svh; max-height: none; padding: 0; display: block; background: #000; }
 .hero-title { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 8%; margin: 0; font-size: clamp(32px, 3.8vw, 62px); letter-spacing: -0.01em; line-height: 1.32; font-weight: 250; pointer-events: none; z-index: 1; text-shadow: 0 2px 26px rgba(4,5,9,.7); }
 /* 두 조각을 대각선으로 어긋나게 둔다 — 왼쪽은 위로, 오른쪽은 아래로.
