@@ -27,6 +27,19 @@
     "highestPrice" : 0,
     "source" : "티켓타코"
   }, {
+    "id" : "meetup-316523540",
+    "title" : "AWSKRUG 데브옵스 x 보안 소모임 - 9월 30일 (수)",
+    "url" : "https://www.meetup.com/awskrug/events/316523540/",
+    "host" : "AWSKRUG - AWS한국사용자모임",
+    "startDate" : "2026-09-30",
+    "startTime" : "19:00",
+    "endDate" : "2026-09-30",
+    "place" : "Centerfield",
+    "isOnline" : false,
+    "lowestPrice" : 10000,
+    "highestPrice" : null,
+    "source" : "Meetup"
+  }, {
     "id" : "vynxqozt",
     "title" : "오픈소스 테크데이 2026",
     "url" : "https://ticketa.co/event/vynxqozt",
