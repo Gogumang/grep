@@ -1,15 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <!--
-    워드마크에 있던 셸 프롬프트를 그대로 옮겼다. viewBox와 획 두께가 같다.
-    탭 배경은 브라우저 테마를 따르므로 색을 두 벌 둔다 — 라이트는 진한 초록,
-    다크는 밝은 초록. 브랜드 토큰(brand.500 / brand.400)과 같은 값이다.
+    수달 얼굴. 워드마크의 셸 프롬프트(>_)를 얼굴에 옮겼다 — 왼쪽 눈이 >, 입이 _ 다.
+    귀는 수달처럼 작게 옆에 붙인다. 16px 탭에서도 얼굴로 읽히게 획을 두껍게 둔다.
+    채운 초록 얼굴 위 흰 획이라 밝은·어두운 탭 모두에서 보여 색은 한 벌(brand.500)만 둔다.
   -->
-  <style>
-    .stroke { stroke: #079743 }
-    @media (prefers-color-scheme: dark) { .stroke { stroke: #09d25d } }
-  </style>
-  <path class="stroke" d="M3.8 5.4L9.4 10L3.8 14.6" fill="none" stroke-width="2.4"
+  <circle cx="6.4" cy="10.2" r="2.8" fill="#079743"/>
+  <circle cx="25.6" cy="10.2" r="2.8" fill="#079743"/>
+  <ellipse cx="16" cy="17.4" rx="13.4" ry="11.8" fill="#079743"/>
+  <path d="M8.6 12.4l3.6 2.7-3.6 2.7" fill="none" stroke="#fff" stroke-width="2.2"
         stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="stroke" d="M11.4 15.4H16.6" fill="none" stroke-width="2.4"
-        stroke-linecap="round" opacity="0.45"/>
+  <path d="M13.4 23.2h5.2" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
 </svg>
