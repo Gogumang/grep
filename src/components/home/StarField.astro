@@ -6,13 +6,13 @@ import character from '../../../public/images/particle-shapes/hello-world-charac
 // 가려진 선(행성 아래 몸통, 앞발 뒤 수평선, 머리 속 안테나 뿌리)은 미리 지워 두었다 — 입자는 가림을 모른다.
 // 좌표를 고치려면 scripts/makeDroidKnightsShape.mjs의 상수를 바꾸고 `node scripts/makeDroidKnightsShape.mjs`.
 import droidKnightsAndroid from '../../../public/images/particle-shapes/droidknights-android.svg?raw'
-// 야자수와 비치 의자가 있는 무인도. scripts/makeIslandShape.mjs로 만든다.
-import island from '../../../public/images/particle-shapes/island.svg?raw'
+// Claude Code 캐릭터가 OpenAI Astra의 나선 은하를 올려다보는 모습. scripts/makeClaudeAstraShape.mjs로 만든다.
+import claudeCodeAstra from '../../../public/images/particle-shapes/claude-code-astra.svg?raw'
 ---
 <div class="star-field" data-star-field>
   <template data-shape-template set:html={character} />
   <template data-shape-template set:html={droidKnightsAndroid} />
-  <template data-shape-template set:html={island} />
+  <template data-shape-template set:html={claudeCodeAstra} />
   <div class="particle-stage" data-particle-stage aria-hidden="true"></div>
   <button class="shape-step shape-step-previous" type="button" data-shape-step="-1" aria-label="이전 별 모양">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
