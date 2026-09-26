@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2023-12-08T02:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/270bbfbbcc.png"
 tags: []
+category: "Backend"
 ---
 
 최적화 기법을 활용한 배송 효율화 사례 소개

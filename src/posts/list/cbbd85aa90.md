@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2023-01-10T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/cbbd85aa90.png"
 tags: []
+category: "AI/ML"
 ---
 
 워크숍에 방문하여 경험한 내용들을 공유합니다.

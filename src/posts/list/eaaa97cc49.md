@@ -7,6 +7,7 @@ blogHomepage: "https://blog.gangnamunni.com"
 publishedAt: "2026-07-04T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/eaaa97cc49.png"
 tags: ["브랜드"]
+category: "Design"
 ---
 
 리브랜딩 아직 안 끝났어요

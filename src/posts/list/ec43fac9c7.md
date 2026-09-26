@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2021-04-28T06:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/ec43fac9c7.avif"
 tags: []
-category: "Engineering"
+category: "Backend"
 author: "김피터"
 ---
 

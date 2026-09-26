@@ -1,5 +1,5 @@
 import { countBy, uniqBy } from 'es-toolkit'
-import type { Post, PostCategory } from '../types'
+import { POST_CATEGORIES, type Post, type PostCategory } from '../types'
 
 export interface BlogFacet {
   blogKey: string
@@ -19,8 +19,8 @@ export interface PostFilter {
 
 export const EMPTY_FILTER: PostFilter = { blogKey: null, category: null }
 
-/** 사이드바에 보이는 순서. 글 수로 정렬하면 수집 때마다 순서가 흔들린다. */
-const CATEGORY_ORDER: PostCategory[] = ['Engineering', 'Design', 'Product']
+/** 사이드바에 보이는 순서(POST_CATEGORIES 순). 글 수로 정렬하면 수집 때마다 순서가 흔들린다. */
+const CATEGORY_ORDER: readonly PostCategory[] = POST_CATEGORIES
 
 const MEANINGLESS_TAGS = new Set([
   'post',

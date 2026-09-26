@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.gccompany.co.kr"
 publishedAt: "2026-08-24T05:41:16Z"
 sourceThumbnail: "https://images.gogumang.com/7bdec5dc71.png"
 tags: ["tech", "ai", "karpenter", "sre", "kubernetes"]
+category: "DevOps"
 ---
 
 SRE 업무에 AI 녹여내기 — 1편: Smart RI Calc로 인프라 비용 산정 자동화 글. 구혜준(Hazel) / SRE팀 이 글은 2부작입니다. (1/2) AI는 읽고, 코드는 계산합니다 — Smart RI Calc (현재 글) (2/2) 틀린 걸 없애기보다, 틀린 게 보이게 — Alert Adviser 안녕하세요, 여기어때컴퍼니 SRE팀에서 클라우드 엔지니어링 업무를 담당하고 있는 헤이즐입니다. SRE팀은 반복되는 수작업을 줄이고 운영 생산성을 높이기 위해 AI와 코드 자동화를 실무에 다각도로 적용해 보고 있습니다. 이번…

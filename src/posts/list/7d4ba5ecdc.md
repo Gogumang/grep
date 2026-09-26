@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2024-09-25T04:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/7d4ba5ecdc.png"
 tags: []
+category: "AI/ML"
 ---
 
 Prompt Engineering을 활용한 비정형 데이터 검수 실험

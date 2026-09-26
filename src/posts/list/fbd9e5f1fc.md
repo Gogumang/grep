@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-01-08T08:44:00Z"
 sourceThumbnail: "https://images.gogumang.com/fbd9e5f1fc.avif"
 tags: []
-category: "Engineering"
+category: "Backend"
 author: "강병수"
 ---
 

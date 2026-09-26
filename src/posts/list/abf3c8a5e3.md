@@ -7,6 +7,7 @@ blogHomepage: "https://medium.com/musinsa-tech"
 publishedAt: "2026-07-09T07:31:01Z"
 sourceThumbnail: "https://cdn-images-1.medium.com/max/1024/1*Lvwtd1fxrDMG6TFUM-qSFg.jpeg"
 tags: ["ai", "musinsa", "jenkins", "claude", "jfr"]
+category: "Backend"
 ---
 
 JFR로 잡은 12분짜리 Jenkins 배치 Hang 무신사 물류기술실 WMS팀 — Spring Batch · Jenkins · JFR(Java Flight Recorder) · Aurora MySQL 들어가며 저희 팀은 무신사의 창고 운영을 책임지는 MWMS(Musinsa Warehouse Management System) 를 만들고 있습니다. 매일 다량의 출고 작업이 인입되면 작업자에게 보낼 피킹 지시서 단위로 작업이 분해되는데, 이 분해 작업을 수행하는 Spring Batch가 한동안 저희를 괴롭혔습니다. 본격적인 시작은 이미…

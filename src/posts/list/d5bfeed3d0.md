@@ -7,6 +7,7 @@ blogHomepage: "https://blog.gangnamunni.com"
 publishedAt: "2023-07-05T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/d5bfeed3d0.jpg"
 tags: ["개발"]
+category: "Backend"
 ---
 
 Transactional Outbox Pattern을 이용한 결과적 일관성 확보

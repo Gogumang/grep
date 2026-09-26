@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-01-11T06:10:00Z"
 sourceThumbnail: "https://images.gogumang.com/e6b9c1b7af.avif"
 tags: []
-category: "Engineering"
+category: "Product"
 author: "한재엽"
 ---
 

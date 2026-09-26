@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-22T12:52:00Z"
 sourceThumbnail: "https://images.gogumang.com/ff3b6ed46c.avif"
 tags: []
-category: "Engineering"
+category: "Frontend"
 author: "박서진/이다용"
 ---
 

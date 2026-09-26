@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.gccompany.co.kr"
 publishedAt: "2026-08-20T08:55:21.121Z"
 sourceThumbnail: "https://images.gogumang.com/fda8a241ca.jpeg"
 tags: ["조직문화", "여기어때컴퍼니", "여기어때", "기업문화", "인터뷰"]
+category: "Culture"
 author: "주디Judy(송민경) / 인사팀"
 ---
 

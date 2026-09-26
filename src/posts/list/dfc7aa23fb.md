@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2021-06-08T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/dfc7aa23fb.avif"
 tags: []
-category: "Engineering"
+category: "Data"
 author: "윤아서"
 ---
 

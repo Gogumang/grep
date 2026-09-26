@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.lycorp.co.jp/ko"
 publishedAt: "2026-06-22T02:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/dbdf3a6e20.png"
 tags: []
+category: "AI/ML"
 ---
 
 LY Corporation의 기술 컨퍼런스인 Tech-Verse 2026의 공식 기사입니다.안녕하세요. AI 에이전트로 분석을 ‘하나로 잇는’ 프로젝트 ‘PJ One Piece’의...

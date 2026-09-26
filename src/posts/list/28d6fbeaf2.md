@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2024-06-26T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/28d6fbeaf2.png"
 tags: []
+category: "Product"
 ---
 
 5. 출시 다음에는 ‘개선과 운영’ 홈탭을 출시하는 과정에서 팀 내에 많은 변동이 있었다. 커리어 개발・창업・이민 준비 등 다양한 이유로 팀원들은 회사를 떠났다. 초기 기획을 함께 이끌어주던 디자이너 동료도 떠나게 되었고, PM…

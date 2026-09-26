@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-12-02T05:23:00Z"
 sourceThumbnail: "https://images.gogumang.com/cfb024dc7b.avif"
 tags: []
-category: "Design"
+category: "AI/ML"
 author: "최정은"
 ---
 

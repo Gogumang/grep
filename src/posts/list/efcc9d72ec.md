@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2020-04-19T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/efcc9d72ec.png"
 tags: []
+category: "Culture"
 ---
 
 컬리 개발조직 맛보기

@@ -7,6 +7,7 @@ blogHomepage: "https://blog.gangnamunni.com"
 publishedAt: "2023-02-05T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/9dc8cf3b0e.png"
 tags: ["개발"]
+category: "Backend"
 ---
 
 IoC를 이용한 데이터 원자성 확보

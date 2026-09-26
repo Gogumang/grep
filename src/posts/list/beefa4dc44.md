@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-09-19T03:07:00Z"
 sourceThumbnail: "https://images.gogumang.com/beefa4dc44.avif"
 tags: []
-category: "Engineering"
+category: "DevOps"
 ---
 
 Kafka Broker request log를 활용해서 서비스 간 의존성 파악하기

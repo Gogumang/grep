@@ -7,6 +7,7 @@ blogHomepage: "https://tech.devsisters.com"
 publishedAt: "2023-09-05T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/dd1e3de70b.png"
 tags: []
+category: "Backend"
 ---
 
 쿠키런: 오븐브레이크 팀에서 MySQL을 사용하면서 있었던 사례에 대해 공유합니다

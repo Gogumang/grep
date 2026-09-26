@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2020-02-26T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/4afaee3baa.png"
 tags: []
+category: "DevOps"
 ---
 
 람다 코드를 제거하는 과정의 경험을 공유합니다.

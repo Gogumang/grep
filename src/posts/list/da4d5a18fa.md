@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-06-05T07:30:00Z"
 sourceThumbnail: "https://images.gogumang.com/da4d5a18fa.avif"
 tags: []
-category: "Engineering"
+category: "Culture"
 author: "문동욱"
 ---
 

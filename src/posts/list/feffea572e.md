@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2022-10-13T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/feffea572e.png"
 tags: []
+category: "AI/ML"
 ---
 
 유전 알고리즘 적용을 통한 최적화 사례 소개

@@ -7,6 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-08-26T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/4befd0cc35.avif"
 tags: []
+category: "AI/ML"
 ---
 
 추천, RAG, 그래프 검색을 만들며 마주한 문제와 선택

@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2020-09-06T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/4cfc1f37fb.png"
 tags: []
+category: "Backend"
 ---
 
 성능 테스트로 데드락을 찾아 없애고 TPS를 끌어올리자!

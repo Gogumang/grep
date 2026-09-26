@@ -7,6 +7,7 @@ blogHomepage: "https://tech.devsisters.com"
 publishedAt: "2023-01-06T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/dd23efd08a.png"
 tags: []
+category: "Culture"
 ---
 
 2021년 1월 25일, 입사 첫날에 36시간 점검을 경험한 이야기를 전해드리고자 합니다.

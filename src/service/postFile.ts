@@ -1,21 +1,19 @@
-import type { Post, PostCategory } from '../shared/types'
+import { POST_CATEGORIES, type Post, type PostCategory } from '../shared/types'
 
 /**
- * 원문 블로그가 쓰는 분류 이름 → 사이트 분류. 비교는 소문자로 한다.
- * 지금 분류를 주는 블로그는 토스뿐이다(Engineering·Design·프로덕트).
+ * 파일의 분류 이름 → 사이트 분류. 비교는 소문자로 한다. 사이트 분류 이름은 그대로 받고, 원문 블로그가 준 이름도
+ * 받는다 — 분류를 주는 블로그는 토스뿐이다(Engineering·Design·프로덕트). 새로 들어온 글이 원문 이름을 달고 올 수 있다.
  */
 const CATEGORY_ALIASES: Record<string, PostCategory> = {
-  engineering: 'Engineering',
+  ...Object.fromEntries(POST_CATEGORIES.map((category) => [category.toLowerCase(), category])),
   개발: 'Engineering',
-  design: 'Design',
   디자인: 'Design',
-  product: 'Product',
   프로덕트: 'Product',
 }
 
 /**
  * 분류가 없거나 모르는 이름이면 Engineering으로 둔다 — 모으는 곳이 전부 기술 블로그라
- * 분류를 따로 매기지 않는 블로그의 글은 사실상 개발 글이다.
+ * 아직 분류를 매기지 않은 글은 사실상 개발 글이다.
  */
 const DEFAULT_CATEGORY: PostCategory = 'Engineering'
 

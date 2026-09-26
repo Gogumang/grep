@@ -7,6 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-24T03:36:00Z"
 sourceThumbnail: "https://images.gogumang.com/cce16e5ecc.avif"
 tags: []
+category: "Frontend"
 ---
 
 *This is the English version of a previously published article . Hello! We&#x27;re Sojin Park, Head of Frontend Engineering at Toss, and Dayong Lee, Frontend Developer at Toss Bank. Today, we&#x27;d like to share the story of es-toolkit: how it started as a small utility function library inside Toss…

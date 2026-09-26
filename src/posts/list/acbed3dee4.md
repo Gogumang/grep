@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2020-04-21T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/acbed3dee4.png"
 tags: []
+category: "Data"
 ---
 
 안녕하세요 뱅크샐러드 데이터 파운데이션의 Product Manager…

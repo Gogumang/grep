@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2019-04-11T03:20:48Z"
 sourceThumbnail: "https://images.gogumang.com/4ecbbae1c1.png"
 tags: []
+category: "Culture"
 ---
 
 Welcome to 마켓컬리!

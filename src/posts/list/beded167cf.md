@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2023-05-17T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/beded167cf.png"
 tags: []
+category: "Backend"
 ---
 
 2주 만에 개발된 웨비나 시스템이 지금까지도 잘 사용되고 있다는 이야기 💬

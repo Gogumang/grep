@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2024-12-02T01:30:00Z"
 sourceThumbnail: "https://images.gogumang.com/dc16dfa27e.png"
 tags: []
+category: "Backend"
 ---
 
 Spring Kafka 활용한 오프셋 이동 및 메시지 재처리 방법

@@ -7,6 +7,7 @@ blogHomepage: "https://medium.com/wantedjobs"
 publishedAt: "2024-02-07T01:35:13Z"
 sourceThumbnail: "https://images.gogumang.com/edf3c9a7bd.png"
 tags: ["pnpm", "package-manager", "yarn", "frontend"]
+category: "Frontend"
 ---
 
 안녕하세요 저는 원티드랩 HR솔루션사업팀에서 프론트엔드 개발을 하고 있는 신은선입니다. HR솔루션사업부에서는 팀 디렉토리, 근태, 전자결재/계약부터 슬랙 연동까지 모든 HR데이터를 쉽고 편하게 관리할 수 있는 HR 솔루션 SaaS인 원티드 스페이스를 만들고 있습니다. 이번 글에서는 원티드 스페이스 프로젝트의 패키지 매니저를 Yarn Classic에서 Pnpm으로 전환한 과정에 대해서 공유해보려 합니다. 배경 Yarn Classic이 가진 문제 원티드 스페이스 프로젝트는 Turbo Repo를 사용한 모노레포 구조에 패키지 매니저로는…

@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2022-11-14T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/eb8dfc2ae7.png"
 tags: []
+category: "AI/ML"
 ---
 
 Digital Twin을 구축해 최적화 알고리즘을 검증하기

@@ -7,6 +7,7 @@ blogHomepage: "https://tech.devsisters.com"
 publishedAt: "2022-08-17T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/180fdbeb9f.png"
 tags: []
+category: "Mobile"
 ---
 
 Swift 5.5에 도입된 async, await 문법의 등장 배경과 동작 원리를 알아봅니다.

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-07-21T05:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/bd0eefefea.avif"
 tags: []
-category: "프로덕트"
+category: "Product"
 author: "박세진/김태성"
 ---
 

@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2020-03-14T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/cb26cadf66.jpeg"
 tags: []
+category: "Culture"
 ---
 
 전면 재택근무 하는 오늘 일어나 이 닦고 세수한 후 출근까지 걸린 시간…

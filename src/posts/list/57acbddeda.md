@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.lycorp.co.jp/ko"
 publishedAt: "2026-04-01T02:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/57acbddeda.png"
 tags: []
+category: "Backend"
 ---
 
 들어가며안녕하세요. ABC Platform 팀에서 메시징 플랫폼(이하 MessagingHub)을 만들고 있는 송재욱입니다. 메시징은 이제 거의 모든 서비스에서 요구되는 기본 스펙인...

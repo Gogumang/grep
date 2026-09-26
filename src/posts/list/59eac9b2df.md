@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-08-21T09:51:00Z"
 sourceThumbnail: "https://images.gogumang.com/59eac9b2df.avif"
 tags: []
-category: "Engineering"
+category: "Backend"
 author: "조민국"
 ---
 

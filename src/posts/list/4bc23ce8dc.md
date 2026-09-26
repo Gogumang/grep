@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.lycorp.co.jp/ko"
 publishedAt: "2026-06-26T02:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/4bc23ce8dc.png"
 tags: []
+category: "AI/ML"
 ---
 
 LY Corporation의 기술 컨퍼런스인 Tech-Verse 2026의 공식 기사입니다.안녕하세요. LY Corporation에서 머신러닝 플랫폼을 개발하고 있는 Kenta K...

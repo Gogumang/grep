@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2024-08-23T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/e3a9cbf9d5.png"
 tags: []
+category: "Design"
 ---
 
 “이걸 진짜 만든다고요? 🤯 ” 샐러드게임 탄생 배경 202…

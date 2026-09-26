@@ -7,6 +7,7 @@ blogHomepage: "https://tech.devsisters.com"
 publishedAt: "2022-10-24T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/504dacab4a.png"
 tags: []
+category: "Backend"
 ---
 
 Scala가 게임 서버 개발에 왜 좋을까요? 그 이유를 알아봅니다.

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-01-30T01:59:00Z"
 sourceThumbnail: "https://images.gogumang.com/cdedf94e5c.avif"
 tags: []
-category: "Design"
+category: "Product"
 author: "유아란"
 ---
 

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2021-10-14T13:32:16Z"
 sourceThumbnail: "https://images.gogumang.com/aaf6dd331e.avif"
 tags: []
-category: "Engineering"
+category: "Culture"
 author: "강병훈"
 ---
 

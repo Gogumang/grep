@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2021-01-12T05:40:00Z"
 sourceThumbnail: "https://images.gogumang.com/cbe5aebb06.png"
 tags: []
+category: "Culture"
 ---
 
 컬리 입사 과정과 합격 이후 일어난 일들을 소개합니다

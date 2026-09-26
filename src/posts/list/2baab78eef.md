@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-06-27T01:45:00Z"
 sourceThumbnail: "https://images.gogumang.com/2baab78eef.avif"
 tags: []
-category: "Design"
+category: "Product"
 author: "정채령"
 ---
 

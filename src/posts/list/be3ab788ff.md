@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2022-02-07T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/be3ab788ff.png"
 tags: []
+category: "Backend"
 ---
 
 안녕하세요. 인증 스쿼드(Authentication Squad)의 엔지니어링 매니저(Engineering Manager…

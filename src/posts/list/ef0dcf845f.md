@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.yogiyo.co.kr"
 publishedAt: "2025-12-31T01:17:58Z"
 sourceThumbnail: "https://images.gogumang.com/ef0dcf845f.png"
 tags: ["post", "yogiyo", "search-engines", "tech", "dba"]
+category: "AI/ML"
 ---
 
 사내 DB 관리 규정을 AI로 적용하다 : Amazon Bedrock 기반 DBA 리뷰봇 개발기 DDL 관리는 어떻게 하고 계신가요? 마이크로서비스 환경에서 DB 스키마 변경은 빈번하게 발생합니다. 문제는 단일 DDL이 아니라, 여러 DDL이 한 요청에 섞여 들어오거나 CDC·Replication과 같은 복제 구조가 함께 고려되어야 하는 복잡도가 높은 작업에서 발생합니다. 이러한 요청을 리뷰하는 DBA의 부담은 요청 수와 복잡도에 비례해 빠르게 커집니다. 요기요에서는 이러한 스키마 변경을 내부 관리 포털인 DBportal(요기요의…

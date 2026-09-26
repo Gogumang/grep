@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-03-20T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/c7ca36bcd2.avif"
 tags: []
-category: "Engineering"
+category: "Security"
 author: "표상영"
 ---
 

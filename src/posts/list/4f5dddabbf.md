@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-07-04T02:31:00Z"
 sourceThumbnail: "https://images.gogumang.com/4f5dddabbf.avif"
 tags: []
-category: "Design"
+category: "Product"
 author: "토스 TNS 길드"
 ---
 

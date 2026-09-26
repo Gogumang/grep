@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2025-12-01T09:01:00Z"
 sourceThumbnail: "https://images.gogumang.com/e30cf2aea7.avif"
 tags: []
-category: "Engineering"
+category: "Backend"
 author: "박순현/양권성"
 ---
 

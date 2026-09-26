@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2023-03-23T07:43:33Z"
 sourceThumbnail: "https://images.gogumang.com/d547ddfeff.avif"
 tags: []
-category: "Design"
+category: "Product"
 author: "박다롱"
 ---
 

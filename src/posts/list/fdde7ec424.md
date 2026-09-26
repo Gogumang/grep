@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2025-01-02T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/fdde7ec424.png"
 tags: []
+category: "DevOps"
 ---
 
 딜리버리 프로덕트 개발팀에서 안정적인 서비스 제공을 위한 고군분투기

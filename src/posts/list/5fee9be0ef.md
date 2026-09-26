@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2022-12-28T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/5fee9be0ef.png"
 tags: []
+category: "Culture"
 ---
 
 A Fast Metaheuristic Optimizer for Large-scale Batch Fulfillment Planning

@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2025-01-05T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/cc347ab8fa.png"
 tags: []
+category: "Backend"
 ---
 
 DB Connection과 Garbage Collector의 관계를 중심으로 mysql-connector-j 사용 시 발생할 수 있는 메모리 누수를 탐지하고 해결한 경험을 공유합니다.

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2022-06-08T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/ababd8fc1f.avif"
 tags: []
-category: "Engineering"
+category: "DevOps"
 author: "하태호"
 ---
 

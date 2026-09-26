@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2020-02-10T00:29:25Z"
 sourceThumbnail: "https://images.gogumang.com/aa6cf347cf.png"
 tags: []
+category: "Design"
 ---
 
 컬리 기술 블로그에 생기가 돌아온다!!

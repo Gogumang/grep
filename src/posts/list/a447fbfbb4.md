@@ -7,6 +7,7 @@ blogHomepage: "https://devocean.sk.com"
 publishedAt: "2026-08-24T08:12:54Z"
 sourceThumbnail: "https://images.gogumang.com/a447fbfbb4.png"
 tags: []
+category: "Security"
 ---
 
 새벽 4시 53분,아무도 안 깨어 있을 때 보안관제센터가 공격 탐지 티켓을 올렸습니다. 5분 뒤 공격자 IP는 두 개의 방화벽에 등록됐고, 티켓에는 조치 완료 댓글이 달렸습니다. 사람은 자고 있었습니다. 04:53:...

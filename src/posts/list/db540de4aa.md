@@ -7,6 +7,7 @@ blogHomepage: "https://tech.kakao.com"
 publishedAt: "2026-05-22T06:52:00Z"
 sourceThumbnail: "https://images.gogumang.com/db540de4aa.png"
 tags: []
+category: "Backend"
 author: "jyami.kim"
 ---
 

@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2022-05-04T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/fcedfe96ec.png"
 tags: []
+category: "Culture"
 ---
 
 뱅크샐러드 DevOps팀은 무슨 일을 하나요? 뱅크샐러드 DevOps…

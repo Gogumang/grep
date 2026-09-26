@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-03-25T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/daaff09cd2.avif"
 tags: []
-category: "Engineering"
+category: "Data"
 author: "박종익"
 ---
 

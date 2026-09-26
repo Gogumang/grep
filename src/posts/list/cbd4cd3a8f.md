@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-10-15T04:27:00Z"
 sourceThumbnail: "https://images.gogumang.com/cbd4cd3a8f.avif"
 tags: []
-category: "Design"
+category: "Culture"
 author: "김자유"
 ---
 

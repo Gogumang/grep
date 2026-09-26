@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2022-12-12T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/e01eaad0f7.png"
 tags: []
+category: "Product"
 ---
 
 후기의 진화는 지금부터

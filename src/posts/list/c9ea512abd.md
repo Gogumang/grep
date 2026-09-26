@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2022-06-08T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/c9ea512abd.avif"
 tags: []
-category: "Engineering"
+category: "Design"
 author: "박민수"
 ---
 

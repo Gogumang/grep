@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-05-30T07:22:00Z"
 sourceThumbnail: "https://images.gogumang.com/2ebfab400c.avif"
 tags: []
-category: "Engineering"
+category: "Design"
 author: "황수재"
 ---
 

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-08T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/d5b2fa86bb.avif"
 tags: []
-category: "Engineering"
+category: "AI/ML"
 author: "조민규"
 ---
 

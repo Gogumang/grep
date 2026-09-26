@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-04-23T05:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/3c5a5ca9fa.avif"
 tags: []
-category: "Engineering"
+category: "Data"
 author: "이유진"
 ---
 

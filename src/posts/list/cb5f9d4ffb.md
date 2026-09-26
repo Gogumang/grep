@@ -7,6 +7,7 @@ blogHomepage: "https://tech.devsisters.com"
 publishedAt: "2024-05-29T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/cb5f9d4ffb.png"
 tags: []
+category: "AI/ML"
 ---
 
 머신러닝 엔지니어가 더 재미있는 퍼즐 게임을 위해 진행했던 프로젝트를 소개합니다.

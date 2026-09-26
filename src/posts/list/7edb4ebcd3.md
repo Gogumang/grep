@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2025-12-03T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/7edb4ebcd3.png"
 tags: []
+category: "Engineering"
 ---
 
 컬리 프로덕트 웹개발 팀의 테크 스펙 정착기와 AI 자동화 시도

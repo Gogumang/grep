@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2022-12-12T12:01:48Z"
 sourceThumbnail: "https://images.gogumang.com/baeafa69ce.avif"
 tags: []
-category: "Engineering"
+category: "QA"
 author: "황채은"
 ---
 

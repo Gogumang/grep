@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2024-05-20T04:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/e74cccdc5d.png"
 tags: []
+category: "AI/ML"
 ---
 
 보완재 추천 모델을 적용하고 성과를 거둔 사례 소개

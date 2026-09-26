@@ -7,6 +7,7 @@ blogHomepage: "https://hyperconnect.github.io"
 publishedAt: "2025-11-28T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/914caeebed.jpg"
 tags: ["machine-learning", "recommender-system"]
+category: "AI/ML"
 ---
 
 실제 비즈니스 목표를 최적화하기 위해 머신러닝 모델의 타겟 메트릭을 정하는 방법을 소개합니다.

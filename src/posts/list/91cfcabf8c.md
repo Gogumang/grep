@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-01-30T05:45:00Z"
 sourceThumbnail: "https://images.gogumang.com/91cfcabf8c.avif"
 tags: []
-category: "Design"
+category: "Culture"
 author: "박지희"
 ---
 

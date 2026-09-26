@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2020-03-17T01:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/5edd5f3c8f.png"
 tags: []
+category: "Backend"
 ---
 
 Legacy 시스템에서 주문 모니터링을 Elasticsearch로 이전했습니다.

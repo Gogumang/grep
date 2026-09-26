@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-04-07T09:44:00Z"
 sourceThumbnail: "https://images.gogumang.com/f25e53bdfb.avif"
 tags: []
-category: "Design"
+category: "Culture"
 author: "이정현"
 ---
 

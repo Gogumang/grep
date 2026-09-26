@@ -7,6 +7,7 @@ blogHomepage: "https://blog.gangnamunni.com"
 publishedAt: "2024-01-25T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/cdb0e8e79f.png"
 tags: ["개발"]
+category: "Frontend"
 ---
 
 피그마 위젯을 직접 개발해 제품 정책 파편화를 해결했어요.

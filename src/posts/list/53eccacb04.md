@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2022-03-23T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/53eccacb04.png"
 tags: []
+category: "Culture"
 ---
 
 뱅크샐러드 iOS 개발자는 무슨 일을 하나요? 뱅크샐러드 iOS…

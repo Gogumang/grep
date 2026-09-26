@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.lycorp.co.jp/ko"
 publishedAt: "2026-04-30T04:30:00Z"
 sourceThumbnail: "https://images.gogumang.com/b2d7ebfb74.png"
 tags: []
+category: "Security"
 ---
 
 안녕하세요. LY Corporation에서 인증·인가 기반 Athenz의 개발·운영을 담당하고 있는 김정우입니다. 이 글에서는 AI 에이전트가 다양한 서비스와 연동할 때 발생하는 ...

@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-10-29T05:43:00Z"
 sourceThumbnail: "https://images.gogumang.com/d46ceb3beb.avif"
 tags: []
-category: "Engineering"
+category: "Data"
 author: "조승완"
 ---
 

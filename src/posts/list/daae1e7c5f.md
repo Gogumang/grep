@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2024-10-24T12:13:00Z"
 sourceThumbnail: "https://images.gogumang.com/daae1e7c5f.avif"
 tags: []
-category: "Engineering"
+category: "QA"
 author: "조민규"
 ---
 

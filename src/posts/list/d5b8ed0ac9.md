@@ -7,6 +7,7 @@ blogHomepage: "https://blog.gangnamunni.com"
 publishedAt: "2025-03-13T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/d5b8ed0ac9.png"
 tags: ["개발"]
+category: "QA"
 ---
 
 테스트 대역은 마법같은 도구가 아니였다

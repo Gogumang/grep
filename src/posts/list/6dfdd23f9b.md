@@ -7,6 +7,7 @@ blogHomepage: "https://blog.banksalad.com"
 publishedAt: "2025-12-20T00:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/6dfdd23f9b.png"
 tags: []
+category: "Culture"
 ---
 
 뱅크샐러드가 11월 말 양재 aT센터에서 열린 ‘코리아 핀테크 위크 202…

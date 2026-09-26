@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2026-06-22T02:01:00Z"
 sourceThumbnail: "https://images.gogumang.com/7a9d10eeba.avif"
 tags: []
-category: "Engineering"
+category: "Culture"
 author: "김혜빈/황동진/한주연"
 ---
 

@@ -7,6 +7,7 @@ blogHomepage: "https://techblog.lycorp.co.jp/ko"
 publishedAt: "2026-04-15T06:30:00Z"
 sourceThumbnail: "https://images.gogumang.com/3bfa0d87bf.png"
 tags: []
+category: "AI/ML"
 ---
 
 안녕하세요. 2024년 4월에 신입 사원으로 LY Corporation에 입사한 Inoue Shuichi입니다. 현재 사내용 Kubernetes as a Service인 FKE 팀...

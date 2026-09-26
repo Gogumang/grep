@@ -7,6 +7,7 @@ blogHomepage: "https://helloworld.kurly.com"
 publishedAt: "2024-07-08T15:00:00Z"
 sourceThumbnail: "https://images.gogumang.com/b4bdb1c87f.png"
 tags: []
+category: "DevOps"
 ---
 
 서버리스 Airflow를 쿠버네티스 환경으로 전환하며 경험한 삽질들

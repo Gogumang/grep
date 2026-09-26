@@ -7,7 +7,7 @@ blogHomepage: "https://toss.tech"
 publishedAt: "2023-03-22T05:29:51Z"
 sourceThumbnail: "https://images.gogumang.com/fdcd52e1c3.png"
 tags: []
-category: "Engineering"
+category: "Backend"
 author: "이준희"
 ---
 
