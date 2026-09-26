@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { PROBLEMS } from '@/coding/problems'
+import * as badge from '@/shared/styles/badge.css'
+import * as styles from '@/styles/coding.css'
+---
+
+{/* 준비 중이라 메뉴·사이트맵·검색에 싣지 않는다(/desk와 같은 방식). 채점 서버를 공개하고 요청 제한을 붙인 뒤 연다. */}
+<BaseLayout
+  title="코딩테스트 — grep"
+  description="C·C++·Java·Kotlin·Go·Python·Ruby·JavaScript·TypeScript로 문제를 풀고 바로 채점받으세요."
+  noindex
+>
+  <main class={styles.listContainer}>
+    <h1 class={styles.pageTitle}>코딩테스트</h1>
+    <p class={styles.pageLead}>
+      문제를 골라 원하는 언어로 풀고, 예시로 실행해 본 뒤 제출하면 숨은 테스트까지 채점합니다.
+      입력은 표준 입력으로 받고 답은 표준 출력으로 냅니다.
+    </p>
+    <ul class={styles.problemList}>
+      {
+        PROBLEMS.map((problem) => (
+          <li>
+            <a class={styles.problemLink} href={`/coding/${problem.id}`}>
+              <span class={badge.category}>Lv. {problem.level}</span>
+              <span class={styles.problemTitle}>{problem.title}</span>
+              <span class={styles.problemTags}>{problem.tags.join(' · ')}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</BaseLayout>

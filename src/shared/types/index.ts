@@ -1,4 +1,14 @@
 export type {
+  CaseReport,
+  CaseVerdict,
+  CodingProblem,
+  CodingProblemsSnapshot,
+  GradeReport,
+  GradeScope,
+  JudgeLanguage,
+  TestCase,
+} from './coding'
+export type {
   DeskCatalog,
   DeskCategory,
   DeskItem,

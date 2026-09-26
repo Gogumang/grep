@@ -1,12 +1,13 @@
 import react from '@astrojs/react'
+import vercel from '@astrojs/vercel'
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import { defineConfig } from 'astro/config'
 import pagefind from 'astro-pagefind'
 
 /**
- * 모든 페이지가 빌드 때 구워진다. 서버가 필요한 라우트가 하나도 없어서
- * 어댑터를 두지 않는다 — 결과물은 dist/의 정적 파일뿐이라 Vercel·Netlify·
- * Cloudflare Pages·GitHub Pages 어디에도 그대로 올릴 수 있다.
+ * 모든 페이지가 빌드 때 구워진다. 예외는 코딩테스트 채점 API(/api/judge) 하나뿐이다 —
+ * 채점 서버 토큰을 브라우저에 싣지 않으려고 그 라우트만 `prerender = false`로 Vercel Function에서 돈다.
+ * 그래서 Vercel 어댑터를 둔다. 나머지 페이지는 그대로 정적 파일이다.
  *
  * sitemap은 src/pages/sitemap.xml.ts에서 직접 만든다 — @astrojs/sitemap은 파일
  * 이름을 sitemap-index.xml로 고정해서 /sitemap.xml을 내줄 수 없다.
@@ -18,6 +19,7 @@ import pagefind from 'astro-pagefind'
  */
 export default defineConfig({
   site: 'https://grep.gogumang.com',
+  adapter: vercel(),
   integrations: [react(), pagefind()],
   vite: {
     plugins: [vanillaExtractPlugin()],

@@ -75,6 +75,21 @@ collector(grep-airflow)가 매일 티켓타코 행사를 읽어 개발 행사만
 신청은 티켓타코 행사 페이지에서 합니다.
 다른 행사 모음(Dev-Event 등)은 사용 정책상 옮겨 올 수 없습니다.
 
+## 코딩테스트 (준비 중)
+
+**코딩테스트**(`/coding`, 준비 중) — `/desk`처럼 메뉴·사이트맵·검색에 없고(`noindex`) 주소로만 들어갑니다.
+문제를 골라 C · C++ · Java · Kotlin · Go · Python · Ruby · JavaScript · TypeScript로 풀고,
+**코드 실행**은 예시만, **제출 후 채점하기**는 숨은 테스트까지 채점합니다(표준 입력 → 표준 출력).
+코드·언어·칸 크기는 브라우저(localStorage)에 저장됩니다.
+
+- **문제** — 어드민(grep-admin)에서 쓰고 공개하면 collector(grep-airflow)가 [`src/coding/problems.json`](src/coding/problems.json)에
+  커밋합니다 — 이 저장소에서는 문제 파일을 손으로 만지지 않습니다. 이 저장소는 공개라 **숨은 테스트와 참조 풀이는 collector에만** 있고,
+  파일에는 설명·예시·숨은 테스트 개수만 실립니다.
+- **채점** — `POST /api/judge`(`{ problemId, language, code, scope: 'examples' | 'all' }`)가 사이트 토큰을 붙여
+  collector의 `POST /api/coding/grade`로 넘깁니다. collector가 같은 호스트의 채점 서버([go-judge](https://github.com/criyle/go-judge))로
+  컴파일·실행하고 비교합니다. 이 라우트만 Vercel Function이고 나머지는 그대로 정적 파일입니다.
+  필요한 환경 변수는 `COLLECTOR_BASE_URL`(예: `https://airflow.gogumang.com/collector`)·`COLLECTOR_SITE_TOKEN`입니다.
+
 ## 책상 꾸미기
 
 **책상**(`/desk`, 준비 중) — 메뉴·사이트맵에 없고 검색엔진에도 싣지 않아(`noindex`) 주소로만 들어갑니다.

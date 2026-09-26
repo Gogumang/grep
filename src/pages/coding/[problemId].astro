@@ -1,0 +1,145 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { CodingWorkspace } from '@/components/coding/CodingWorkspace'
+import { PostBody } from '@/components/post/PostBody'
+import { PROBLEMS } from '@/coding/problems'
+import * as styles from '@/styles/coding.css'
+
+export function getStaticPaths() {
+  return PROBLEMS.map((problem) => ({ params: { problemId: problem.id }, props: { problem } }))
+}
+
+const { problem } = Astro.props
+const MILLISECONDS_PER_SECOND = 1000
+---
+
+{/*
+  풀이 화면은 사이트 헤더 대신 자체 상단 바를 쓰고 화면 전체를 차지한다(프로그래머스·LeetCode와 같은 IDE 배치).
+  페이지는 스크롤하지 않고 문제·편집기·실행 결과가 각자 스크롤된다.
+*/}
+<BaseLayout title={`${problem.title} — 코딩테스트 — grep`} description={`${problem.title} 문제를 풀고 채점받으세요.`} noindex hideHeader>
+  <div class={styles.ide}>
+    <header class={styles.topBar}>
+      <a class={styles.brand} href="/">GREP</a>
+      <nav class={styles.breadcrumb} aria-label="현재 위치">
+        <a class={styles.breadcrumbLink} href="/coding">코딩테스트</a>
+        <span aria-hidden="true">›</span>
+        <span class={styles.breadcrumbCurrent}>{problem.title}</span>
+      </nav>
+    </header>
+
+    <div class={styles.titleBar}>
+      <h1 class={styles.title}>{problem.title}</h1>
+      <span class={styles.levelBadge}>Lv. {problem.level}</span>
+      <span class={styles.tags}>{problem.tags.join(' · ')}</span>
+    </div>
+
+    <main class={styles.panes} data-coding-panes>
+      <article class={styles.statement}>
+        <section class={styles.section}>
+          <h2 class={styles.sectionTitle}>문제 설명</h2>
+          <div class={styles.prose}><PostBody body={problem.statement} /></div>
+        </section>
+
+        <section class={styles.section}>
+          <h2 class={styles.sectionTitle}>입력</h2>
+          <div class={styles.prose}><PostBody body={problem.inputFormat} /></div>
+        </section>
+
+        <section class={styles.section}>
+          <h2 class={styles.sectionTitle}>출력</h2>
+          <div class={styles.prose}><PostBody body={problem.outputFormat} /></div>
+        </section>
+
+        <section class={styles.section}>
+          <h2 class={styles.sectionTitle}>제한 사항</h2>
+          <ul class={styles.limitList}>
+            <li>시간 제한 {problem.timeLimitMs / MILLISECONDS_PER_SECOND}초 — C·C++·Go 기준이고, 다른 언어는 더 줍니다.</li>
+            <li>메모리 제한 {problem.memoryLimitMb}MB</li>
+            <li>제출하면 예시 {problem.examples.length}개와 숨은 테스트 {problem.hiddenCaseCount}개로 채점합니다.</li>
+          </ul>
+        </section>
+
+        <section class={styles.section}>
+          <h2 class={styles.sectionTitle}>입출력 예</h2>
+          {
+            problem.examples.map((example, index) => (
+              <>
+                <p class={styles.exampleLabel}>입력 #{index + 1}</p>
+                <pre class={styles.exampleBlock}>{example.input}</pre>
+                <p class={styles.exampleLabel}>출력 #{index + 1}</p>
+                <pre class={styles.exampleBlock}>{example.output}</pre>
+              </>
+            ))
+          }
+        </section>
+      </article>
+
+      <div
+        class={styles.verticalHandle}
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="문제와 편집기 폭 조절 (좌우 방향키)"
+        tabindex="0"
+        data-coding-handle
+      >
+      </div>
+
+      {/* client:only — 편집기(CodeMirror)는 DOM이 있어야 그려지고, 코드는 localStorage에서 읽는다. */}
+      <CodingWorkspace client:only="react" problemId={problem.id} examples={problem.examples}>
+        <div slot="fallback" class={styles.workspaceLoading}>편집기를 준비하고 있어요…</div>
+      </CodingWorkspace>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  // 문제와 편집기 사이 손잡이. 폭은 이 브라우저에 기억한다(다른 문제로 가도 같은 폭).
+  const STORAGE_KEY = 'grep-coding-left-width'
+  const MIN_PERCENT = 25
+  const MAX_PERCENT = 70
+  const KEYBOARD_STEP_PERCENT = 2
+
+  const panes = document.querySelector<HTMLElement>('[data-coding-panes]')
+  const handle = document.querySelector<HTMLElement>('[data-coding-handle]')
+
+  const clamp = (percent: number) => Math.min(MAX_PERCENT, Math.max(MIN_PERCENT, percent))
+  const apply = (percent: number) => panes?.style.setProperty('--left-width', `${clamp(percent)}%`)
+  const current = () => Number.parseFloat(panes?.style.getPropertyValue('--left-width') || '40')
+  const save = () => {
+    try {
+      localStorage.setItem(STORAGE_KEY, String(current()))
+    } catch {
+      // 기억하지 못해도 조절은 된다.
+    }
+  }
+
+  try {
+    const stored = Number(localStorage.getItem(STORAGE_KEY))
+    if (stored) apply(stored)
+  } catch {
+    // 저장소가 막혀 있으면 기본 폭으로 둔다.
+  }
+
+  handle?.addEventListener('pointerdown', (event) => {
+    if (!panes) return
+    handle.setPointerCapture(event.pointerId)
+    handle.dataset.dragging = ''
+    const bounds = panes.getBoundingClientRect()
+    const onMove = (move: PointerEvent) => apply(((move.clientX - bounds.left) / bounds.width) * 100)
+    const onUp = () => {
+      delete handle.dataset.dragging
+      handle.removeEventListener('pointermove', onMove)
+      save()
+    }
+    handle.addEventListener('pointermove', onMove)
+    handle.addEventListener('pointerup', onUp, { once: true })
+  })
+
+  handle?.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    apply(current() + (event.key === 'ArrowLeft' ? -KEYBOARD_STEP_PERCENT : KEYBOARD_STEP_PERCENT))
+    save()
+  })
+</script>
