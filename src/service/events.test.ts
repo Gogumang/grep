@@ -78,11 +78,20 @@ describe('parseEventsFile', () => {
     expect(event?.source).toBe('Dev-Event')
   })
 
+  test('Meetup·Luma 행사도 그 출처로 읽는다', () => {
+    const fromMeetup = { ...FLUTTER_KOREA, id: 'meetup-316523540', url: 'https://www.meetup.com/awskrug/events/316523540/', source: 'Meetup' }
+    const fromLuma = { ...FLUTTER_KOREA, id: 'luma-evt-G9AqnOFI4wwbkKT', url: 'https://luma.com/espresso-hh', source: 'Luma' }
+
+    const events = parseEventsFile(file([fromMeetup, fromLuma]))
+
+    expect(events.map((event) => event.source)).toEqual(['Meetup', 'Luma'])
+  })
+
   test('모르는 source 는 실패한다 — collector 와 계약이 어긋난 채 배포되지 않게', () => {
-    const json = file([{ ...FLUTTER_KOREA, source: 'Meetup' }])
+    const json = file([{ ...FLUTTER_KOREA, source: 'Eventbrite' }])
 
     expect(() => parseEventsFile(json)).toThrow(
-      'source 값은 티켓타코·이벤터스·Dev-Event 중 하나여야 합니다, 입력값: Meetup',
+      'source 값은 티켓타코·이벤터스·Dev-Event·Meetup·Luma 중 하나여야 합니다, 입력값: Eventbrite',
     )
   })
 
