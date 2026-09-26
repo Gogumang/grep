@@ -21,5 +21,14 @@ export default defineConfig({
   integrations: [react(), pagefind()],
   vite: {
     plugins: [vanillaExtractPlugin()],
+    /*
+     * 책상 꾸미기(/desk)의 3D 라이브러리를 개발 서버가 뜰 때 React와 한 번에 미리 묶는다.
+     * 빼 두면 /desk를 처음 열 때에야 발견해서 다시 묶는데, 그 사이 브라우저가 immutable로 캐시한
+     * 이전 React와 새로 묶은 React가 섞여 두 벌이 된다 — "Cannot read properties of null
+     * (reading 'useState')"로 책상이 뜨지 않았다(개발 서버에서만, 빌드는 무관).
+     */
+    optimizeDeps: {
+      include: ['three', '@react-three/fiber', '@react-three/drei'],
+    },
   },
 })

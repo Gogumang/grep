@@ -17,6 +17,8 @@ interface Props {
    * 채용·이벤트 페이지에서 돋보기를 눌러 아티클이 뜨면 엉뚱하다.
    */
   searchScope?: 'posts' | 'jobs' | 'events'
+  /** 검색엔진에 싣지 않는다. 메뉴·사이트맵에 없는 준비 중인 페이지(/desk)용. */
+  noindex?: boolean
 }
 
 const {
@@ -27,6 +29,7 @@ const {
   ogImage,
   structuredData,
   searchScope = 'posts',
+  noindex = false,
 } = Astro.props
 
 const SEARCH_BUTTON_LABELS = { posts: '글 검색 열기', jobs: '채용 공고 검색 열기', events: '이벤트 검색 열기' }
@@ -111,6 +114,7 @@ const NAVIGATION = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="grep" />

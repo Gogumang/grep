@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { DeskBuilder } from '@/components/desk/DeskBuilder'
+import * as styles from '@/styles/desk.css'
+---
+
+<BaseLayout
+  title="책상 꾸미기 — grep"
+  description="개발자 책상을 3D로 꾸며 보세요. 모니터·키보드·소품을 올리고 옮기고 바꿔 본 뒤 링크로 자랑할 수 있습니다."
+  noindex
+>
+  <main>
+    <h1 class={styles.visuallyHidden}>책상 꾸미기</h1>
+    {/*
+      client:only — 3D 캔버스는 서버에서 그릴 수 없고, 배치는 주소창 해시·localStorage에서 읽는다.
+      three.js는 이 페이지에서만 받는다(Astro가 섬 단위로 번들을 나눈다). 글 페이지는 가벼운 그대로다.
+    */}
+    <DeskBuilder client:only="react">
+      <p slot="fallback" class={styles.loading}>책상을 준비하고 있어요…</p>
+    </DeskBuilder>
+  </main>
+</BaseLayout>
+

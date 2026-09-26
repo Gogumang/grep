@@ -1,0 +1,76 @@
+{
+  "models": {
+    "plant-monstera": {
+      "file": "/desk/models/plant-monstera.glb",
+      "title": "Potted Plant 02",
+      "author": "Rico Cilliers",
+      "sourceUrl": "https://polyhaven.com/a/potted_plant_02",
+      "license": "CC0-1.0"
+    },
+    "cactus": {
+      "file": "/desk/models/cactus.glb",
+      "title": "Potted Plant 04",
+      "author": "James Ray Cock",
+      "sourceUrl": "https://polyhaven.com/a/potted_plant_04",
+      "license": "CC0-1.0"
+    },
+    "rubber-duck": {
+      "file": "/desk/models/rubber-duck.glb",
+      "title": "Rubber Duck Toy",
+      "author": "Plat251",
+      "sourceUrl": "https://polyhaven.com/a/rubber_duck_toy",
+      "license": "CC0-1.0"
+    },
+    "desk-lamp": {
+      "file": "/desk/models/desk-lamp.glb",
+      "title": "Desk Lamp Arm 01",
+      "author": "Yann Kervran, Kuutti Siitonen",
+      "sourceUrl": "https://polyhaven.com/a/desk_lamp_arm_01",
+      "license": "CC0-1.0"
+    },
+    "books": {
+      "file": "/desk/models/books.glb",
+      "title": "Book Encyclopedia Set 01",
+      "author": "John Malcolm",
+      "sourceUrl": "https://polyhaven.com/a/book_encyclopedia_set_01",
+      "license": "CC0-1.0"
+    },
+    "alarm-clock": {
+      "file": "/desk/models/alarm-clock.glb",
+      "title": "Alarm Clock 01",
+      "author": "Yann Kervran, James Ray Cock",
+      "sourceUrl": "https://polyhaven.com/a/alarm_clock_01",
+      "license": "CC0-1.0"
+    }
+  },
+  "textures": {
+    "oak": {
+      "file": "/desk/textures/oak_{diff,nor,rough}.webp",
+      "title": "Oak Veneer 01",
+      "author": "Jenelle van Heerden",
+      "sourceUrl": "https://polyhaven.com/a/oak_veneer_01",
+      "license": "CC0-1.0"
+    },
+    "walnut": {
+      "file": "/desk/textures/walnut_{diff,nor,rough}.webp",
+      "title": "American Walnut Veneer",
+      "author": "Jenelle van Heerden",
+      "sourceUrl": "https://polyhaven.com/a/american_walnut_veneer",
+      "license": "CC0-1.0"
+    },
+    "floor": {
+      "file": "/desk/textures/floor_{diff,nor,rough}.webp",
+      "title": "Laminate Floor 02",
+      "author": "Dario Barresi, Charlotte Baglioni",
+      "sourceUrl": "https://polyhaven.com/a/laminate_floor_02",
+      "license": "CC0-1.0"
+    }
+  },
+  "hdri": {
+    "file": "/desk/hdri/room.hdr",
+    "title": "Lythwood Lounge",
+    "author": "Greg Zaal",
+    "sourceUrl": "https://polyhaven.com/a/lythwood_lounge",
+    "license": "CC0-1.0"
+  }
+}

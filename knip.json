@@ -12,6 +12,7 @@
     "src/styles/post.css.ts",
     "src/styles/notFound.css.ts",
     "src/styles/events.css.ts",
+    "src/styles/desk.css.ts",
     "src/components/search/SearchModal.css.ts",
     "src/components/header/SiteHeader.css.ts",
     "src/components/header/Wordmark.css.ts"
