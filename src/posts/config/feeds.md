@@ -19,7 +19,7 @@ collector가 이 파일의 표를 읽어 RSS/Atom 피드를 수집한다.
 | 당근 | https://medium.com/feed/daangn | https://medium.com/daangn |
 | 쿠팡 | https://medium.com/feed/coupang-engineering | https://medium.com/coupang-engineering |
 | 무신사 | https://medium.com/feed/musinsa-tech | https://medium.com/musinsa-tech |
-| 야놀자 | https://medium.com/feed/yanolja | https://medium.com/yanolja |
+| 야놀자 | https://medium.com/feed/@nol.tech | https://medium.com/@nol.tech |
 | 데브시스터즈 | https://tech.devsisters.com/rss.xml | https://tech.devsisters.com |
 | 뱅크샐러드 | https://blog.banksalad.com/rss.xml | https://blog.banksalad.com |
 | 하이퍼커넥트 | https://hyperconnect.github.io/feed.xml | https://hyperconnect.github.io |
@@ -36,7 +36,6 @@ collector가 이 파일의 표를 읽어 RSS/Atom 피드를 수집한다.
 | NHN | https://meetup.nhncloud.com/rss | https://meetup.nhncloud.com |
 | 데이블 | https://teamdable.github.io/techblog/feed.xml | https://teamdable.github.io/techblog |
 | SK 데보션 | https://devocean.sk.com/blog/rss.do | https://devocean.sk.com |
-| 카카오엔터프라이즈 | https://tech.kakaoenterprise.com/feed | https://tech.kakaoenterprise.com |
 
 ## 뺀 블로그
 
