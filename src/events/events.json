@@ -1,6 +1,19 @@
 {
   "source" : "티켓타코·이벤터스·Dev-Event·Meetup·Luma",
   "events" : [ {
+    "id" : "meetup-316466036",
+    "title" : "OWASP Seoul 9월 세미나: 정보보안 직무 특집",
+    "url" : "https://www.meetup.com/owasp-seoul/events/316466036/",
+    "host" : "OWASP Seoul Chapter",
+    "startDate" : "2026-09-29",
+    "startTime" : "19:00",
+    "endDate" : "2026-09-29",
+    "place" : "D Camp",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "Meetup"
+  }, {
     "id" : "ki83qyfs",
     "title" : "Dot4 9월 밋업 (미니 손선풍기 증정)",
     "url" : "https://ticketa.co/event/ki83qyfs",
