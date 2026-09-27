@@ -105,6 +105,19 @@
     "highestPrice" : null,
     "source" : "티켓타코"
   }, {
+    "id" : "meetup-316379129",
+    "title" : "OpenSearch Project - Seoul Meetup",
+    "url" : "https://www.meetup.com/opensearch-project-seoul/events/316379129/",
+    "host" : "OpenSearch Project - Seoul",
+    "startDate" : "2026-10-13",
+    "startTime" : "19:30",
+    "endDate" : "2026-10-13",
+    "place" : "센터필드 18층",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "Meetup"
+  }, {
     "id" : "izi3e7pl",
     "title" : "GitHub Copilot Dev Days | Pohang",
     "url" : "https://ticketa.co/event/izi3e7pl",
