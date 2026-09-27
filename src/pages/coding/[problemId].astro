@@ -11,6 +11,16 @@ export function getStaticPaths() {
 
 const { problem } = Astro.props
 const MILLISECONDS_PER_SECOND = 1000
+
+// 함수 방식(프로그래머스식) 문제는 채울 함수를 보여 주고, 입출력 예를 매개변수 칸·반환값 칸의 표로 그린다.
+// 예시 입력은 매개변수마다 JSON 한 줄이다.
+const problemFunction = problem.function ?? null
+const signatureText = problemFunction
+  ? `${problemFunction.name}(${problemFunction.parameters.map((parameter) => `${parameter.name}: ${parameter.type}`).join(', ')}): ${problemFunction.returnType}`
+  : null
+const exampleRows = problem.examples.map((example) =>
+  example.input.split('\n').map((line) => line.trim()).filter((line) => line !== ''),
+)
 ---
 
 {/*
@@ -41,13 +51,22 @@ const MILLISECONDS_PER_SECOND = 1000
           <div class={styles.prose}><PostBody body={problem.statement} /></div>
         </section>
 
+        {
+          signatureText && (
+            <section class={styles.section}>
+              <h2 class={styles.sectionTitle}>채울 함수</h2>
+              <pre class={styles.signature}>{signatureText}</pre>
+            </section>
+          )
+        }
+
         <section class={styles.section}>
-          <h2 class={styles.sectionTitle}>입력</h2>
+          <h2 class={styles.sectionTitle}>{problemFunction ? '매개변수' : '입력'}</h2>
           <div class={styles.prose}><PostBody body={problem.inputFormat} /></div>
         </section>
 
         <section class={styles.section}>
-          <h2 class={styles.sectionTitle}>출력</h2>
+          <h2 class={styles.sectionTitle}>{problemFunction ? '반환값' : '출력'}</h2>
           <div class={styles.prose}><PostBody body={problem.outputFormat} /></div>
         </section>
 
@@ -63,14 +82,39 @@ const MILLISECONDS_PER_SECOND = 1000
         <section class={styles.section}>
           <h2 class={styles.sectionTitle}>입출력 예</h2>
           {
-            problem.examples.map((example, index) => (
-              <>
-                <p class={styles.exampleLabel}>입력 #{index + 1}</p>
-                <pre class={styles.exampleBlock}>{example.input}</pre>
-                <p class={styles.exampleLabel}>출력 #{index + 1}</p>
-                <pre class={styles.exampleBlock}>{example.output}</pre>
-              </>
-            ))
+            problemFunction ? (
+              <div class={styles.exampleTableScroller}>
+                <table class={styles.exampleTable}>
+                  <thead>
+                    <tr>
+                      {problemFunction.parameters.map((parameter) => (
+                        <th>{parameter.name}</th>
+                      ))}
+                      <th>result</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {problem.examples.map((example, index) => (
+                      <tr>
+                        {problemFunction.parameters.map((_, parameterIndex) => (
+                          <td>{exampleRows[index]?.[parameterIndex] ?? ''}</td>
+                        ))}
+                        <td>{example.output.trim()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              problem.examples.map((example, index) => (
+                <>
+                  <p class={styles.exampleLabel}>입력 #{index + 1}</p>
+                  <pre class={styles.exampleBlock}>{example.input}</pre>
+                  <p class={styles.exampleLabel}>출력 #{index + 1}</p>
+                  <pre class={styles.exampleBlock}>{example.output}</pre>
+                </>
+              ))
+            )
           }
         </section>
       </article>
@@ -86,7 +130,7 @@ const MILLISECONDS_PER_SECOND = 1000
       </div>
 
       {/* client:only — 편집기(CodeMirror)는 DOM이 있어야 그려지고, 코드는 localStorage에서 읽는다. */}
-      <CodingWorkspace client:only="react" problemId={problem.id} examples={problem.examples}>
+      <CodingWorkspace client:only="react" problemId={problem.id} examples={problem.examples} problemFunction={problemFunction}>
         <div slot="fallback" class={styles.workspaceLoading}>편집기를 준비하고 있어요…</div>
       </CodingWorkspace>
     </main>

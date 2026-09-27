@@ -1,4 +1,4 @@
-import type { JudgeLanguage } from '@/shared/types'
+import type { JudgeLanguage, ProblemFunction } from '@/shared/types'
 
 /**
  * 풀이 화면의 언어 목록과 처음 코드. 브라우저에서 쓰는 쪽이라 채점 명령(service/judge.ts)과 따로 둔다 —
@@ -142,4 +142,26 @@ export const DEFAULT_LANGUAGE: JudgeLanguage = 'python'
 
 export function findLanguageOption(language: JudgeLanguage): LanguageOption {
   return LANGUAGE_OPTIONS.find((option) => option.id === language) ?? (LANGUAGE_OPTIONS[0] as LanguageOption)
+}
+
+/**
+ * 함수 방식 문제(프로그래머스식)에서 편집기 탭에 보일 파일 이름. 채점 서버의 하네스(collector FunctionHarness)가
+ * 사람 코드를 두는 파일과 같아서, 컴파일 오류의 파일 이름·줄 번호가 이 탭과 맞는다.
+ */
+const FUNCTION_FILE_NAMES: Partial<Record<JudgeLanguage, string>> = {
+  java: 'Solution.java',
+  kotlin: 'Solution.kt',
+  python: 'solution.py',
+  javascript: 'solution.js',
+  cpp: 'solution.cpp',
+}
+
+/** 함수 방식 문제의 언어 목록 — 뼈대 코드가 있는 언어만, 표준입출력 문제와 같은 순서로. */
+export function functionLanguageOptions(problemFunction: ProblemFunction): LanguageOption[] {
+  return LANGUAGE_OPTIONS.filter((option) => problemFunction.starters[option.id] !== undefined).map((option) => ({
+    ...option,
+    fileName: FUNCTION_FILE_NAMES[option.id] ?? option.fileName,
+    note: `${option.note.split(' — ')[0]} — ${problemFunction.name} 함수만 채우세요. 입력을 읽거나 출력할 필요가 없습니다`,
+    template: problemFunction.starters[option.id] ?? option.template,
+  }))
 }

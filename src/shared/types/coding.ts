@@ -9,6 +9,34 @@ export interface TestCase {
   output: string
 }
 
+/** 함수 방식 문제의 값 타입. collector 의 ValueType.id 와 같다. */
+export type FunctionValueType =
+  | 'int'
+  | 'long'
+  | 'double'
+  | 'boolean'
+  | 'string'
+  | 'int[]'
+  | 'long[]'
+  | 'double[]'
+  | 'boolean[]'
+  | 'string[]'
+  | 'int[][]'
+  | 'long[][]'
+  | 'string[][]'
+
+/**
+ * 함수 방식(프로그래머스식) 문제에서 채울 함수. 채점 서버가 이 모양대로 입력을 읽어 함수를 부른다.
+ * 예시의 input 은 매개변수마다 JSON 한 줄, output 은 반환값 JSON 이다.
+ */
+export interface ProblemFunction {
+  name: string
+  parameters: { name: string; type: FunctionValueType }[]
+  returnType: FunctionValueType
+  /** 풀 수 있는 언어와 그 언어의 뼈대 코드. 여기 없는 언어로는 채점하지 않는다. */
+  starters: Partial<Record<JudgeLanguage, string>>
+}
+
 /**
  * 사이트에 실리는 문제. collector가 공개할 때 src/coding/problems.json으로 커밋한다.
  * 이 저장소는 공개라 숨은 테스트는 여기 없다 — collector가 채점할 때만 쓴다.
@@ -28,6 +56,8 @@ export interface CodingProblem {
   memoryLimitMb: number
   examples: TestCase[]
   hiddenCaseCount: number
+  /** 함수 방식이면 채울 함수, 표준입출력 방식(백준식)이면 null. 이 필드가 생기기 전에 쓴 파일에는 없다. */
+  function?: ProblemFunction | null
 }
 
 export interface CodingProblemsSnapshot {

@@ -3,9 +3,11 @@ export type {
   CaseVerdict,
   CodingProblem,
   CodingProblemsSnapshot,
+  FunctionValueType,
   GradeReport,
   GradeScope,
   JudgeLanguage,
+  ProblemFunction,
   TestCase,
 } from './coding'
 export type {

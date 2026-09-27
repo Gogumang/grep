@@ -22,10 +22,12 @@ export type GradeState =
 interface ResultPanelProps {
   state: GradeState
   examples: TestCase[]
+  /** 함수 방식 문제면 입출력 대신 매개변수·반환값으로 부른다. stdout 에는 반환값만, 풀이가 찍은 것은 stderr 에 온다. */
+  isFunction?: boolean
 }
 
 /** 실행 결과 칸. 터미널 출력처럼 고정폭 글자로 줄줄이 적는다. */
-export function ResultPanel({ state, examples }: ResultPanelProps) {
+export function ResultPanel({ state, examples, isFunction = false }: ResultPanelProps) {
   if (state.kind === 'idle') return <p className={styles.placeholder}>실행 결과가 여기에 표시됩니다.</p>
   if (state.kind === 'running') {
     return (
@@ -52,7 +54,7 @@ export function ResultPanel({ state, examples }: ResultPanelProps) {
       {scope === 'examples'
         ? report.cases.map((entry, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: 케이스에는 id가 없고 서버가 순서를 고정해 돌려준다
-            <ExampleResult key={index} entry={entry} index={index} example={examples[index]} />
+            <ExampleResult key={index} entry={entry} index={index} example={examples[index]} isFunction={isFunction} />
           ))
         : report.cases.map((entry, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: 위와 같다
@@ -72,18 +74,28 @@ export function ResultPanel({ state, examples }: ResultPanelProps) {
   )
 }
 
-function ExampleResult({ entry, index, example }: { entry: CaseReport; index: number; example?: TestCase }) {
+function ExampleResult({
+  entry,
+  index,
+  example,
+  isFunction,
+}: {
+  entry: CaseReport
+  index: number
+  example?: TestCase
+  isFunction: boolean
+}) {
   return (
     <div className={styles.resultGroup}>
       <p className={styles.resultLine}>
         테스트 {index + 1} 〉 <Verdict entry={entry} />
       </p>
       <div className={styles.ioGrid}>
-        <IoValue label="입력값" value={example?.input ?? ''} />
-        <IoValue label="기댓값" value={example?.output ?? ''} />
-        <IoValue label="실행 결과" value={entry.stdout ?? ''} />
+        <IoValue label={isFunction ? '매개변수' : '입력값'} value={example?.input ?? ''} />
+        <IoValue label={isFunction ? '기대 반환값' : '기댓값'} value={example?.output ?? ''} />
+        <IoValue label={isFunction ? '반환값' : '실행 결과'} value={entry.stdout ?? ''} />
       </div>
-      {entry.stderr && <IoValue label="표준 에러" value={entry.stderr} />}
+      {entry.stderr && <IoValue label={isFunction ? '출력 · 에러' : '표준 에러'} value={entry.stderr} />}
     </div>
   )
 }

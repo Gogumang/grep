@@ -23,4 +23,22 @@ describe('problems.json', () => {
       expect(problem.hiddenCaseCount, problem.id).toBeGreaterThan(0)
     }
   })
+
+  test('함수 방식 문제는 뼈대 코드가 그 함수를 담고, 예시 입력이 매개변수마다 JSON 한 줄이다', () => {
+    for (const problem of PROBLEMS) {
+      const problemFunction = problem.function
+      if (!problemFunction) continue
+      const starters = Object.entries(problemFunction.starters)
+      expect(starters.length, problem.id).toBeGreaterThan(0)
+      for (const [language, starter] of starters) {
+        expect(starter, `${problem.id} ${language}`).toContain(problemFunction.name)
+      }
+      for (const example of problem.examples) {
+        const lines = example.input.split('\n').filter((line) => line.trim() !== '')
+        expect(lines.length, problem.id).toBe(problemFunction.parameters.length)
+        for (const line of lines) expect(() => JSON.parse(line), `${problem.id}: ${line}`).not.toThrow()
+        expect(() => JSON.parse(example.output), `${problem.id}: ${example.output}`).not.toThrow()
+      }
+    }
+  })
 })

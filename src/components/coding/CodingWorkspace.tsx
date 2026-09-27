@@ -1,6 +1,6 @@
 import { type CSSProperties, type PointerEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { DEFAULT_LANGUAGE, findLanguageOption, LANGUAGE_OPTIONS } from '@/coding/languages'
-import type { GradeReport, GradeScope, JudgeLanguage, TestCase } from '@/shared/types'
+import { DEFAULT_LANGUAGE, functionLanguageOptions, LANGUAGE_OPTIONS } from '@/coding/languages'
+import type { GradeReport, GradeScope, JudgeLanguage, ProblemFunction, TestCase } from '@/shared/types'
 import { CodeEditor } from './CodeEditor'
 import * as styles from './CodingWorkspace.css'
 import { type GradeState, ResultPanel } from './ResultPanel'
@@ -9,7 +9,13 @@ import { useGradeThrottle } from './useGradeThrottle'
 /** 마지막으로 고른 언어와 편집기 높이는 문제를 옮겨 다녀도 유지한다. 코드는 문제·언어마다 따로 둔다. */
 const LANGUAGE_STORAGE_KEY = 'grep-coding-language'
 const EDITOR_SHARE_STORAGE_KEY = 'grep-coding-editor-share'
-const codeStorageKey = (problemId: string, language: JudgeLanguage) => `grep-coding:${problemId}:${language}`
+
+/**
+ * 함수 방식 문제는 키 끝에 :function 을 붙인다 — 같은 문제가 표준입출력에서 함수 방식으로 바뀌면
+ * 예전에 저장한 main 코드가 뼈대 대신 떠서 채점이 전부 틀린다.
+ */
+const codeStorageKey = (problemId: string, language: JudgeLanguage, isFunction: boolean) =>
+  `grep-coding:${problemId}:${language}${isFunction ? ':function' : ''}`
 
 /** 편집기가 오른쪽 칸에서 차지하는 비율(%). 나머지는 실행 결과 칸이다. */
 const DEFAULT_EDITOR_SHARE = 62
@@ -19,33 +25,41 @@ const MAX_EDITOR_SHARE = 88
 interface CodingWorkspaceProps {
   problemId: string
   examples: TestCase[]
+  /** 함수 방식 문제면 채울 함수. 뼈대가 있는 언어만 고를 수 있고, 편집기는 뼈대로 시작한다. */
+  problemFunction?: ProblemFunction | null
 }
 
-export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
-  const [language, setLanguage] = useState<JudgeLanguage>(() => readLanguage())
-  const [code, setCode] = useState(() => readCode(problemId, language))
+export function CodingWorkspace({ problemId, examples, problemFunction = null }: CodingWorkspaceProps) {
+  const isFunction = problemFunction !== null
+  const [options] = useState(() => (problemFunction ? functionLanguageOptions(problemFunction) : LANGUAGE_OPTIONS))
+  const optionFor = (id: JudgeLanguage) =>
+    options.find((option) => option.id === id) ?? (options[0] as (typeof options)[number])
+  const [language, setLanguage] = useState<JudgeLanguage>(() => readLanguage(options.map((option) => option.id)))
+  const [code, setCode] = useState(() =>
+    readCode(codeStorageKey(problemId, language, isFunction), optionFor(language).template),
+  )
   const [gradeState, setGradeState] = useState<GradeState>({ kind: 'idle' })
   const [editorShare, setEditorShare] = useState(() => readEditorShare())
   const isRunning = gradeState.kind === 'running'
   const throttle = useGradeThrottle()
   const isGradeDisabled = isRunning || throttle.isBlocked
   const waitSuffix = throttle.isBlocked ? ` (${throttle.waitSeconds})` : ''
-  const languageOption = findLanguageOption(language)
+  const languageOption = optionFor(language)
 
   const changeLanguage = (next: JudgeLanguage) => {
     setLanguage(next)
-    setCode(readCode(problemId, next))
+    setCode(readCode(codeStorageKey(problemId, next, isFunction), optionFor(next).template))
     setGradeState({ kind: 'idle' })
     writeStorage(LANGUAGE_STORAGE_KEY, next)
   }
 
   const changeCode = (next: string) => {
     setCode(next)
-    writeStorage(codeStorageKey(problemId, language), next)
+    writeStorage(codeStorageKey(problemId, language, isFunction), next)
   }
 
   const resetCode = () => {
-    removeStorage(codeStorageKey(problemId, language))
+    removeStorage(codeStorageKey(problemId, language, isFunction))
     setCode(languageOption.template)
     setGradeState({ kind: 'idle' })
   }
@@ -134,7 +148,7 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
           onChange={(event) => changeLanguage(event.target.value as JudgeLanguage)}
           aria-label="언어"
         >
-          {LANGUAGE_OPTIONS.map((option) => (
+          {options.map((option) => (
             <option key={option.id} value={option.id}>
               {option.label}
             </option>
@@ -150,7 +164,7 @@ export function CodingWorkspace({ problemId, examples }: CodingWorkspaceProps) {
       <div className={styles.resultPane}>
         <div className={styles.resultHeader}>실행 결과</div>
         <div className={styles.resultBody} aria-live="polite">
-          <ResultPanel state={gradeState} examples={examples} />
+          <ResultPanel state={gradeState} examples={examples} isFunction={isFunction} />
         </div>
       </div>
 
@@ -184,13 +198,15 @@ function readEditorShare(): number {
   return stored ? clampEditorShare(stored) : DEFAULT_EDITOR_SHARE
 }
 
-function readLanguage(): JudgeLanguage {
-  const stored = readStorage(LANGUAGE_STORAGE_KEY)
-  return LANGUAGE_OPTIONS.some((option) => option.id === stored) ? (stored as JudgeLanguage) : DEFAULT_LANGUAGE
+/** 지난번 고른 언어. 이 문제에서 고를 수 없는 언어면(함수 방식 문제의 Go 등) 기본 언어, 그것도 없으면 첫 언어. */
+function readLanguage(available: JudgeLanguage[]): JudgeLanguage {
+  const stored = readStorage(LANGUAGE_STORAGE_KEY) as JudgeLanguage | null
+  if (stored && available.includes(stored)) return stored
+  return available.includes(DEFAULT_LANGUAGE) ? DEFAULT_LANGUAGE : (available[0] ?? DEFAULT_LANGUAGE)
 }
 
-function readCode(problemId: string, language: JudgeLanguage): string {
-  return readStorage(codeStorageKey(problemId, language)) ?? findLanguageOption(language).template
+function readCode(key: string, template: string): string {
+  return readStorage(key) ?? template
 }
 
 // 저장은 편의 기능이다. 사생활 보호 모드처럼 저장소가 막혀도 풀이는 그대로 된다.

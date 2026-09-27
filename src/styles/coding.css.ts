@@ -219,6 +219,31 @@ export const exampleBlock = style({
   wordBreak: 'break-all',
 })
 
+/** 함수 방식 문제의 채울 함수 한 줄. 예시 블록과 같은 바탕에 고정폭 글자. */
+export const signature = style([exampleBlock, { fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }])
+
+/** 함수 방식 문제의 입출력 예. 프로그래머스처럼 매개변수마다 칸, 마지막 칸이 반환값이다. 넓으면 이 안에서만 옆으로 민다. */
+export const exampleTableScroller = style({ overflowX: 'auto' })
+
+export const exampleTable = style({
+  width: '100%',
+  borderCollapse: 'collapse',
+  fontSize: 14,
+  color: IDE_COLORS.textStrong,
+})
+
+globalStyle(`${exampleTable} th, ${exampleTable} td`, {
+  padding: `${vars.space.sm} ${vars.space.md}`,
+  border: `1px solid ${IDE_COLORS.block}`,
+  textAlign: 'left',
+  verticalAlign: 'top',
+  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+  whiteSpace: 'pre-wrap',
+  wordBreak: 'break-all',
+})
+
+globalStyle(`${exampleTable} th`, { background: IDE_COLORS.block, fontWeight: vars.fontWeight.semibold })
+
 export const workspaceLoading = style({
   display: 'grid',
   placeItems: 'center',
