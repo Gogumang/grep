@@ -1,6 +1,19 @@
 {
   "source" : "티켓타코·이벤터스·Dev-Event·Meetup·Luma",
   "events" : [ {
+    "id" : "dev-event-88718b56cc5f",
+    "title" : "2026 고용24 국민참여 AI 고용서비스 발굴 온라인 해커톤",
+    "url" : "https://www.국민참여고용서비스발굴온라인해커톤.com",
+    "host" : "고용노동부 / 한국고용정보원",
+    "startDate" : "2026-09-21",
+    "startTime" : "00:00",
+    "endDate" : "2026-10-13",
+    "place" : "서울",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "Dev-Event"
+  }, {
     "id" : "meetup-316466036",
     "title" : "OWASP Seoul 9월 세미나: 정보보안 직무 특집",
     "url" : "https://www.meetup.com/owasp-seoul/events/316466036/",
