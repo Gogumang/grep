@@ -157,6 +157,19 @@
     "highestPrice" : 10000,
     "source" : "티켓타코"
   }, {
+    "id" : "dev-event-f1fb8c6cd028",
+    "title" : "Cursor Hackathon Seoul 4th",
+    "url" : "https://luma.com/06x2etd7",
+    "host" : "Cursor Korea",
+    "startDate" : "2026-10-24",
+    "startTime" : "10:30",
+    "endDate" : "2026-10-24",
+    "place" : "서울",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "Dev-Event"
+  }, {
     "id" : "xzch6c1g",
     "title" : "GitHub Copilot Dev Days | Seoul",
     "url" : "https://ticketa.co/event/xzch6c1g",
