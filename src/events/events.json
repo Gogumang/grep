@@ -234,5 +234,18 @@
     "lowestPrice" : 15000,
     "highestPrice" : 50000,
     "source" : "티켓타코"
+  }, {
+    "id" : "8dedugs6",
+    "title" : "DEVFEST INCHEON 2026",
+    "url" : "https://ticketa.co/event/8dedugs6",
+    "host" : "GDG Incheon",
+    "startDate" : "2026-12-12",
+    "startTime" : "13:00",
+    "endDate" : "2026-12-12",
+    "place" : "송도컨벤시아",
+    "isOnline" : false,
+    "lowestPrice" : 15000,
+    "highestPrice" : 15000,
+    "source" : "티켓타코"
   } ]
 }
