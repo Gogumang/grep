@@ -53,6 +53,19 @@
     "highestPrice" : 0,
     "source" : "티켓타코"
   }, {
+    "id" : "eventus-133718",
+    "title" : "KVCache Meetup Korea",
+    "url" : "https://event-us.kr/pytorchkr/event/133718",
+    "host" : "PyTorchKR",
+    "startDate" : "2026-09-30",
+    "startTime" : "18:30",
+    "endDate" : "2026-09-30",
+    "place" : "드림플러스 지하1층 이벤트홀",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "이벤터스"
+  }, {
     "id" : "meetup-316523540",
     "title" : "AWSKRUG 데브옵스 x 보안 소모임 - 9월 30일 (수)",
     "url" : "https://www.meetup.com/awskrug/events/316523540/",
