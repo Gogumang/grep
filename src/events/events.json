@@ -131,6 +131,19 @@
     "highestPrice" : null,
     "source" : "Meetup"
   }, {
+    "id" : "eventus-135213",
+    "title" : "PyTorchKR 테크 세미나",
+    "url" : "https://event-us.kr/pytorchkr/event/135213",
+    "host" : "PyTorchKR",
+    "startDate" : "2026-10-14",
+    "startTime" : "19:00",
+    "endDate" : "2026-10-14",
+    "place" : "우제빌딩 2층, OpenUP",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "이벤터스"
+  }, {
     "id" : "izi3e7pl",
     "title" : "GitHub Copilot Dev Days | Pohang",
     "url" : "https://ticketa.co/event/izi3e7pl",
