@@ -14,19 +14,6 @@
     "highestPrice" : null,
     "source" : "Dev-Event"
   }, {
-    "id" : "dev-event-768c641d74e8",
-    "title" : "SK하이닉스 AI 해커톤 2026",
-    "url" : "https://skhynix-hackathon.com/ai-2026",
-    "host" : "SK하이닉스 / 멋쟁이사자처럼",
-    "startDate" : "2026-09-21",
-    "startTime" : "00:00",
-    "endDate" : "2026-09-28",
-    "place" : "서울 강남구",
-    "isOnline" : false,
-    "lowestPrice" : 0,
-    "highestPrice" : null,
-    "source" : "Dev-Event"
-  }, {
     "id" : "meetup-316466036",
     "title" : "OWASP Seoul 9월 세미나: 정보보안 직무 특집",
     "url" : "https://www.meetup.com/owasp-seoul/events/316466036/",
@@ -194,6 +181,19 @@
     "isOnline" : false,
     "lowestPrice" : 10000,
     "highestPrice" : 10000,
+    "source" : "티켓타코"
+  }, {
+    "id" : "pyvju8i6",
+    "title" : "OPENSQUARE 2026",
+    "url" : "https://ticketa.co/event/pyvju8i6",
+    "host" : "오픈패스",
+    "startDate" : "2026-10-17",
+    "startTime" : "13:00",
+    "endDate" : "2026-10-17",
+    "place" : "한국컨퍼런스센터",
+    "isOnline" : false,
+    "lowestPrice" : null,
+    "highestPrice" : null,
     "source" : "티켓타코"
   }, {
     "id" : "dev-event-f1fb8c6cd028",
