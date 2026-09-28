@@ -79,6 +79,19 @@
     "highestPrice" : null,
     "source" : "Meetup"
   }, {
+    "id" : "eventus-135350",
+    "title" : "스노우플레이크 유저그룹 밋업 18회 - 🔥 Snowflake World Tour 2026에서 가장 뜨거웠던 세션을 다시 만나다",
+    "url" : "https://event-us.kr/flakers/event/135350",
+    "host" : "스노우플레이크코리아 유저그룹",
+    "startDate" : "2026-10-06",
+    "startTime" : "18:00",
+    "endDate" : "2026-10-06",
+    "place" : "역삼 드리움 - 성홍타워 3층 포레스트홀",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "이벤터스"
+  }, {
     "id" : "vynxqozt",
     "title" : "오픈소스 테크데이 2026",
     "url" : "https://ticketa.co/event/vynxqozt",
