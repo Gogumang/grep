@@ -75,7 +75,11 @@ const exampleRows = problem.examples.map((example) =>
           <ul class={styles.limitList}>
             <li>시간 제한 {problem.timeLimitMs / MILLISECONDS_PER_SECOND}초 — C·C++·Go 기준이고, 다른 언어는 더 줍니다.</li>
             <li>메모리 제한 {problem.memoryLimitMb}MB</li>
-            <li>제출하면 예시 {problem.examples.length}개와 숨은 테스트 {problem.hiddenCaseCount}개로 채점합니다.</li>
+            <li>
+              {problem.hiddenCaseCount > 0
+                ? `제출하면 예시 ${problem.examples.length}개와 숨은 테스트 ${problem.hiddenCaseCount}개로 채점합니다.`
+                : `제출하면 예시 ${problem.examples.length}개로 채점합니다.`}
+            </li>
           </ul>
         </section>
 

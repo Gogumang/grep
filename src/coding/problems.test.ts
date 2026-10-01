@@ -17,10 +17,10 @@ describe('problems.json', () => {
     for (const id of ids) expect(id).toMatch(/^[a-z0-9-]+$/)
   })
 
-  test('문제마다 예시와 숨은 테스트가 있다 — 없으면 풀이 화면과 제출 채점이 성립하지 않는다', () => {
+  // 숨은 테스트는 없을 수 있다 — 가져온 문제는 예시만으로 공개하고, 그때 제출은 예시로만 채점한다.
+  test('문제마다 예시가 있다 — 없으면 풀이 화면과 제출 채점이 성립하지 않는다', () => {
     for (const problem of PROBLEMS) {
       expect(problem.examples.length, problem.id).toBeGreaterThan(0)
-      expect(problem.hiddenCaseCount, problem.id).toBeGreaterThan(0)
     }
   })
 
