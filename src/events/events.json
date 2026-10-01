@@ -170,6 +170,19 @@
     "highestPrice" : null,
     "source" : "Dev-Event"
   }, {
+    "id" : "t12vlmil",
+    "title" : "FECONF 2026",
+    "url" : "https://ticketa.co/event/t12vlmil",
+    "host" : "프론트엔드개발그룹",
+    "startDate" : "2026-10-24",
+    "startTime" : "11:00",
+    "endDate" : "2026-10-24",
+    "place" : "롯데월드타워",
+    "isOnline" : false,
+    "lowestPrice" : 60000,
+    "highestPrice" : 119000,
+    "source" : "티켓타코"
+  }, {
     "id" : "xzch6c1g",
     "title" : "GitHub Copilot Dev Days | Seoul",
     "url" : "https://ticketa.co/event/xzch6c1g",
