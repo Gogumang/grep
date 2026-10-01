@@ -209,6 +209,19 @@
     "highestPrice" : null,
     "source" : "티켓타코"
   }, {
+    "id" : "meetup-316356394",
+    "title" : "MongoDB User Group Seoul Meetup #6 OCT 2026",
+    "url" : "https://www.meetup.com/mongodb-usergroup-seoul/events/316356394/",
+    "host" : "Seoul MongoDB User Group",
+    "startDate" : "2026-10-29",
+    "startTime" : "19:00",
+    "endDate" : "2026-10-29",
+    "place" : "Microsoft Korea Office",
+    "isOnline" : false,
+    "lowestPrice" : 0,
+    "highestPrice" : null,
+    "source" : "Meetup"
+  }, {
     "id" : "ql1tygi5",
     "title" : "GitHub Copilot Dev Days | Jeju",
     "url" : "https://ticketa.co/event/ql1tygi5",
